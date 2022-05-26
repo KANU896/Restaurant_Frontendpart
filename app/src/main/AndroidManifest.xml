@@ -22,6 +22,7 @@
         <activity android:name=".User_Login"/>
         <activity android:name=".User_Register"/>
         <activity android:name=".User_IdFind"/>
+        <activity android:name=".User_Main"/>
     </application>
 
 </manifest>

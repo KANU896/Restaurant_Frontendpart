@@ -34,6 +34,16 @@ public class User_Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button login_btn = (Button) findViewById(R.id.login_btn); // 로그인 버튼
+        //로그인화면 -> 메인화면 전환
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), User_Main.class);
+                startActivity(intent);
+            }
+        });
     }
 }
 

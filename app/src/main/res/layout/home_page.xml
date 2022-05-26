@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/food"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/today_keword"
+        android:layout_width="281dp"
+        android:layout_height="51dp"
+        android:background="@drawable/bin_blue"
+        android:backgroundTint="@color/teal_200"
+        android:text="실시간 맛집 키워드"
+        android:textColor="#3F51B5"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.533" />
+
+    <Button
+        android:id="@+id/today_restourant"
+        android:layout_width="281dp"
+        android:layout_height="51dp"
+        android:background="@drawable/bin_blue"
+        android:backgroundTint="@color/teal_200"
+        android:text="오늘의 맛집"
+        android:textColor="#3F51B5"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.722" />
+
+    <SearchView
+        android:id="@+id/local_search"
+        android:layout_width="314dp"
+        android:layout_height="54dp"
+        android:background="@drawable/bin_blue"
+        android:backgroundTint="@color/white"
+        android:queryHint="예) 강남 식당"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.217" />
+</androidx.constraintlayout.widget.ConstraintLayout>
