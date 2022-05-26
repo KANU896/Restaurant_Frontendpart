@@ -24,7 +24,8 @@
         <activity android:name=".User_Register"/>
         <activity android:name=".User_IdFind"/>
         <activity android:name=".User_Main"/>
-        <activity android:name=".User_Home_Page2"/>  //버튼 누르면 화면전환 (민우)
+        <activity android:name=".User_Home_Page"
+            tools:ignore="Instantiatable" />  //버튼 누르면 화면전환 (민우)
         <activity android:name=".User_Myfavorite_Page2"/>
     </application>
 
