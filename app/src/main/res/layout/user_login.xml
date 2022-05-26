@@ -54,7 +54,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/bin_blue"
         android:text="로그인"
-        android:textColor="#050505"
+        android:textColor="#FFFFFF"
         app:backgroundTint="#4F9CDF"></Button>
 
     <TextView
@@ -69,9 +69,9 @@
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bin_blue"
-        android:text="카카오톡 로그인"
-        android:textColor="#050505"
-        app:backgroundTint="#F2DC00"></Button>
+        android:text="페이스북 로그인"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#1974EB"></Button>
 
     <LinearLayout
         android:layout_width="match_parent"

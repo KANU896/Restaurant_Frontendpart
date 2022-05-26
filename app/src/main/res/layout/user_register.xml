@@ -44,20 +44,20 @@
                 >
 
                 <EditText
-                    android:id="@+id/emailText"
+                    android:id="@+id/idText"
                     android:layout_width="190dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
                     android:background="#1974EB"
-                    android:hint="이메일"
+                    android:hint="아이디"
                     android:padding="10dp"
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff" />
 
                 <Button
-                    android:id="@+id/email_confirm_btn"
-                    android:layout_width="60dp"
+                    android:id="@+id/id_confirm_btn"
+                    android:layout_width="62dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="중복체크"
@@ -80,7 +80,7 @@
                 android:textColorHint="#ffffff" />
 
             <LinearLayout
-                android:layout_width="280dp"
+                android:layout_width="284dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -88,10 +88,11 @@
 
                 <EditText
                     android:id="@+id/password_confirm"
-                    android:layout_width="190dp"
+                    android:layout_width="156dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
+                    android:layout_weight="1"
                     android:background="#1974EB"
                     android:hint="비밀번호 확인"
                     android:inputType="textPassword"
@@ -101,7 +102,7 @@
 
                 <Button
                     android:id="@+id/pwd_confirm_btn"
-                    android:layout_width="60dp"
+                    android:layout_width="41dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="확인"
@@ -111,13 +112,13 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/nameText"
+                android:id="@+id/emailText"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="#1974EB"
-                android:hint="이름"
+                android:hint="이메일"
                 android:inputType="text"
                 android:padding="10dp"
                 android:textColor="#ffffff"
