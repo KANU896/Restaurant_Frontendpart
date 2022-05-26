@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myapplication">
 
     <application
@@ -23,6 +24,8 @@
         <activity android:name=".User_Register"/>
         <activity android:name=".User_IdFind"/>
         <activity android:name=".User_Main"/>
+        <activity android:name=".User_Home_Page2"/>  //버튼 누르면 화면전환 (민우)
+        <activity android:name=".User_Myfavorite_Page2"/>
     </application>
 
 </manifest>

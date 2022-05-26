@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,8 +51,10 @@ public class User_Main extends AppCompatActivity {
             } else if (id == R.id.navigation_2){
 
                 fragment = new User_Search_Page();
-            }else {
+            }else if(id == R.id.navigation_4){
                 fragment = new User_Myfavorite_Page();
+            }else{
+                fragment = new User_Map_Page();
             }
 
             fragmentTransaction.add(R.id.content_layout, fragment, tag);
@@ -63,4 +66,4 @@ public class User_Main extends AppCompatActivity {
         fragmentTransaction.setReorderingAllowed(true);
         fragmentTransaction.commitNow();
     }
-    }
+}

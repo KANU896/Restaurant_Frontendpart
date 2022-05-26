@@ -16,11 +16,11 @@ public class User_MainScreen extends AppCompatActivity {
 
         Button start_btn = (Button) findViewById(R.id.main_start); // 시작하기 버튼
 
-        // 시작하기 -> 로그인화면 전환
+        // 시작하기 -> 메인화면 전환
         start_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), User_Login.class);
+                Intent intent = new Intent(getApplicationContext(), User_Main.class);
                 startActivity(intent);
             }
         });

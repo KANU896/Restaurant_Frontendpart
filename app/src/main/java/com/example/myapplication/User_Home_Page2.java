@@ -1,3 +1,5 @@
+package com.example.myapplication;  // 추가(민우)
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

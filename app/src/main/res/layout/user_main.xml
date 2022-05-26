@@ -23,7 +23,7 @@
                 android:layout_height="match_parent"
                 android:background="#6ECAD6"
                 android:gravity="center"
-                android:text="호이닝 코드"
+                android:text="INSTORANT"
                 android:textColor="#fff"
                 android:textSize="30dp"
                 android:textStyle="bold" />
