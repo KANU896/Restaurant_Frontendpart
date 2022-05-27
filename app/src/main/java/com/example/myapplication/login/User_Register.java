@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.login;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.myapplication.R;
 
 public class User_Register extends AppCompatActivity {
 
@@ -35,13 +37,13 @@ public class User_Register extends AppCompatActivity {
         builder.show();
 
         Handler timer = new Handler(); //Handler 생성
-        timer.postDelayed(new Runnable(){ //2.5초후 쓰레드를 생성하는 postDelayed 메소드
+        timer.postDelayed(new Runnable(){ //Login.5초후 쓰레드를 생성하는 postDelayed 메소드
             public void run(){//intent 생성
                 Intent intent = new Intent(getApplicationContext(), User_Login.class);
                 startActivity(intent);
                 finish(); // 이 액티비티를 종료
             }
-        }, 2500); // 2.5초 대기
+        }, 2500); // Login.5초 대기
     }
 
     @Override

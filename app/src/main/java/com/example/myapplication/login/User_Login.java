@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.login;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.myapplication.R;
+import com.example.myapplication.User_Main;
 
 //로그인화면 -> 회원가입화면 전환
 public class User_Login extends AppCompatActivity {

@@ -1,3 +1,5 @@
+package com.example.myapplication.homepage;  // 추가(민우)
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,8 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
-import com.example.myapplication.Restourant_Keyword;
-import com.example.myapplication.Today_Restourant;
 
 public class User_Home_Page2 extends AppCompatActivity {
     @Override

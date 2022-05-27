@@ -2,14 +2,17 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.SearchView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.myapplication.homepage.User_Home_Page;
+import com.example.myapplication.map.User_Map_Page;
+import com.example.myapplication.myfavorite.User_Myfavorite_Page;
+import com.example.myapplication.searchpage.User_Search_Page;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class User_Main extends AppCompatActivity {
@@ -50,8 +53,10 @@ public class User_Main extends AppCompatActivity {
             } else if (id == R.id.navigation_2){
 
                 fragment = new User_Search_Page();
-            }else {
+            }else if(id == R.id.navigation_4){
                 fragment = new User_Myfavorite_Page();
+            }else{
+                fragment = new User_Map_Page();
             }
 
             fragmentTransaction.add(R.id.content_layout, fragment, tag);
@@ -63,4 +68,4 @@ public class User_Main extends AppCompatActivity {
         fragmentTransaction.setReorderingAllowed(true);
         fragmentTransaction.commitNow();
     }
-    }
+}

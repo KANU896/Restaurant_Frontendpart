@@ -5,13 +5,24 @@
       <map>
         <entry key="app/src/main/res/drawable/bin_blue.xml" value="0.291" />
         <entry key="app/src/main/res/drawable/btn_tema.xml" value="0.291" />
+        <entry key="app/src/main/res/layout/home_page.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/map.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/map_page.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/myfavorite_page.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/restourant_keyword.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/search_page.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/today_restourant.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/user_idfind.xml" value="0.2259963768115942" />
         <entry key="app/src/main/res/layout/user_login.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/user_main.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/user_mainscreen.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/user_register.xml" value="0.2259963768115942" />
+        <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.291" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.291" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
