@@ -54,7 +54,7 @@ public class User_Main extends AppCompatActivity {
             }else if(id == R.id.navigation_4){
                 fragment = new User_Myfavorite_Page();
             }else{
-                fragment = new User_Map_Page();
+               //
             }
 
             fragmentTransaction.add(R.id.content_layout, fragment, tag);
