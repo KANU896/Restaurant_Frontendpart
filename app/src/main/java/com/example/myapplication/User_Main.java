@@ -2,15 +2,17 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.SearchView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.myapplication.homepage.User_Home_Page;
+import com.example.myapplication.map.User_Map_Page;
+import com.example.myapplication.myfavorite.User_Myfavorite_Page;
+import com.example.myapplication.searchpage.User_Search_Page;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class User_Main extends AppCompatActivity {
