@@ -40,12 +40,12 @@
         app:layout_constraintVertical_bias="0.722" />
 
     <SearchView
-        android:id="@+id/local_search"
+        android:id="@+id/restour_search"
         android:layout_width="314dp"
         android:layout_height="54dp"
         android:background="@drawable/bin_blue"
         android:backgroundTint="@color/white"
-        android:queryHint="예) 강남 식당"
+        android:queryHint="식당 이름을 입력하세요"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
