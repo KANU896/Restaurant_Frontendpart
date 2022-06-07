@@ -2,17 +2,29 @@ package com.example.myapplication.homepage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.homepage.Search.Data;
+import com.example.myapplication.homepage.Search.RetrofitClient_Search;
+import com.example.myapplication.homepage.Search.SearchData;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class User_Home_Page extends Fragment  {
     private View view;
@@ -50,8 +62,32 @@ public class User_Home_Page extends Fragment  {
         main_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             public boolean onQueryTextSubmit(String query) {
                 // 검색 버튼이 눌러졌을 때 이벤트 처리
-                Intent intent = new Intent(getActivity(), Main_Search.class);
-                startActivity(intent);
+
+                Call<SearchData> call = RetrofitClient_Search.getApiService().postOverlapCheck(query);
+                call.enqueue((new Callback<SearchData>() {
+                    @Override
+                    public void onResponse(Call<SearchData> call, Response<SearchData> response) {
+                        if(!response.isSuccessful()){
+                            Log.e("연결이 비정상적 : ", "error code : " + response.code());
+                            return;
+                        }
+                        //TODO 응답 받은 데이터 처리
+                        SearchData searchdata = response.body();
+                        Data[] data = searchdata != null
+                                ? searchdata.getData()
+                                : new Data[0];
+
+                        Log.d("연결이 성공적 : ", String.valueOf(data));
+                        // 여기까지
+                        Intent intent = new Intent(getActivity(), Main_Search.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<SearchData> call, Throwable t) {
+                        Log.e("연결실패", t.getMessage());
+                    }
+                }));
                 return true;
             }
 
