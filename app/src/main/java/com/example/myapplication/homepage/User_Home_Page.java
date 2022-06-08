@@ -15,12 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.homepage.Search.Data;
-import com.example.myapplication.homepage.Search.RetrofitClient_Search;
-import com.example.myapplication.homepage.Search.SearchData;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.myapplication.homepage.Search_retrofit.Data;
+import com.example.myapplication.homepage.Search_retrofit.RetrofitClient_Search;
+import com.example.myapplication.homepage.Search_retrofit.SearchData;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +28,7 @@ public class User_Home_Page extends Fragment  {
     private Button today_key_btn;
     private Button today_rest_btn;
     private SearchView main_search;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
@@ -75,9 +73,17 @@ public class User_Home_Page extends Fragment  {
                         SearchData searchdata = response.body();
                         Data[] data = searchdata != null
                                 ? searchdata.getData()
-                                : new Data[0];
+                                :new Data[0];
 
-                        Log.d("연결이 성공적 : ", String.valueOf(data));
+                        for (int i = 0; i < data.length; i++){
+                            String id = data[i].get_id();
+                            String Image = data[i].getImage();
+                            String Name = data[i].getName();
+                            String Score = data[i].getScore();
+
+                            Log.d("데이터 - ", "id : "+ id + " Image : "+Image+" Name : "+Name+ " Score : "+Score);
+                        }
+
                         // 여기까지
                         Intent intent = new Intent(getActivity(), Main_Search.class);
                         startActivity(intent);
@@ -85,6 +91,7 @@ public class User_Home_Page extends Fragment  {
 
                     @Override
                     public void onFailure(Call<SearchData> call, Throwable t) {
+                        Toast.makeText(getActivity(),"서버 연결 실패",Toast.LENGTH_SHORT).show();
                         Log.e("연결실패", t.getMessage());
                     }
                 }));

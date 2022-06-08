@@ -1,4 +1,4 @@
-package com.example.myapplication.homepage.Search;
+package com.example.myapplication.homepage.Search_retrofit;
 
 import com.google.gson.annotations.Expose;//object 중 null 값 자동 생략
 import com.google.gson.annotations.SerializedName;
