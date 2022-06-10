@@ -18,6 +18,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.Main_Screen.Search_Retrofit.Data;
 import com.example.myapplication.Main_Screen.Search_Retrofit.RetrofitClient_Search;
 import com.example.myapplication.Main_Screen.Search_Retrofit.SearchData;
+import com.example.myapplication.Search_List.Search_List;
 
 import java.util.ArrayList;
 

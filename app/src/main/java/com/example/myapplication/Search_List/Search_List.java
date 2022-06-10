@@ -1,11 +1,14 @@
-package com.example.myapplication.Main_Screen;
+package com.example.myapplication.Search_List;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Main_Screen.ResponseData;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ import java.util.ArrayList;
 
 public class Search_List extends AppCompatActivity {
     private ArrayList<ResponseData> responseData;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,5 +29,8 @@ public class Search_List extends AppCompatActivity {
             Log.d("Intent Test : ", test.getName());
         }
 
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new Search_List_Adapter(responseData));
     }
 }
