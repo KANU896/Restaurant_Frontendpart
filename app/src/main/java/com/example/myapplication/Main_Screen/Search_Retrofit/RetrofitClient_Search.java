@@ -1,4 +1,4 @@
-package com.example.myapplication.homepage.Search_retrofit;
+package com.example.myapplication.Main_Screen.Search_Retrofit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

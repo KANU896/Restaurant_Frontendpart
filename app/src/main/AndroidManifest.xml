@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".User_MainScreen"
+            android:name=".Start_Screen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,13 +24,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".login.User_Login"/>
-        <activity android:name=".login.User_Register"/>
-        <activity android:name=".login.User_IdFind"/>
-        <activity android:name=".User_Main"/>
-        <activity android:name=".homepage.Restourant_Keyword"/>
-        <activity android:name=".homepage.Today_Restourant"/>
-        <activity android:name=".homepage.Main_Search"/>
+        <activity android:name=".Login.User_Login"/>
+        <activity android:name=".Login.User_Register"/>
+        <activity android:name=".Login.User_IdFind"/>
+        <activity android:name=".Main_Frame"/>
+        <activity android:name=".Main_Screen.Restourant_Keyword"/>
+        <activity android:name=".Main_Screen.Today_Restourant"/>
+        <activity android:name=".Main_Screen.Search_List"/>
         //버튼 누르면 화면전환 (민우)
         <activity android:name=".User_Myfavorite_Page2"/>
     </application>

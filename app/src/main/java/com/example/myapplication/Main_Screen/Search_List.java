@@ -1,4 +1,4 @@
-package com.example.myapplication.homepage;
+package com.example.myapplication.Main_Screen;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +11,7 @@ import com.example.myapplication.R;
 import java.util.ArrayList;
 
 
-public class Main_Search extends AppCompatActivity {
+public class Search_List extends AppCompatActivity {
     private ArrayList<ResponseData> responseData;
 
     @Override

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".User_MainScreen">
+    tools:context=".Start_Screen">
 
     <TextView
         android:id="@+id/textView3"
