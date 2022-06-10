@@ -13,11 +13,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.R;
 import com.example.myapplication.homepage.Search_retrofit.Data;
 import com.example.myapplication.homepage.Search_retrofit.RetrofitClient_Search;
 import com.example.myapplication.homepage.Search_retrofit.SearchData;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +32,7 @@ public class User_Home_Page extends Fragment  {
     private Button today_key_btn;
     private Button today_rest_btn;
     private SearchView main_search;
+    //private MutableLiveData<ArrayList<ResponseData>> dieseldata;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,23 +74,35 @@ public class User_Home_Page extends Fragment  {
                             Log.e("연결이 비정상적 : ", "error code : " + response.code());
                             return;
                         }
-                        //TODO 응답 받은 데이터 처리
+                        //dieseldata = new MutableLiveData<>();
+                        ArrayList<ResponseData> responseData = new ArrayList<>();
                         SearchData searchdata = response.body();
                         Data[] data = searchdata != null
                                 ? searchdata.getData()
                                 :new Data[0];
-
+                        // 데이터 저장 ArrayList<ResponseData>
                         for (int i = 0; i < data.length; i++){
                             String id = data[i].get_id();
                             String Image = data[i].getImage();
                             String Name = data[i].getName();
                             String Score = data[i].getScore();
 
-                            Log.d("데이터 - ", "id : "+ id + " Image : "+Image+" Name : "+Name+ " Score : "+Score);
+                            responseData.add(new ResponseData(
+                                    id,
+                                    Image,
+                                    Name,
+                                    Score
+                            ));
                         }
 
-                        // 여기까지
+                        //dieseldata.setValue(responseData); // MutableLiveData에 저장한 데이터 ArrayList<ResponseData> 저장
+
+                        // 데이터 확인
+                        for (ResponseData responseData1 : responseData)
+                            Log.d("live 데이터 : ", responseData1.getName());
+
                         Intent intent = new Intent(getActivity(), Main_Search.class);
+                        intent.putExtra("responseData", responseData);
                         startActivity(intent);
                     }
 
