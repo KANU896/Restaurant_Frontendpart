@@ -1,4 +1,4 @@
-package com.example.myapplication.Main_Screen;
+package com.example.myapplication.Search_Page;
 
 import java.io.Serializable;
 

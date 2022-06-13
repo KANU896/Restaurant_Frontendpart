@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/food"
-    tools:context=".MainActivity">
+    android:background="@drawable/food">
 
     <Button
         android:id="@+id/today_keword"
@@ -39,16 +38,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.722" />
 
-    <SearchView
-        android:id="@+id/restour_search"
-        android:layout_width="314dp"
-        android:layout_height="54dp"
-        android:background="@drawable/bin_blue"
-        android:queryHint="식당 이름을 입력하세요"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.217" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
+            android:hint="검색어를 입력하세요."
+            android:stateListAnimator="@null"
+            app:circularflow_defaultRadius="10dp" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

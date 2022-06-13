@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Main_Screen.ResponseData;
+import com.example.myapplication.Search_Page.ResponseData;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.myapplication.Main_Screen.Search_Retrofit;
+package com.example.myapplication.Search_Page.Search_Retrofit;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

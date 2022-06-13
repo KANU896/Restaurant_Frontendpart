@@ -17,6 +17,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Main_Frame extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
+    //private int id;
+    User_Search_Page user_search_page = new User_Search_Page();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,5 +69,9 @@ public class Main_Frame extends AppCompatActivity {
         fragmentTransaction.setPrimaryNavigationFragment(fragment);
         fragmentTransaction.setReorderingAllowed(true);
         fragmentTransaction.commitNow();
+    }
+    public void changeFragment(){
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, user_search_page).commit();
+        mBottomNV.setSelectedItemId(R.id.navigation_2);
     }
 }
