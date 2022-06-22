@@ -20,6 +20,10 @@ public class Data {
     @Expose
     private String Score;
 
+    @SerializedName("Category")
+    @Expose
+    private String[] Category;
+
     public String get_id() {
         return _id;
     }
@@ -47,6 +51,11 @@ public class Data {
     public void setScore(String Score) {
         this.Score = Score;
     }
+
+    public String[] getCategory() {
+        return Category;
+    }
+    public void setCategory(String[] Category) {this.Category = Category;}
 
     @Override
     public String toString()

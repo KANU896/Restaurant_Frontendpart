@@ -8,5 +8,5 @@ import retrofit2.http.POST;
 public interface SearchService {
     @FormUrlEncoded
     @POST("/search/data/")
-    Call<SearchData> postOverlapCheck(@Field("search_data") String search_data);
+    Call<SearchData> postOverlapCheck(@Field("search_data") String search_data, @Field("category") String category);
 }

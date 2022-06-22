@@ -61,6 +61,9 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
 
     @Override
     public int getItemCount() {
-        return responseData.size();
+        if (responseData != null)
+           return responseData.size();
+        else
+            return 0;
     }
 }

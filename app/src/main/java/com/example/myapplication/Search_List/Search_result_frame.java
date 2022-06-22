@@ -1,0 +1,216 @@
+package com.example.myapplication.Search_List;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
+import androidx.fragment.app.Fragment;
+
+import com.example.myapplication.R;
+import com.example.myapplication.Search_List.search_result_fragment.Food;
+import com.example.myapplication.Search_List.search_result_fragment.Alcohol;
+import com.example.myapplication.Search_List.search_result_fragment.Cafe;
+import com.example.myapplication.Search_List.search_result_fragment.Search_List_total;
+import com.example.myapplication.Search_Page.ResponseData;
+import com.example.myapplication.Search_Page.Search_Retrofit.Data;
+import com.example.myapplication.Search_Page.Search_Retrofit.RetrofitClient_Search;
+import com.example.myapplication.Search_Page.Search_Retrofit.SearchData;
+import com.google.android.material.tabs.TabLayout;
+
+
+import androidx.appcompat.app.AppCompatActivity;
+
+
+import android.util.Log;
+import android.widget.SearchView;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class Search_result_frame extends AppCompatActivity {
+    private static final String TAG = "Search_result_frame";
+
+    //객체 선언
+    TabLayout tabs;
+    Search_List_total total;
+    Food food;
+    Alcohol alcohol;
+    Cafe cafe;
+    Fragment selected = null;
+
+    // 각 프레그먼트 별 데이터 저장소
+    ArrayList<ResponseData> total_data;
+    ArrayList<ResponseData> food_data;
+    ArrayList<ResponseData> alcohol_data;
+    ArrayList<ResponseData> cafe_data;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.search_result_frame);
+        // 데이터 받기
+        Intent intent = getIntent();
+        String query = intent.getStringExtra("query");
+
+        //프래그먼트 초기화
+        total = new Search_List_total();
+        food = new Food();
+        alcohol = new Alcohol();
+        cafe = new Cafe();
+        selected = total;
+
+        Bundle bundle = new Bundle();
+
+        // 서버 통신
+        retrofit(selected, query, null, 0);
+
+        //탭 만들기 (동적)
+        tabs = findViewById(R.id.tabs);
+        tabs.addTab(tabs.newTab().setText("전체"));
+        tabs.addTab(tabs.newTab().setText("밥집"));
+        tabs.addTab(tabs.newTab().setText("술집"));
+        tabs.addTab(tabs.newTab().setText("카페"));
+
+        //탭이 선택되었을때 작동하는 메서드
+        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                Log.d(TAG, "선택된 탭 : " + position);
+
+                if (position == 0) {
+                    selected = total;
+                    if (total_data == null)
+                        retrofit(selected, query, null, position);
+                    else {
+                        bundle.putSerializable("responseData", total_data);
+                        selected.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
+                    }
+                }
+                else if (position == 1) {
+                    selected = food;
+                    if (food_data == null)
+                        retrofit(selected, query, "밥집", position);
+                    else {
+                        bundle.putSerializable("responseData", food_data);
+                        selected.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
+                    }
+                }
+                else if (position == 2) {
+                    selected = alcohol;
+                    if (alcohol_data == null)
+                        retrofit(selected, query, "술집", position);
+                    else {
+                        bundle.putSerializable("responseData", alcohol_data);
+                        selected.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
+                    }
+                }
+                else if (position == 3) {
+                    selected = cafe;
+                    if (cafe_data == null)
+                        retrofit(selected, query, "카페", position);
+                    else {
+                        bundle.putSerializable("responseData", cafe_data);
+                        selected.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
+                    }
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_list_menu, menu);
+        MenuItem mSearch = menu.findItem(R.id.app_bar_search);
+        SearchView sv = (SearchView) mSearch.getActionView();
+        sv.setIconifiedByDefault(false);
+        sv.setQueryHint("검색어를 입력하세요.");
+        sv.setMaxWidth(Integer.MAX_VALUE);
+
+
+        return true;
+    }
+
+    public void retrofit (Fragment selected, String query, String category, int position){
+        ArrayList<ResponseData> responseData = new ArrayList<>();
+        Bundle bundle = new Bundle();
+
+        Call<SearchData> call = RetrofitClient_Search.getApiService().postOverlapCheck(query, category);
+        call.enqueue((new Callback<SearchData>() {
+            @Override
+            public void onResponse(Call<SearchData> call, Response<SearchData> response) {
+                if(!response.isSuccessful()){
+                    Log.e("연결이 비정상적 : ", "error code : " + response.code());
+                    return;
+                }
+                Log.e("Search_List_total", "연결 성공");
+                SearchData searchdata = response.body();
+                Data[] data = searchdata != null
+                        ? searchdata.getData()
+                        :new Data[0];
+
+                // 데이터 저장 ArrayList<ResponseData>
+                for (int i = 0; i < data.length; i++){
+                    String id = data[i].get_id();
+                    String Image = data[i].getImage();
+                    String Name = data[i].getName();
+                    String Score = data[i].getScore();
+
+                    responseData.add(new ResponseData(
+                            id,
+                            Image,
+                            Name,
+                            Score
+                    ));
+                }
+
+                if (position == 0) {
+                    total_data = responseData;
+                    bundle.putSerializable("responseData", total_data);
+                }
+                else if (position == 1){
+                    food_data = responseData;
+                    bundle.putSerializable("responseData", food_data);
+                }
+                else if (position == 2){
+                    alcohol_data = responseData;
+                    bundle.putSerializable("responseData", alcohol_data);
+                }
+                else if (position == 3){
+                    cafe_data = responseData;
+                    bundle.putSerializable("responseData", cafe_data);
+                }
+
+                selected.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
+            }
+
+            // 서버 통신 실패 시
+            @Override
+            public void onFailure(Call<SearchData> call, Throwable t) {
+                Log.e("연결실패", t.getMessage());
+            }
+        }));
+    }
+}
