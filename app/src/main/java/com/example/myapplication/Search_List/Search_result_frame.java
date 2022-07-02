@@ -13,10 +13,10 @@ import com.example.myapplication.Search_List.search_result_fragment.Food;
 import com.example.myapplication.Search_List.search_result_fragment.Alcohol;
 import com.example.myapplication.Search_List.search_result_fragment.Cafe;
 import com.example.myapplication.Search_List.search_result_fragment.Search_List_total;
-import com.example.myapplication.Search_Page.ResponseData;
-import com.example.myapplication.Search_Page.Search_Retrofit.Data;
+import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
+import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.RetrofitClient_Search;
-import com.example.myapplication.Search_Page.Search_Retrofit.SearchData;
+import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 import com.google.android.material.tabs.TabLayout;
 
 

@@ -3,13 +3,10 @@ package com.example.myapplication.Main_Screen;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,17 +14,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Main_Frame;
 import com.example.myapplication.R;
-import com.example.myapplication.Search_Page.ResponseData;
-import com.example.myapplication.Search_Page.Search_Retrofit.Data;
-import com.example.myapplication.Search_Page.Search_Retrofit.RetrofitClient_Search;
-import com.example.myapplication.Search_Page.Search_Retrofit.SearchData;
-import com.example.myapplication.Search_Page.User_Search_Page;
-
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class User_Home_Page extends Fragment  {
     private View view;

@@ -8,25 +8,25 @@
 
     <ImageView
         android:id="@+id/restaurant_image"
-        android:layout_width="82dp"
-        android:layout_height="84dp" />
+        android:layout_width="97dp"
+        android:layout_height="86dp" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="227dp"
-            android:layout_height="84dp"
-            android:gravity="center"
-            android:text="TextView"
-            android:textSize="17sp" />
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="226dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="TextView"
+        android:textSize="17sp" />
 
-        <TextView
-            android:id="@+id/score"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TextView"
-            android:textSize="20sp" />
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="118dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="TextView"
+        android:textSize="20sp" />
 
 
 </LinearLayout>

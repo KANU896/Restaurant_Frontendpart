@@ -1,4 +1,4 @@
-package com.example.myapplication.Search_Page;
+package com.example.myapplication.Search_Page.Search_Retrofit.Search_Data;
 
 import android.os.Parcelable;
 

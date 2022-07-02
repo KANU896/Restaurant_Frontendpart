@@ -19,33 +19,18 @@ import com.example.myapplication.Map.User_Map_Page;
 import com.example.myapplication.Mypage.User_Myfavorite_Page;
 import com.example.myapplication.Search_List.search_result_fragment.Search_List_total;
 import com.example.myapplication.Search_List.Search_result_frame;
-import com.example.myapplication.Search_Page.ResponseData;
-import com.example.myapplication.Search_Page.Search_Retrofit.Data;
-import com.example.myapplication.Search_Page.Search_Retrofit.RetrofitClient_Search;
-import com.example.myapplication.Search_Page.Search_Retrofit.SearchData;
 import com.example.myapplication.Search_Page.User_Search_Page;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class Main_Frame extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
-    //private ArrayList<ResponseData> responseData = new ArrayList<>();
-
-    User_Search_Page user_search_page = new User_Search_Page();
 
     Fragment search_list = new Search_List_total();
     Fragment fragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     Fragment currentFragment;
-    //FragmentManager search_result_FM;
     FragmentTransaction search_result_FT;
-    // Fragment search_result_Fragment;
     String tag;
 
     @Override
@@ -80,11 +65,9 @@ public class Main_Frame extends AppCompatActivity {
         }
         if(search_result_FT != null){
             search_result_FT.remove(search_list);
-          //  Log.e("search_result_FT", String.valueOf(search_result_FT));
         }
 
         fragment = fragmentManager.findFragmentByTag(tag);
-       // Log.e("fragment", String.valueOf(fragment));
         if (fragment == null) {
             if (id == R.id.navigation_1) {
                 fragment = new User_Home_Page();
@@ -96,7 +79,6 @@ public class Main_Frame extends AppCompatActivity {
             else{
                 fragment = new User_Map_Page();
             }
-            //Log.d("fragment2 : ", String.valueOf(fragment));
             fragmentTransaction.add(R.id.content_layout, fragment, tag);
         }
         else {
@@ -118,9 +100,8 @@ public class Main_Frame extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
-
         // 검색 nav 일 때 ActionBar에 SearchView 표시
-        if(tag.equals("2131296581")){
+        if(tag.equals(String.valueOf(R.id.navigation_2))){
             inflater.inflate(R.menu.search_list_menu, menu);
             MenuItem mSearch = menu.findItem(R.id.app_bar_search); // SearchView 있는 res/menu/app_bar_search.xml
 
