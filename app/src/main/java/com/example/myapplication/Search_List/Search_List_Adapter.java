@@ -16,13 +16,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Common.JWTUtils;
+import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Detail_Page.Detail_page;
 import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Detail_ResponseData;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
 import com.example.myapplication.R;
-import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Data_Detail;
 import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Detail_Data;
-import com.example.myapplication.Search_Page.Search_Retrofit.RetrofitClient_Search;
+import com.example.myapplication.Common.RetrofitClient;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -34,6 +37,7 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
     private ArrayList<ResponseData> responseData;
     private AsyncTask<Void, Void, Bitmap> image_url;
     private Context mContext;
+    private String token;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         ImageView image;
@@ -53,8 +57,18 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     ResponseData test = responseData.get(pos);
-                    retrofit(v, test.getId());
-                    //Toast.makeText(mContext,test.getName(),Toast.LENGTH_SHORT).show();
+
+                    SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(mContext, "User");
+                    if (!sharedPreferencesUtil.getPreferenceString("token").equals("")) {
+                        token = sharedPreferencesUtil.getPreferenceString("token");
+                        try {
+                            JSONObject jObject = JWTUtils.decoded(token);
+                            retrofit(v, test.getId(), jObject.getString("username"));
+                        } catch (Exception e) {
+                            Log.e("JSON Decode Error", e.getMessage());
+                        }
+                    }
+                    else retrofit(v, test.getId(), "");
                 }
             });
         }
@@ -85,13 +99,6 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
             holder.score.setText("점수 없음");
         else
             holder.score.setText(text.getScore());
-
-//        holder.cvItem.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v){
-//                Toast.makeText(mContext,"Toast",Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 
     @Override
@@ -102,10 +109,10 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
             return 0;
     }
 
-    public void retrofit (View v, String id){
+    public void retrofit (View v, String id, String username){
         Bundle bundle = new Bundle();
 
-        Call<Detail_Data> call = RetrofitClient_Search.getApiService().Detail_post(id);
+        Call<Detail_Data> call = RetrofitClient.getApiService().Detail_post(id, username);
         call.enqueue((new Callback<Detail_Data>() {
             @Override
             public void onResponse(Call<Detail_Data> call, Response<Detail_Data> response) {
@@ -121,14 +128,17 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
                 String Address = detail_data.getAddress();
                 String Tag = detail_data.getTag();
                 String Menu = detail_data.getMenu();
+                boolean Fav = detail_data.getFav();
 
                 Detail_ResponseData response_detail_data = new Detail_ResponseData(
+                        id,
                         Image,
                         Name,
                         Score,
                         Address,
                         Tag,
-                        Menu
+                        Menu,
+                        Fav
                 );
 
                 Intent intent = new Intent(v.getContext(), Detail_page.class);

@@ -15,7 +15,7 @@ import com.example.myapplication.Search_List.search_result_fragment.Cafe;
 import com.example.myapplication.Search_List.search_result_fragment.Search_List_total;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.Data;
-import com.example.myapplication.Search_Page.Search_Retrofit.RetrofitClient_Search;
+import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 import com.google.android.material.tabs.TabLayout;
 
@@ -156,7 +156,7 @@ public class Search_result_frame extends AppCompatActivity {
         ArrayList<ResponseData> responseData = new ArrayList<>();
         Bundle bundle = new Bundle();
 
-        Call<SearchData> call = RetrofitClient_Search.getApiService().postOverlapCheck(query, category);
+        Call<SearchData> call = RetrofitClient.getApiService().postOverlapCheck(query, category);
         call.enqueue((new Callback<SearchData>() {
             @Override
             public void onResponse(Call<SearchData> call, Response<SearchData> response) {

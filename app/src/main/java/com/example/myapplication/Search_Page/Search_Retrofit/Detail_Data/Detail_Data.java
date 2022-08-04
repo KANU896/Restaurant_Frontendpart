@@ -28,6 +28,10 @@ public class Detail_Data {
     @Expose
     private String Tag;
 
+    @SerializedName("fav")
+    @Expose
+    private boolean fav;
+
     public String getImage(){
         return Image;
     }
@@ -51,6 +55,8 @@ public class Detail_Data {
     public String getTag(){
         return Tag;
     }
+
+    public boolean getFav() { return fav; }
 
     @Override
     public String toString() {

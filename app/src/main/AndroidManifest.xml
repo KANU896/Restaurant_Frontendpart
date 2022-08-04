@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".Start_Screen"
+            android:name=".Main_Frame"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
         <activity android:name=".Login.User_Login"/>
         <activity android:name=".Login.User_Register"/>
         <activity android:name=".Login.User_IdFind"/>
-        <activity android:name=".Main_Frame"/>
+<!--        <activity android:name=".Main_Frame"/>-->
         <activity android:name=".Main_Screen.Restourant_Keyword"/>
         <activity android:name=".Main_Screen.Today_Restourant"/>
         <activity android:name=".Search_List.search_result_fragment.Search_List_total"/>
