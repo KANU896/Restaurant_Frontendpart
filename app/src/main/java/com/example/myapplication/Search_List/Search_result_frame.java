@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.Main_Frame;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_List.search_result_fragment.Food;
 import com.example.myapplication.Search_List.search_result_fragment.Alcohol;
@@ -148,10 +149,29 @@ public class Search_result_frame extends AppCompatActivity {
         sv.setQueryHint("검색어를 입력하세요.");
         sv.setMaxWidth(Integer.MAX_VALUE);
 
+        //SearchView 검색 시
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            public boolean onQueryTextSubmit(String query) { // 검색 버튼이 눌러졌을 때 이벤트 처리
+                finish();//인텐트 종료
+                overridePendingTransition(0, 0);//인텐트 효과 없애기
+                intent(query);
+                overridePendingTransition(0, 0);//인텐트 효과 없애기
+                return true;
+            }
+
+            public boolean onQueryTextChange(String newText) {
+                // 검색어가 변경되었을 때 이벤트 처리
+                return false;
+            }
+        });
 
         return true;
     }
-
+    public void intent (String query){
+        Intent intent = new Intent(this, Search_result_frame.class);
+        intent.putExtra("query", query);
+        startActivity(intent);
+    }
     public void retrofit (Fragment selected, String query, String category, int position){
         ArrayList<ResponseData> responseData = new ArrayList<>();
         Bundle bundle = new Bundle();

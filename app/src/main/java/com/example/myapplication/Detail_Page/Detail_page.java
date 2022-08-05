@@ -1,9 +1,12 @@
 package com.example.myapplication.Detail_Page;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -22,8 +25,16 @@ import com.example.myapplication.Search_List.ImageLoadTask;
 import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Detail_Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Detail_ResponseData;
 
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +44,7 @@ public class Detail_page extends AppCompatActivity {
     Detail_ResponseData responseData;
     TextView detail_title, detail_menu, detail_tag, detail_score, detail_address;
     ImageView imageView;
+    double x, y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +128,11 @@ public class Detail_page extends AppCompatActivity {
         detail_address = findViewById(R.id.detail_address);
         Button location_button = findViewById(R.id.locationbutton);
         LinearLayout location_layout = findViewById(R.id.location_layout);
-        detail_address.setText(responseData.getAddress());
+        String address = responseData.getAddress();
+        if(!address.equals(""))
+            detail_address.setText(address);
+        else
+            detail_address.setText("찾을 수 없습니다.");
 
         location_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,6 +151,41 @@ public class Detail_page extends AppCompatActivity {
                 }
             }
         });
+
+//        // 지도 (에뮬레이터랑 호환 안되서 평소엔 주석처리)
+//        MapView mapView = new MapView(this);
+//        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
+//
+//        //주소로 좌표 추출
+//        Geocoder geocoder = new Geocoder(this, Locale.KOREA);
+//
+//        try{
+//            List<Address> addresses = geocoder.getFromLocationName(address,3);
+//            StringBuffer buffer= new StringBuffer();
+//            for(Address t : addresses){
+//                buffer.append(t.getLatitude()+", "+t.getLongitude()+"\n");
+//            }
+//            String[] coordinate = buffer.toString().split(", ");
+//            x = Double.parseDouble(coordinate[0]);
+//            y = Double.parseDouble(coordinate[1]);
+//
+//            mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(x, y), 2, true);
+//
+//        }
+//        catch (IOException e) {
+//            Toast.makeText(this, "검색 실패", Toast.LENGTH_SHORT).show();
+//        }
+//
+//        mapViewContainer.addView(mapView);
+//
+//        MapPOIItem marker = new MapPOIItem();
+//        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(x, y);
+//        marker.setItemName("Default Marker");
+//        marker.setTag(0);
+//        marker.setMapPoint(MARKER_POINT);
+//        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+//        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+//        mapView.addPOIItem(marker);
 
         //TODO TAG
         detail_tag = findViewById(R.id.detail_tag);

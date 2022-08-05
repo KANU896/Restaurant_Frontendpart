@@ -4,7 +4,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +21,9 @@ import com.example.myapplication.Login.Login_Data.Login_Token;
 import com.example.myapplication.R;
 import com.example.myapplication.Main_Frame;
 import com.example.myapplication.Common.RetrofitClient;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,6 +73,7 @@ public class User_Login extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getAppKeyHash();
                 String id = username.getText().toString();
                 String pw = password.getText().toString();
                 retrofit(id, pw);
@@ -84,23 +92,30 @@ public class User_Login extends AppCompatActivity {
                     Log.e("연결이 비정상적 : ", "error code : " + response.code());
                     return;
                 }
-                Login_Token login_token = response.body();
+                Login_Token login_data = response.body();
 
-                String token = login_token.getToken();
+                String token = login_data.getToken();
 
-                sharedPreferencesUtil.setPreference("token", token);
+                if(login_data.getMsg().equals("success")) {
+                    sharedPreferencesUtil.setPreference("token", token);
+                    //자동 로그인 여부
+                    if (checkBox.isChecked()) {
+                        sharedPreferencesUtil.setPreference("autoLoginId", username);
+                        sharedPreferencesUtil.setPreference("autoLoginPw", password);
+                    } else {
+                        sharedPreferencesUtil.setPreference("autoLoginId", "");
+                        sharedPreferencesUtil.setPreference("autoLoginPw", "");
+                    }
 
-                //자동 로그인 여부
-                if (checkBox.isChecked()) {
-                    sharedPreferencesUtil.setPreference("autoLoginId", username);
-                    sharedPreferencesUtil.setPreference("autoLoginPw", password);
-                } else {
-                    sharedPreferencesUtil.setPreference("autoLoginId", "");
-                    sharedPreferencesUtil.setPreference("autoLoginPw", "");
+                    Intent intent = new Intent(getApplicationContext(), Main_Frame.class);
+                    startActivity(intent);
+                    finish();
                 }
 
-                Intent intent = new Intent(getApplicationContext(), Main_Frame.class);
-                startActivity(intent);
+                else {
+                    Toast.makeText(getApplicationContext(), login_data.getMsg(), Toast.LENGTH_LONG).show();
+                    Log.e("틀림", login_data.getMsg());
+                }
             }
 
             // 서버 통신 실패 시
@@ -121,6 +136,23 @@ public class User_Login extends AppCompatActivity {
         startActivity(intent);
         finish();
 
+    }
+
+    private void getAppKeyHash() {
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String something = new String(Base64.encode(md.digest(), 0));
+                Log.e("Hash key", something);
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e("name not found", e.toString());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 }
 

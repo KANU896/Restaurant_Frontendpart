@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".Start_Screen">
 
@@ -14,20 +14,15 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="호이닝 코드"
+        android:paddingTop="70dp"
+        android:text="INSTORANT"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="24sp"
+        android:textSize="40dp"
         android:textStyle="bold"></TextView>
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        app:srcCompat="@drawable/hoseo" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -43,7 +38,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/emailText"
+                    android:id="@+id/id"
                     android:layout_width="190dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -55,7 +50,7 @@
                     android:textColorHint="#ffffff" />
 
                 <Button
-                    android:id="@+id/email_confirm_btn"
+                    android:id="@+id/id_confirm_btn"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -125,21 +120,22 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/register_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="130dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/bin_blue"
-            android:text="회원 가입"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:backgroundTint="#4F9CDF"></Button>
-
     </LinearLayout>
 
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="130dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bin_blue"
+        android:gravity="center"
+        android:text="회원 가입"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:backgroundTint="#4F9CDF"></Button>
 
 
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.SharedPreferencesUtil;
@@ -47,6 +48,10 @@ public class User_Myfavorite_Page extends Fragment {
                 if (myfavorite_login.getText().equals("로그인")) {
                     Intent intent = new Intent(getActivity(), User_Login.class);
                     startActivity(intent);
+                    getActivity().finish();
+//                    FragmentManager fm = getActivity().getSupportFragmentManager();
+//                    fm.beginTransaction().remove(User_Myfavorite_Page.this).commit();
+//                    fm.popBackStack();
                 }
                 else {
                     sharedPreferencesUtil.deletePreference("token");

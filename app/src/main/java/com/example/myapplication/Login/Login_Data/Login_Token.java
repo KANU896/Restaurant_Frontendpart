@@ -8,7 +8,12 @@ public class Login_Token {
     @Expose
     private String token;
 
+    @SerializedName("msg")
+    @Expose
+    private String msg;
+
     public String getToken(){
         return token;
     }
+    public String getMsg() {return msg;}
 }

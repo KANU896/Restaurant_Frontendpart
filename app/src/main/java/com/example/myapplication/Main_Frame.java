@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -110,7 +111,6 @@ public class Main_Frame extends AppCompatActivity {
             //SearchView 검색 시
             sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 public boolean onQueryTextSubmit(String query) { // 검색 버튼이 눌러졌을 때 이벤트 처리
-
                     intent(query);
                     return true;
                 }
@@ -120,9 +120,7 @@ public class Main_Frame extends AppCompatActivity {
                     return false;
                 }
             });
-
         }
-
         //Title만 있는 ActionBar
         else{
             inflater.inflate(R.menu.no_menu, menu);
