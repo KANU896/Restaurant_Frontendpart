@@ -6,8 +6,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Main_Frame;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_List.search_result_fragment.Food;
@@ -37,18 +39,21 @@ public class Search_result_frame extends AppCompatActivity {
     private static final String TAG = "Search_result_frame";
 
     //객체 선언
-    TabLayout tabs;
-    Search_List_total total;
-    Food food;
-    Alcohol alcohol;
-    Cafe cafe;
-    Fragment selected = null;
+    private TabLayout tabs;
+    private Search_List_total total;
+    private Food food;
+    private Alcohol alcohol;
+    private Cafe cafe;
+    private Fragment selected = null;
 
     // 각 프레그먼트 별 데이터 저장소
-    ArrayList<ResponseData> total_data;
-    ArrayList<ResponseData> food_data;
-    ArrayList<ResponseData> alcohol_data;
-    ArrayList<ResponseData> cafe_data;
+    private ArrayList<ResponseData> total_data;
+    private ArrayList<ResponseData> food_data;
+    private ArrayList<ResponseData> alcohol_data;
+    private ArrayList<ResponseData> cafe_data;
+
+    private SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(this, "Searched");
+    private String query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +61,7 @@ public class Search_result_frame extends AppCompatActivity {
         setContentView(R.layout.search_result_frame);
         // 데이터 받기
         Intent intent = getIntent();
-        String query = intent.getStringExtra("query");
+        this.query = intent.getStringExtra("query");
 
         //프래그먼트 초기화
         total = new Search_List_total();
@@ -141,11 +146,13 @@ public class Search_result_frame extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
+        MenuInflater inflater = getMenuInflater( );
         inflater.inflate(R.menu.search_list_menu, menu);
         MenuItem mSearch = menu.findItem(R.id.app_bar_search);
         SearchView sv = (SearchView) mSearch.getActionView();
-        sv.setIconifiedByDefault(false);
+        ActionBar ab = getSupportActionBar();
+        ab.setTitle(query);
+
         sv.setQueryHint("검색어를 입력하세요.");
         sv.setMaxWidth(Integer.MAX_VALUE);
 
@@ -154,6 +161,7 @@ public class Search_result_frame extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) { // 검색 버튼이 눌러졌을 때 이벤트 처리
                 finish();//인텐트 종료
                 overridePendingTransition(0, 0);//인텐트 효과 없애기
+                sharedPreferencesUtil.setSearchedData(query);
                 intent(query);
                 overridePendingTransition(0, 0);//인텐트 효과 없애기
                 return true;

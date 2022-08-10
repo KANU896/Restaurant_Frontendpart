@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static final String BASE_URL = "http://192.168.219.102:8000"; // 서버 ip 주소
+    private static final String BASE_URL = "http://192.168.219.103:8000"; // 서버 ip 주소
 
     public static Retrofit_Service getApiService(){
         return getInstance().create(Retrofit_Service.class);

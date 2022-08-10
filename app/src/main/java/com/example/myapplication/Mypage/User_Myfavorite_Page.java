@@ -49,9 +49,6 @@ public class User_Myfavorite_Page extends Fragment {
                     Intent intent = new Intent(getActivity(), User_Login.class);
                     startActivity(intent);
                     getActivity().finish();
-//                    FragmentManager fm = getActivity().getSupportFragmentManager();
-//                    fm.beginTransaction().remove(User_Myfavorite_Page.this).commit();
-//                    fm.popBackStack();
                 }
                 else {
                     sharedPreferencesUtil.deletePreference("token");

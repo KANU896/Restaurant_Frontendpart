@@ -7,11 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.Common.Location_GPS;
 import com.example.myapplication.Main_Frame;
 import com.example.myapplication.R;
 
@@ -19,9 +22,9 @@ public class User_Home_Page extends Fragment  {
     private View view;
     private Button today_key_btn;
     private Button today_rest_btn;
-    //private SearchView main_search;
+    private TextView location_text;
     private Button search_button;
-    Main_Frame main_frame;
+    private Main_Frame main_frame;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -41,7 +44,6 @@ public class User_Home_Page extends Fragment  {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         view = inflater.inflate(R.layout.home_page, container,false);
-
 
         // 실시간 맛집 키워드 버튼 클릭시 화면전환
         today_key_btn = (Button) view.findViewById(R.id.today_keword);
@@ -64,6 +66,11 @@ public class User_Home_Page extends Fragment  {
             }
         });
 
+        //현재 위치 정보 표시
+        location_text = (TextView) view.findViewById(R.id.location_text);
+        location_text.setText(getArguments().getString("address"));
+
+        //검색 버튼
         search_button = (Button) view.findViewById(R.id.search_button);
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
