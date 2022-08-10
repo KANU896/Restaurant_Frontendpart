@@ -48,77 +48,22 @@ public class SharedPreferencesUtil {
         editor.apply();
     }
 
-    public void setSearchedData(String value){
-        SharedPreferences pref = context.getSharedPreferences(Data_Store, MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        JSONArray jsonArray = getSearchData();
 
-        try{
-            jsonArray.put(value);
-            editor.putString("searched", jsonArray.toString());
-        }
-        catch (Exception e){
-            JSONArray jsonArray2 = new JSONArray();
-            jsonArray2.put(value);
-            editor.putString("searched", jsonArray2.toString());
-        }
-        editor.apply();
-        Log.e("after", getPreferenceString("searched"));
-    }
-
-    public JSONArray getSearchData(){
-        SharedPreferences pref = context.getSharedPreferences(Data_Store, MODE_PRIVATE);
-        String json = pref.getString("searched", null);
-        JSONArray jsonArray = null;
-        if(json != null) {
-            try {
-                jsonArray = new JSONArray(json);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return jsonArray;
-    }
-
-    public void deleteSearchData(String value){
-        SharedPreferences pref = context.getSharedPreferences(Data_Store, MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        ArrayList<String> list = new ArrayList<>();
-        String json = pref.getString("searched", null);
-        JSONArray jsonArray, jsonArray2 = null;
-        if(json != null) {
-            try {
-                jsonArray = new JSONArray(json);
-                jsonArray2 = new JSONArray();
-                for (int i = 0; i < jsonArray.length(); i++){
-                    list.add(jsonArray.optString(i));
-                }
-                list.remove(value);
-                for(int i = 0; i < list.size(); i++) {
-                    jsonArray2.put(list.get(i));
-                }
-                editor.putString("searched", jsonArray2.toString());
-                editor.apply();
-                Log.e("delete2", getPreferenceString("searched"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
+    private String SEARCHHISTORYLIST_KEY = "key_search_history";
+    // 검색 기록 저장
     public void storeSearchHistoryList(List<SearchedList> searchHistoryList){
         String searchHistoryListString = new Gson().toJson(searchHistoryList);
         SharedPreferences pref = context.getSharedPreferences(Data_Store, MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
-        editor.putString("key_search_history", searchHistoryListString);
+        editor.putString(SEARCHHISTORYLIST_KEY, searchHistoryListString);
         editor.apply();
     }
 
+    //검색 기록 불러오기
     public List<SearchedList> getSearchHistoryList(){
         SharedPreferences pref = context.getSharedPreferences(Data_Store, MODE_PRIVATE);
-        String searchHistoryListString = pref.getString("key_search_history", null);
+        String searchHistoryListString = pref.getString(SEARCHHISTORYLIST_KEY, null);
 
         ArrayList<SearchedList> storedSearchHistoryList = new ArrayList<SearchedList>();
         try {
@@ -130,9 +75,9 @@ public class SharedPreferencesUtil {
         }
         catch (Exception e){
             SharedPreferences.Editor editor = pref.edit();
-            editor.putString("key_search_history", "");
+            editor.putString(SEARCHHISTORYLIST_KEY, "");
             editor.apply();
-            searchHistoryListString = pref.getString("key_search_history", null);
+            searchHistoryListString = pref.getString(SEARCHHISTORYLIST_KEY, null);
             if (!searchHistoryListString.isEmpty()) {
                 Type listType = new TypeToken<ArrayList<SearchedList>>() {
                 }.getType();

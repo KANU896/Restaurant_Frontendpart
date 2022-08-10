@@ -20,6 +20,7 @@ import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.Respons
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.Data;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
+import com.example.myapplication.Search_Page.SearchedList;
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -54,6 +55,7 @@ public class Search_result_frame extends AppCompatActivity {
 
     private SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(this, "Searched");
     private String query;
+    private ArrayList<SearchedList> searchHistoryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +163,9 @@ public class Search_result_frame extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) { // 검색 버튼이 눌러졌을 때 이벤트 처리
                 finish();//인텐트 종료
                 overridePendingTransition(0, 0);//인텐트 효과 없애기
-                sharedPreferencesUtil.setSearchedData(query);
+                searchHistoryList = (ArrayList<SearchedList>) sharedPreferencesUtil.getSearchHistoryList();
+                searchHistoryList.add(new SearchedList(query));
+                sharedPreferencesUtil.storeSearchHistoryList(searchHistoryList);
                 intent(query);
                 overridePendingTransition(0, 0);//인텐트 효과 없애기
                 return true;
