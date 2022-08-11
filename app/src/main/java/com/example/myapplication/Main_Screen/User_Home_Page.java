@@ -25,6 +25,7 @@ public class User_Home_Page extends Fragment  {
     private TextView location_text;
     private Button search_button;
     private Main_Frame main_frame;
+    private String address;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -68,7 +69,8 @@ public class User_Home_Page extends Fragment  {
 
         //현재 위치 정보 표시
         location_text = (TextView) view.findViewById(R.id.location_text);
-        location_text.setText(getArguments().getString("address"));
+        address = getArguments().getString("address");
+        location_text.setText(address);
 
         //검색 버튼
         search_button = (Button) view.findViewById(R.id.search_button);
