@@ -8,6 +8,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -60,7 +61,9 @@ public class User_Login extends AppCompatActivity {
 
         //자동 로그인을 선택한 유저
         checkBox = findViewById(R.id.checkBox);
-        if (!sharedPreferencesUtil.getPreferenceString("autoLoginId").equals("") && !sharedPreferencesUtil.getPreferenceString("autoLoginPw").equals("")) {
+        String autoLoginId = sharedPreferencesUtil.getPreferenceString("autoLoginId");
+        String autoLoginPw =sharedPreferencesUtil.getPreferenceString("autoLoginPw");
+        if (!TextUtils.isEmpty(autoLoginId) && !TextUtils.isEmpty(autoLoginPw)) {
             checkBox.setChecked(true);
             checkAutoLogin(sharedPreferencesUtil.getPreferenceString("autoLoginId"));
         }

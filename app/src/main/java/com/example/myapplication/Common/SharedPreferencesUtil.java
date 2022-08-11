@@ -37,7 +37,8 @@ public class SharedPreferencesUtil {
     //내부 저장소에 저장된 데이터 가져오기
     public String getPreferenceString(String key) {
         SharedPreferences pref = context.getSharedPreferences(Data_Store, MODE_PRIVATE);
-        return pref.getString(key, null);
+        String data = pref.getString(key, null);
+        return data;
     }
 
     //데이터 삭제

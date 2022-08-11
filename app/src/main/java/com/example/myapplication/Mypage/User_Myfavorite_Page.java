@@ -2,6 +2,7 @@ package com.example.myapplication.Mypage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,10 +31,10 @@ public class User_Myfavorite_Page extends Fragment {
         Button myfavorite_login = (Button) view.findViewById(R.id.myfavorite_login_btn); // 로그인 버튼
 
         SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(this.getActivity(), "User");
-
-        if (!sharedPreferencesUtil.getPreferenceString("token").equals("")) {
+        String token = sharedPreferencesUtil.getPreferenceString("token");
+        if (!TextUtils.isEmpty(token)) {
             myfavorite_login.setText("로그아웃");
-            String token = sharedPreferencesUtil.getPreferenceString("token");
+            //String token = sharedPreferencesUtil.getPreferenceString("token");
             try {
                 JSONObject jObject = JWTUtils.decoded(token);
             } catch (Exception e) {
@@ -52,7 +53,8 @@ public class User_Myfavorite_Page extends Fragment {
                 }
                 else {
                     sharedPreferencesUtil.deletePreference("token");
-                    if (sharedPreferencesUtil.getPreferenceString("token").equals("")) myfavorite_login.setText("로그인");
+                    String token = sharedPreferencesUtil.getPreferenceString("token");
+                    if (TextUtils.isEmpty(token)) myfavorite_login.setText("로그인");
                     Log.e("token", sharedPreferencesUtil.getPreferenceString("token")+"끝");
                 }
             }
