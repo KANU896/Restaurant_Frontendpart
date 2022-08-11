@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,8 +60,9 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
                     ResponseData test = responseData.get(pos);
 
                     SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(mContext, "User");
-                    if (!sharedPreferencesUtil.getPreferenceString("token").equals("")) {
-                        token = sharedPreferencesUtil.getPreferenceString("token");
+                    token = sharedPreferencesUtil.getPreferenceString("token");
+                    if (!TextUtils.isEmpty(token)) {
+                        //token = sharedPreferencesUtil.getPreferenceString("token");
                         try {
                             JSONObject jObject = JWTUtils.decoded(token);
                             retrofit(v, test.getId(), jObject.getString("username"));
@@ -110,8 +112,6 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
     }
 
     public void retrofit (View v, String id, String username){
-        Bundle bundle = new Bundle();
-
         Call<Detail_Data> call = RetrofitClient.getApiService().Detail_post(id, username);
         call.enqueue((new Callback<Detail_Data>() {
             @Override
@@ -140,6 +140,8 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
                         Menu,
                         Fav
                 );
+
+
 
                 Intent intent = new Intent(v.getContext(), Detail_page.class);
                 intent.putExtra("responseData", response_detail_data);

@@ -81,70 +81,9 @@ public class User_Home_Page extends Fragment  {
             }
         });
 
-
-//        main_search = (SearchView) view.findViewById(R.id.restour_search);
-//
-//        main_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            public boolean onQueryTextSubmit(String query) {
-//                // 검색 버튼이 눌러졌을 때 이벤트 처리
-//
-//                Call<SearchData> call = RetrofitClient_Search.getApiService().postOverlapCheck(query);
-//                call.enqueue((new Callback<SearchData>() {
-//                    @Override
-//                    public void onResponse(Call<SearchData> call, Response<SearchData> response) {
-//                        if(!response.isSuccessful()){
-//                            Log.e("연결이 비정상적 : ", "error code : " + response.code());
-//                            return;
-//                        }
-//                        //dieseldata = new MutableLiveData<>();
-//                        ArrayList<ResponseData> responseData = new ArrayList<>();
-//                        SearchData searchdata = response.body();
-//                        Data[] data = searchdata != null
-//                                ? searchdata.getData()
-//                                :new Data[0];
-//                        // 데이터 저장 ArrayList<ResponseData>
-//                        for (int i = 0; i < data.length; i++){
-//                            String id = data[i].get_id();
-//                            String Image = data[i].getImage();
-//                            String Name = data[i].getName();
-//                            String Score = data[i].getScore();
-//
-//                            responseData.add(new ResponseData(
-//                                    id,
-//                                    Image,
-//                                    Name,
-//                                    Score
-//                            ));
-//                        }
-//
-//                        //dieseldata.setValue(responseData); // MutableLiveData에 저장한 데이터 ArrayList<ResponseData> 저장
-//
-//                        // 데이터 확인
-//                        for (ResponseData responseData1 : responseData)
-//                            Log.d("live 데이터 : ", responseData1.getName());
-//
-//                        //Intent intent = new Intent(getActivity(), Search_List.class);
-//                        Intent intent = new Intent(getActivity(), User_Search_Page.class);
-//                        intent.putExtra("responseData", responseData);
-//                        startActivity(intent);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<SearchData> call, Throwable t) {
-//                        Toast.makeText(getActivity(),"서버 연결 실패",Toast.LENGTH_SHORT).show();
-//                        Log.e("연결실패", t.getMessage());
-//                    }
-//                }));
-//                return true;
-//            }
-//
-//            public boolean onQueryTextChange(String newText) {
-//                // 검색어가 변경되었을 때 이벤트 처리
-//                return false;
-//            }
-//        });
         return view;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

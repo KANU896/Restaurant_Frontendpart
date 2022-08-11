@@ -19,6 +19,11 @@ public interface Retrofit_Service {
     @POST("/search/data/")
     Call<SearchData> postOverlapCheck(@Field("search_data") String search_data, @Field("category") String category);
 
+    @FormUrlEncoded
+    @POST("/search/data/")
+    Call<SearchData> test(@Field("location") String Address, @Field("category") String category);
+
+
     //선택한 음식점 정보 불러오기
     @FormUrlEncoded
     @POST("/detail/data/")

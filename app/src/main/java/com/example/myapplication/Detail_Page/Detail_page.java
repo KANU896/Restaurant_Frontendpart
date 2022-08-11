@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,9 +42,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Detail_page extends AppCompatActivity {
-    Detail_ResponseData responseData;
-    TextView detail_title, detail_menu, detail_tag, detail_score, detail_address;
-    ImageView imageView;
+    private Detail_ResponseData responseData;
+    private TextView detail_title, detail_menu, detail_tag, detail_score, detail_address;
+    private ImageView imageView;
+    private JSONObject jObject = null;
     double x, y;
 
     @Override
@@ -70,13 +72,15 @@ public class Detail_page extends AppCompatActivity {
         SharedPreferencesUtil spref = new SharedPreferencesUtil(getApplicationContext(), "User");
         favorite.setChecked(responseData.getFav()); //해당 계정 즐겨찾기에 추가되어 있으면 체크 된 상태
         String token = spref.getPreferenceString("token");
-        JSONObject jObject = JWTUtils.decoded(token);
+        if(!TextUtils.isEmpty(token)){
+            jObject = JWTUtils.decoded(token);
+        }
 
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = null;
-                if (!token.equals("")) {
+                if (!TextUtils.isEmpty(token)) {
                     try {
                         username = jObject.getString("username");
                     } catch (JSONException e) {
