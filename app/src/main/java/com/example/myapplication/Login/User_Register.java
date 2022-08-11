@@ -19,41 +19,14 @@ public class User_Register extends AppCompatActivity {
     private int id_flag = 0; // 아이디 중복 검사 플래그
     private int pwd_flag = 0; // 비밀번호 일치 검사 플래그
 
-    // 가입환영 팝업 출력, 로그인화면 전환 함수
-    void show(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setTitle("회원가입 성공!");
-        //타이틀설정
-        String congratu_text = "호이닝 코드에 오신 여러분을 환영합니다~";
-        builder.setMessage(congratu_text);
-        //내용설정
-        builder.setPositiveButton("확인",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(),"가입완료",Toast.LENGTH_SHORT).show();
-                    }
-                });
-        builder.show();
-
-        Handler timer = new Handler(); //Handler 생성
-        timer.postDelayed(new Runnable(){ //Login.5초후 쓰레드를 생성하는 postDelayed 메소드
-            public void run(){//intent 생성
-                Intent intent = new Intent(getApplicationContext(), User_Login.class);
-                startActivity(intent);
-                finish(); // 이 액티비티를 종료
-            }
-        }, 2500); // Login.5초 대기
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_register);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(User_Register.this);
-        EditText emailText = (EditText) findViewById(R.id.emailText); // 이메일 입력 텍스트
-        Button duplicateID = (Button) findViewById(R.id.email_confirm_btn); // 이메일 중복 체크 버튼
+        EditText id = (EditText) findViewById(R.id.id); // 이메일 입력 텍스트
+        Button duplicateID = (Button) findViewById(R.id.id_confirm_btn); // 이메일 중복 체크 버튼
         EditText pwd = (EditText) findViewById(R.id.passwordText); // 비밀번호 입력 텍스트
         EditText pwd_cfm = (EditText) findViewById(R.id.password_confirm); // 비밀번호 확인 텍스트
         Button pwd_check = (Button) findViewById(R.id.pwd_confirm_btn); // 비밀번호 확인 버튼
@@ -66,9 +39,9 @@ public class User_Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 이메일을 입력하지 않고 중복체크 버튼을 누를시 이메일을 입력하라는 창이뜸 (민우)
-                if (emailText.getText().toString().length() == 0 ) {
+                if (id.getText().toString().length() == 0 ) {
                     Toast.makeText(User_Register.this, "이메일를 입력하세요", Toast.LENGTH_SHORT).show();
-                    emailText.requestFocus();
+                    id.requestFocus();
                     return;
                 }
                 builder.setTitle("확인 메시지");
@@ -111,10 +84,10 @@ public class User_Register extends AppCompatActivity {
         register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 이메일 입력 필수
-                if (emailText.getText().toString().length() == 0 ) {
+                // 아이디 입력 필수
+                if (id.getText().toString().length() == 0 ) {
                     Toast.makeText(User_Register.this, "이메일를 입력하세요", Toast.LENGTH_SHORT).show();
-                    emailText.requestFocus();
+                    id.requestFocus();
                     return;
                 }
                 // 비밀번호 입력 필수
@@ -135,7 +108,7 @@ public class User_Register extends AppCompatActivity {
                     name.requestFocus();
                     return;
                 }
-                // 이메일 중복 체크 필수
+                // 아이디 중복 체크 필수
                 if(id_flag == 0)
                 {
                     Toast.makeText(User_Register.this, "이메일 중복 검사를 해주세요", Toast.LENGTH_SHORT).show();
@@ -147,8 +120,35 @@ public class User_Register extends AppCompatActivity {
                     Toast.makeText(User_Register.this, "비밀번호 확인 검사를 해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                //TODO Retrofit2 연결
                 show(); // 팝업함수 호출
             }
         });
+    }
+    // 가입환영 팝업 출력, 로그인화면 전환 함수
+    void show(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("회원가입 성공!");
+        //타이틀설정
+        String congratu_text = "호이닝 코드에 오신 여러분을 환영합니다~";
+        builder.setMessage(congratu_text);
+        //내용설정
+        builder.setPositiveButton("확인",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),"가입완료",Toast.LENGTH_SHORT).show();
+                    }
+                });
+        builder.show();
+
+        Handler timer = new Handler(); //Handler 생성
+        timer.postDelayed(new Runnable(){ //Login.5초후 쓰레드를 생성하는 postDelayed 메소드
+            public void run(){//intent 생성
+                Intent intent = new Intent(getApplicationContext(), User_Login.class);
+                startActivity(intent);
+                finish(); // 이 액티비티를 종료
+            }
+        }, 2500); // Login.5초 대기
     }
 }

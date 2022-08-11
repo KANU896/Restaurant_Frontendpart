@@ -1,12 +1,14 @@
-package com.example.myapplication.Main_Screen;
+package com.example.myapplication.Search_Page.Search_Retrofit.Search_Data;
+
+import android.os.Parcelable;
 
 import java.io.Serializable;
 
 public class ResponseData implements Serializable {
-    private  String Id;
-    private  String Image;
-    private  String Name;
-    private  String Score;
+    private String Id;
+    private String Image;
+    private String Name;
+    private String Score;
 
     public ResponseData(String id, String Image, String Name, String Score){
         this.Id = id;
