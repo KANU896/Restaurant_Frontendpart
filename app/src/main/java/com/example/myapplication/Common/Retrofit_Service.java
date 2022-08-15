@@ -1,6 +1,7 @@
 package com.example.myapplication.Common;
 
 import com.example.myapplication.Login.Login_Data.Login_Token;
+import com.example.myapplication.Login.Login_Data.Signup_Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Detail_Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 
@@ -19,10 +20,6 @@ public interface Retrofit_Service {
     @POST("/search/data/")
     Call<SearchData> postOverlapCheck(@Field("search_data") String search_data, @Field("category") String category);
 
-    @FormUrlEncoded
-    @POST("/search/data/")
-    Call<SearchData> test(@Field("location") String Address, @Field("category") String category);
-
 
     //선택한 음식점 정보 불러오기
     @FormUrlEncoded
@@ -33,6 +30,16 @@ public interface Retrofit_Service {
     @FormUrlEncoded
     @POST("/account/login/")
     Call<Login_Token> Login_post(@Field("username") String username, @Field("password") String password);
+
+    //회원가입
+    @FormUrlEncoded
+    @POST("/account/signup/")
+    Call<Signup_Data> Signup_post(@Field("username") String username, @Field("password") String password, @Field("name") String name);
+
+    //아이디 중복 확인
+    @FormUrlEncoded
+    @POST("/account/idcheck/")
+    Call<Signup_Data> IDCheck_post(@Field("username") String username);
 
     //즐겨찾기 추가
     @FormUrlEncoded

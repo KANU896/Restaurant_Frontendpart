@@ -39,14 +39,15 @@ public class Main_Frame extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private Fragment currentFragment;
-    private String tag;
+    private String tag, address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_main);
         Location_GPS gps = new Location_GPS(getApplicationContext(), Main_Frame.this);
-        String address = gps.get_address();
+        address = gps.get_address();
+        //address = gps.currentGPS();
         Log.e("Main_Frame", address);
 
         mBottomNV = findViewById(R.id.nav_view);
@@ -99,6 +100,9 @@ public class Main_Frame extends AppCompatActivity {
     public void changeFragment(){
         mBottomNV.setSelectedItemId(R.id.navigation_2);
     }
+    public void changeFragment(int id){
+        mBottomNV.setSelectedItemId(id);
+    }
 
     // ActionBar
     @Override
@@ -118,21 +122,8 @@ public class Main_Frame extends AppCompatActivity {
                     searchHistoryList = (ArrayList<SearchedList>) sharedPreferencesUtil.getSearchHistoryList();
                     searchHistoryList.add(new SearchedList(query));
                     sharedPreferencesUtil.storeSearchHistoryList(searchHistoryList);
-
-                    fragmentManager = getSupportFragmentManager();
-                    fragmentTransaction = fragmentManager.beginTransaction();
-
-                    currentFragment = fragmentManager.getPrimaryNavigationFragment();
-                    if (currentFragment != null) {
-                        fragmentTransaction.remove(currentFragment);
-                    }
-                    fragment = new User_Search_Page();
-
-                    fragmentTransaction.add(R.id.content_layout, fragment);
-
-                    fragmentTransaction.setPrimaryNavigationFragment(fragment);
-                    fragmentTransaction.setReorderingAllowed(true);
-                    fragmentTransaction.commitNow();
+                    BottomNavigate(R.id.navigation_1, address);
+                    changeFragment(R.id.navigation_1);
 
                     intent(query);
                     return true;

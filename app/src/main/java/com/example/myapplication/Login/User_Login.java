@@ -84,9 +84,14 @@ public class User_Login extends AppCompatActivity {
         });
     }
 
-    public void retrofit (String username, String password){
-        //Bundle bundle = new Bundle();
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), Main_Frame.class);
+        startActivity(intent);
+        finish();
+    }
 
+    public void retrofit (String username, String password){
         Call<Login_Token> call = RetrofitClient.getApiService().Login_post(username, password);
         call.enqueue((new Callback<Login_Token>() {
             @Override
