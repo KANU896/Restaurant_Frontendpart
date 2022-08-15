@@ -39,7 +39,7 @@
         <meta-data android:name="com.kakao.sdk.AppKey"
             android:value="58f427dd33e20722f0e9f2b7b3010f14"/>
         <meta-data android:name= "com.google.android.geo.API_KEY"
-            android:value="AIzaSyC_Q-xghE04hnxcbkGTnMyMLhvFVgvT5S4"/>
+            android:value="Google map API key"/>
     </application>
 
 </manifest>

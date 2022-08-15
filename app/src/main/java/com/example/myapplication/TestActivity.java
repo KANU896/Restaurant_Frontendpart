@@ -601,7 +601,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         new NRPlaces.Builder()
                 .listener(TestActivity.this)
-                .key("AIzaSyDYUhX6vzPSQG_G-egpr0akFcAIriib3wU")
+                .key("")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //500 미터 내에서 검색
                 .type(PlaceType.RESTAURANT) //음식점
