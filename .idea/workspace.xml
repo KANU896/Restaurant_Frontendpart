@@ -20,19 +20,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Common/Retrofit_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Common/Retrofit_Service.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Main_Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Main_Frame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Mypage/User_Myfavorite_Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Mypage/User_Myfavorite_Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Search_List/Search_List_Adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Search_List/Search_List_Adapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Search_List/Search_result_frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/Search_List/Search_result_frame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/myfavorite_page.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/myfavorite_page.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layouts/login/layout/detail_page.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/login/layout/detail_page.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layouts/login/layout/fragment2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/login/layout/fragment2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layouts/login/layout/fragment3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/login/layout/fragment3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layouts/login/layout/fragment4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/login/layout/fragment4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layouts/login/layout/search_result_recyclerview_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layouts/login/layout/search_result_recyclerview_item.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

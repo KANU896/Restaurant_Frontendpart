@@ -55,8 +55,8 @@ public class Main_Frame extends AppCompatActivity {
         setContentView(R.layout.user_main);
         Location_GPS gps = new Location_GPS(getApplicationContext(), Main_Frame.this);
         address = gps.get_address();
-        //address = gps.currentGPS();
-        Log.e("Main_Frame", address);
+
+        sharedPreferencesUtil.setPreference("location", address);
 
         mBottomNV = findViewById(R.id.nav_view);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
