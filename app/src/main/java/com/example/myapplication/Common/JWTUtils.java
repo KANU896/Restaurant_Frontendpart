@@ -1,3 +1,7 @@
+// 작성자 : 김도윤
+// Token 복호화 클래스
+// Update : 22.08.18
+
 package com.example.myapplication.Common;
 
 import android.util.Base64;

@@ -1,3 +1,7 @@
+// 작성자 : 김도윤
+// 검색 결과 또는 즐겨찾기 목록 등 RecyclerView에 데이터 넣고 띄워주는 Adapter
+// Update : 22.08.18
+
 package com.example.myapplication.Search_List;
 
 import android.content.Context;
@@ -19,10 +23,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Detail_Page.Detail_page;
-import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Detail_ResponseData;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
 import com.example.myapplication.R;
-import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Detail_Data;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
 import com.example.myapplication.Common.RetrofitClient;
 
 import org.json.JSONObject;

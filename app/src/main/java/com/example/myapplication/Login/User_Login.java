@@ -1,3 +1,7 @@
+// 로그인 페이지
+// 담당 : 김도윤 - 로그인 서버 통신 기능(retrofit2) 구현
+// Update : 22.08.18
+
 package com.example.myapplication.Login;
 
 import androidx.annotation.Nullable;

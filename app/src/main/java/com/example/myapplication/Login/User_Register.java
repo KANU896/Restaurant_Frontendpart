@@ -1,3 +1,8 @@
+// 회원가입 페이지
+// 담당 : 김도윤 - 아이디 중복 확인 기능 구현(retrofit2)
+//               회원가입 기능 구현(retrofit2)
+// Update : 22.08.18
+
 package com.example.myapplication.Login;
 
 import androidx.annotation.Nullable;

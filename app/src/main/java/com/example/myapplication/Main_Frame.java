@@ -1,3 +1,8 @@
+// 작성자 : 김도윤, 송민우, 송준곤
+// 메인페이지, 검색, 지도, 마이페이지 4개의 Fragment를 관리하는 메인 Frame
+// 담당 : 김도윤 - SearchView, onBackPressed(), 현재 위치 설정
+// Update : 22.08.18
+
 package com.example.myapplication;
 
 import android.content.Intent;

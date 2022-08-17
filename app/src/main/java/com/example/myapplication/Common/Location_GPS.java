@@ -1,3 +1,7 @@
+// 작성자 : 김도윤
+// 위치서비스 on 일 때, 현재 위치를 위도와 경도로 얻고 이를 주소로 바꿔주는 클래스
+// Update : 22.08.18
+
 package com.example.myapplication.Common;
 
 import android.Manifest;

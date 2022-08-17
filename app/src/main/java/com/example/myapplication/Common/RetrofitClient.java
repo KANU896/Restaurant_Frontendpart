@@ -1,3 +1,7 @@
+// 작성자 : 김도윤
+// Retrofit Client
+// Update : 22.08.18
+
 package com.example.myapplication.Common;
 
 import com.google.gson.Gson;

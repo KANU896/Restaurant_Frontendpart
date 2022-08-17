@@ -1,3 +1,7 @@
+// 작성자 : 김도윤
+// 앱에 데이터를 저장시킬 수 있는 기능 모음 클래스
+// Update : 22.08.18
+
 package com.example.myapplication.Common;
 
 import static android.content.Context.MODE_PRIVATE;

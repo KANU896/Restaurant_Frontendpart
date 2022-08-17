@@ -1,16 +1,18 @@
+// 작성자 : 김도윤
+// 서버 전송 시 필요한 데이터, url 등 관리하는 인터페이스
+// Update : 22.08.18
+
 package com.example.myapplication.Common;
 
 import com.example.myapplication.Login.Login_Data.Login_Token;
 import com.example.myapplication.Login.Login_Data.Signup_Data;
-import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Detail_Data;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 
 import retrofit2.Call;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 

@@ -1,3 +1,7 @@
+// 작성자 : 김도윤
+// 마이페이지 - 로그인 & 로그아웃과 로그인시 해당 계정 즐겨찾기 목록 보여줌
+// Update : 22.08.18
+
 package com.example.myapplication.Mypage;
 
 import android.content.Intent;

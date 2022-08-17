@@ -1,13 +1,14 @@
+// 작성자 : 김도윤
+// 음식점 상세정보 페이지
+// Update : 22.08.18
+
 package com.example.myapplication.Detail_Page;
 
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -16,26 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_List.ImageLoadTask;
-import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Detail_Data;
-import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Detail_ResponseData;
-
-import net.daum.mf.map.api.MapPOIItem;
-import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapView;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;

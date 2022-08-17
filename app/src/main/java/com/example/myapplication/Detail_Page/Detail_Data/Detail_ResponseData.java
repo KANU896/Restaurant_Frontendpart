@@ -1,4 +1,8 @@
-package com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data;
+// 작성자 : 김도윤
+// 상세 페이지에 필요한 응답 데이터를 저장하는 클래스
+// Update : 22.08.18
+
+package com.example.myapplication.Detail_Page.Detail_Data;
 
 import java.io.Serializable;
 

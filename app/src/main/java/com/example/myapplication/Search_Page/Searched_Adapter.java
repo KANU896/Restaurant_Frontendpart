@@ -1,3 +1,7 @@
+// 작성자 : 김도윤
+// 최근 검색어를 RecyclerView에 데이터 넣고 띄워주는 Adapter
+// Update : 22.08.18
+
 package com.example.myapplication.Search_Page;
 
 import android.content.Context;

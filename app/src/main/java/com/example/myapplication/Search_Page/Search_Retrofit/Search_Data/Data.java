@@ -1,3 +1,7 @@
+// 작성자 : 김도윤
+// SearchData 클래스에서 받은 응답 데이터는 배열로 구성되어 있어 추가로 구성한 데이터 클래스
+// Update : 22.08.18
+
 package com.example.myapplication.Search_Page.Search_Retrofit.Search_Data;
 
 import com.google.gson.annotations.Expose;//object 중 null 값 자동 생략
@@ -46,11 +50,5 @@ public class Data {
     }
     public void setScore(String Score) {
         this.Score = Score;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [Score = "+Score+", _id = "+_id+", Image = "+Image+", Name = "+Name+"]";
     }
 }
