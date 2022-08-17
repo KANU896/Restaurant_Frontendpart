@@ -184,7 +184,7 @@ public class Search_result_frame extends AppCompatActivity {
         intent.putExtra("query", query);
         startActivity(intent);
     }
-    public void retrofit (Fragment selected, String query, String category, int position){
+    private void retrofit (Fragment selected, String query, String category, int position){
         ArrayList<ResponseData> responseData = new ArrayList<>();
         Bundle bundle = new Bundle();
 

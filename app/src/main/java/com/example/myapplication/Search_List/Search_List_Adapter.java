@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +38,15 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
     private AsyncTask<Void, Void, Bitmap> image_url;
     private Context mContext;
     private String token;
+
+    public Search_List_Adapter(Context mContext, ArrayList<ResponseData> responseData){
+        this.responseData = responseData;
+        this.mContext = mContext;
+    }
+
+    public void setData(ArrayList<ResponseData> responseData){
+        this.responseData = responseData;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         ImageView image;
@@ -76,10 +84,6 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
         }
     }
 
-    public Search_List_Adapter(Context mContext, ArrayList<ResponseData> responseData){
-        this.responseData = responseData;
-        this.mContext = mContext;
-    }
     @NonNull
     @Override
     public Search_List_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

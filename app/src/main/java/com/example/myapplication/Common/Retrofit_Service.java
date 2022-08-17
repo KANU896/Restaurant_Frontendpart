@@ -52,4 +52,9 @@ public interface Retrofit_Service {
     @POST("/detail/favorite/")
     Call<Void> favorite_delete(@Field("mongo_id") String mongo_id, @Field("username") String username,
                                @Header("Authorization") String token);
+
+    //즐겨찾기 목록
+    @FormUrlEncoded
+    @POST("/detail/favorite_list/")
+    Call<SearchData> favorite_list(@Field("") String a, @Header("Authorization") String token);
 }

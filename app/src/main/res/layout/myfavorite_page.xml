@@ -40,51 +40,64 @@
         android:background="#0E0E0E" />
 
     <LinearLayout
+        android:id="@+id/favorite_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/info_button"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="내 정보"
-            android:padding="30dp"
-            android:background="?attr/selectableItemBackground"/>
+            android:paddingTop="5dp"
+            android:paddingBottom="20dp"
+            android:text="내 즐겨찾기 목록"
+            android:textSize="13dp" />
 
-        <View
-            android:id="@+id/view2"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#770E0E0E" />
+            android:layout_height="match_parent" />
+<!--        <Button-->
+<!--            android:id="@+id/info_button"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="내 정보"-->
+<!--            android:padding="30dp"-->
+<!--            android:background="?attr/selectableItemBackground"/>-->
 
-        <Button
-            android:id="@+id/favorite_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="즐겨찾기 목록"
-            android:padding="30dp"
-            android:background="?attr/selectableItemBackground"/>
+<!--        <View-->
+<!--            android:id="@+id/view2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="2dp"-->
+<!--            android:background="#770E0E0E" />-->
 
-        <View
-            android:id="@+id/view3"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#770E0E0E" />
+<!--        <Button-->
+<!--            android:id="@+id/favorite_button"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="즐겨찾기 목록"-->
+<!--            android:padding="30dp"-->
+<!--            android:background="?attr/selectableItemBackground"/>-->
 
-        <Button
-            android:id="@+id/preferences_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="환경설정"
-            android:padding="30dp"
-            android:background="?attr/selectableItemBackground"/>
-        <View
-            android:id="@+id/view4"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#0E0E0E" />
+<!--        <View-->
+<!--            android:id="@+id/view3"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="2dp"-->
+<!--            android:background="#770E0E0E" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/preferences_button"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="환경설정"-->
+<!--            android:padding="30dp"-->
+<!--            android:background="?attr/selectableItemBackground"/>-->
+<!--        <View-->
+<!--            android:id="@+id/view4"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="2dp"-->
+<!--            android:background="#0E0E0E" />-->
     </LinearLayout>
 
 
