@@ -106,7 +106,7 @@ public class Location_GPS {
 
         if (addresses == null || addresses.size() == 0) {
             Toast.makeText(mContext, "주소 미발견", Toast.LENGTH_LONG).show();
-            return "주소 미발견";
+            return "위치 정보 없음";
 
         } else {
             Address address = addresses.get(0);
