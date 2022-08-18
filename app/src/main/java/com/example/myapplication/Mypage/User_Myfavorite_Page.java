@@ -83,7 +83,7 @@ public class User_Myfavorite_Page extends Fragment {
                     String token = sharedPreferencesUtil.getPreferenceString("token");
                     if (TextUtils.isEmpty(token)) {
                         myfavorite_login.setText("로그인");
-                        comment.setText("로그인 하시면 나만의 즐겨찾기 관리와 리뷰 작성을 하실 수 있습니다.");
+                        comment.setText("로그인 하시면 나만의 즐겨찾기 관리와\n리뷰 작성을 하실 수 있습니다.");
 
                         adapter.setData(null);
                         adapter.notifyDataSetChanged();
