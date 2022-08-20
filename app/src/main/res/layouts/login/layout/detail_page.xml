@@ -8,250 +8,133 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="50dp">
-
-        <ImageView
-            android:id="@+id/detail_image"
-            android:layout_width="match_parent"
-            android:layout_height="156dp"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/detail_title"
-            android:layout_width="254dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="제목"
-            android:textSize="30dp" />
-
-        <TextView
-            android:id="@+id/detail_score"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="점수"
-            android:textSize="30dp" />
-
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@id/coordinator">
 
         <LinearLayout
+            android:id="@+id/profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-            <View
+            android:orientation="vertical"
+            android:paddingTop="50dp">
+
+            <ImageView
+                android:id="@+id/detail_image"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#0E0E0E" />
+                android:layout_height="156dp"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/detail_title"
+                android:layout_width="254dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="제목"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/detail_score"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="점수"
+                android:textSize="30dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/top_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp">
 
             <LinearLayout
-                android:id="@+id/top_menu"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp">
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/favorite"
+                    android:layout_width="54dp"
+                    android:layout_height="81dp"
+                    android:layout_gravity="center"
+                    android:button="@drawable/favorite_checkbox"
+                    android:checked="false"
+                    android:gravity="center" />
 
-                    <CheckBox
-                        android:id="@+id/favorite"
-                        android:layout_width="54dp"
-                        android:layout_height="81dp"
-                        android:layout_gravity="center"
-                        android:button="@drawable/favorite_checkbox"
-                        android:checked="false"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="16dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.5"
-                        android:paddingLeft="10dp"
-                        android:text="즐겨찾기"
-                        android:textSize="25dp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:background="#0E0E0E" />
-
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="전화"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="10dp"
+                    android:text="즐겨찾기"
                     android:textSize="25dp" />
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#0E0E0E" />
 
-            <LinearLayout
-                android:id="@+id/menu_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="20dp">
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="match_parent"
-                    android:layout_height="43dp"
-                    android:layout_weight="1"
-                    android:text="메뉴"
-                    android:textSize="30dp" />
-
-                <Button
-                    android:id="@+id/menubutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FAFAFA"
-                    android:text="+" />
-
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#0E0E0E" />
-
-            <LinearLayout
-                android:id="@+id/menu_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <ListView
-                    android:layout_width="wrap_content"
-                    android:layout_height="206dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/location_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="20dp">
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="위치"
-                    android:textSize="30dp" />
-
-                <Button
-                    android:id="@+id/locationbutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FAFAFA"
-                    android:text="+" />
-            </LinearLayout>
-
-            <View
+            <Button
+                android:id="@+id/button"
                 android:layout_width="wrap_content"
-                android:layout_height="2dp"
-                android:background="#0E0E0E" />
-
-            <LinearLayout
-                android:id="@+id/location_layout"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/detail_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="41dp"
-                    android:text="address"
-                    android:textSize="20dp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="277dp"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:id="@+id/map_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/tag_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="20dp"
-                android:visibility="visible">
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="태그"
-                    android:textSize="30dp" />
-
-                <Button
-                    android:id="@+id/tagbutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FAFAFA"
-                    android:text="+" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#0E0E0E" />
-
-            <LinearLayout
-                android:id="@+id/tag_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/detail_tag"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:text="Tag"
-                    android:textColor="#020202"
-                    android:textSize="20dp" />
-            </LinearLayout>
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:text="전화"
+                android:textSize="25dp" />
         </LinearLayout>
-    </ScrollView>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#0E0E0E" />
+    </LinearLayout>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="660dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <!--액션바 레이아웃-->
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbarlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="clip_horizontal|center"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <!--탭 레이아웃-->
+            <!--tabMode : fixed면 탭이 고정된 길이를 갖게끔 자동으로 나눠진다-->
+            <!--scrollable이면 옆으로 넘길 수 있게 된다-->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/background_light"
+                android:elevation="1dp"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="#00BCD4"
+                app:tabTextColor="#3F51B5" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/contatiner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

@@ -13,11 +13,5 @@
         android:layout_height="0dp"
         android:layout_weight="0.8" />
 
-    <Button
-        android:id="@+id/around_search_button"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:text="장소검색" />
 
 </LinearLayout>

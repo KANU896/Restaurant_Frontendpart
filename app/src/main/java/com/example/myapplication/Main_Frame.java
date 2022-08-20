@@ -61,8 +61,6 @@ public class Main_Frame extends AppCompatActivity {
         Location_GPS gps = new Location_GPS(getApplicationContext(), Main_Frame.this);
         address = gps.get_address();
 
-        sharedPreferencesUtil.setPreference("location", address);
-
         mBottomNV = findViewById(R.id.nav_view);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
             @Override

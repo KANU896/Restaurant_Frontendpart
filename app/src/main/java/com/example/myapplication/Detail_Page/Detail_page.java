@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -17,37 +18,59 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
+import com.example.myapplication.Detail_Page.Fragment.Detail_Info;
+import com.example.myapplication.Detail_Page.Fragment.Detail_Review;
+import com.example.myapplication.Detail_Page.Fragment.Detail_map;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_List.ImageLoadTask;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
+import com.example.myapplication.Search_List.search_result_fragment.Alcohol;
+import com.example.myapplication.Search_List.search_result_fragment.Cafe;
+import com.example.myapplication.Search_List.search_result_fragment.Food;
+import com.example.myapplication.Search_List.search_result_fragment.Search_List_total;
+import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
+import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Detail_page extends AppCompatActivity {
-    private Detail_ResponseData responseData;
-    private TextView detail_title, detail_menu, detail_tag, detail_score, detail_address;
-    private ImageView imageView;
+    private String TAG = "Detail_page";
+
+    //객체 선언
+    private TabLayout tabs;
+    private Detail_Info detail_info;
+    private Detail_Review detail_review;
+    private Detail_map detail_map;
+    private Fragment selected = null;
     private JSONObject jObject = null;
-    double x, y;
+
+    private TextView detail_title, detail_score;
+    private ImageView imageView;
+    private Detail_ResponseData responseData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail_page);
+        setContentView(R.layout.detail_testpage);
+
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Intent intent = getIntent();
         responseData = (Detail_ResponseData) intent.getSerializableExtra("responseData");
 
-        Log.e("Detail_page", responseData.getTag());
+        Log.e(TAG, responseData.getTag());
 
         detail_title = findViewById(R.id.detail_title);
         detail_score = findViewById(R.id.detail_score);
@@ -97,116 +120,67 @@ public class Detail_page extends AppCompatActivity {
             }
         });
 
-        //TODO 메뉴
-        LinearLayout menu_layout = findViewById(R.id.menu_layout);
-        Button menu_button = findViewById(R.id.menubutton);
+        //프래그먼트 초기화
+        detail_info = new Detail_Info();
+        detail_review = new Detail_Review();
+        detail_map = new Detail_map();
+        selected = detail_info;
 
-        menu_button.setOnClickListener(new View.OnClickListener() {
+        Bundle bundle = new Bundle();
+
+        //Tab 설정
+        tabs = findViewById(R.id.tabs);
+        tabs.addTab(tabs.newTab().setText("정보"));
+        tabs.addTab(tabs.newTab().setText("지도"));
+        tabs.addTab(tabs.newTab().setText("리뷰"));
+
+        //첫 화면(프레그먼트) 세팅
+        bundle.putSerializable("responseData", responseData);
+        selected.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
+
+        //탭이 선택되었을때 작동하는 메서드
+        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View v) {
-                String text = (String) menu_button.getText();
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                Log.e(TAG, "선택된 탭 : " + position);
 
-                // 펼치기
-                if (text.equals("+")){
-                    menu_button.setText("-");
-                    menu_layout.setVisibility(View.VISIBLE);
+                if (position == 0) {
+                    Log.e(TAG, "position == 0");
+                    selected = detail_info;
+                    if (responseData != null) {
+                        Log.e(TAG, "responseData != null");
+                        bundle.putSerializable("responseData", responseData);
+                        selected.setArguments(bundle);
+                    }
+                    getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
                 }
-                // 접기
-                else{
-                    menu_button.setText("+");
-                    menu_layout.setVisibility(View.GONE);
+                else if (position == 1) {
+                    selected = detail_map;
+                    bundle.putSerializable("responseData", responseData);
+                    selected.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
+                }
+                else if (position == 2) {
+                    selected = detail_review;
+                    getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
                 }
             }
-        });
 
-        //TODO 위치
-        detail_address = findViewById(R.id.detail_address);
-        Button location_button = findViewById(R.id.locationbutton);
-        LinearLayout location_layout = findViewById(R.id.location_layout);
-        String address = responseData.getAddress();
-        if(!address.equals(""))
-            detail_address.setText(address);
-        else
-            detail_address.setText("찾을 수 없습니다.");
-
-        location_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String text = (String) location_button.getText();
+            public void onTabUnselected(TabLayout.Tab tab) {
 
-                // 펼치기
-                if (text.equals("+")){
-                    location_button.setText("-");
-                    location_layout.setVisibility(View.VISIBLE);
-                }
-                // 접기
-                else{
-                    location_button.setText("+");
-                    location_layout.setVisibility(View.GONE);
-                }
             }
-        });
 
-//        // 지도 (에뮬레이터랑 호환 안되서 평소엔 주석처리)
-//        MapView mapView = new MapView(this);
-//        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
-//
-//        //주소로 좌표 추출
-//        Geocoder geocoder = new Geocoder(this, Locale.KOREA);
-//
-//        try{
-//            List<Address> addresses = geocoder.getFromLocationName(address,3);
-//            StringBuffer buffer= new StringBuffer();
-//            for(Address t : addresses){
-//                buffer.append(t.getLatitude()+", "+t.getLongitude()+"\n");
-//            }
-//            String[] coordinate = buffer.toString().split(", ");
-//            x = Double.parseDouble(coordinate[0]);
-//            y = Double.parseDouble(coordinate[1]);
-//
-//            mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(x, y), 2, true);
-//
-//        }
-//        catch (IOException e) {
-//            Toast.makeText(this, "검색 실패", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        mapViewContainer.addView(mapView);
-//
-//        MapPOIItem marker = new MapPOIItem();
-//        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(x, y);
-//        marker.setItemName("Default Marker");
-//        marker.setTag(0);
-//        marker.setMapPoint(MARKER_POINT);
-//        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-//        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-//        mapView.addPOIItem(marker);
-
-        //TODO TAG
-        detail_tag = findViewById(R.id.detail_tag);
-        Button tag_button = findViewById(R.id.tagbutton);
-        LinearLayout tag_layout = findViewById(R.id.tag_layout);
-        detail_tag.setText(responseData.getTag());
-
-        tag_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String text = (String) tag_button.getText();
+            public void onTabReselected(TabLayout.Tab tab) {
 
-                // 펼치기
-                if (text.equals("+")){
-                    tag_button.setText("-");
-                    tag_layout.setVisibility(View.VISIBLE);
-                }
-                // 접기
-                else{
-                    tag_button.setText("+");
-                    tag_layout.setVisibility(View.GONE);
-                }
             }
         });
     }
 
+    // 즐겨찾기용 서버 통신
     public void retrofit (Call<Void> call){
         call.enqueue((new Callback<Void>() {
             @Override

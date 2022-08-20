@@ -67,13 +67,14 @@ public class Search_result_frame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result_frame);
+        Log.e(TAG, "연결 성공");
         // 데이터 받기
         Intent intent = getIntent();
         this.query = intent.getStringExtra("query");
 
         //내 현재위치
         String address = sharedPreferencesUtil.getPreferenceString("location");
-        if (!TextUtils.isEmpty(address) && !address.equals("주소 미발견")) {
+        if (!TextUtils.isEmpty(address) && !address.equals("위치 정보 없음")) {
             String remove_text = "대한민국 ";
             address = address.replace(remove_text,"");
             this.location = address;
@@ -103,7 +104,7 @@ public class Search_result_frame extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
-                Log.d(TAG, "선택된 탭 : " + position);
+                Log.e(TAG, "선택된 탭 : " + position);
 
                 if (position == 0) {
                     selected = total;
