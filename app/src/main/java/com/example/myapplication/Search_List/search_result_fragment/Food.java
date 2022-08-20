@@ -1,3 +1,7 @@
+// 작성자 : 김도윤
+// 검색 결과 페이지 -> 밥집 Tab 선택 페이지
+// Update : 22.08.18
+
 package com.example.myapplication.Search_List.search_result_fragment;
 
 import android.content.Context;

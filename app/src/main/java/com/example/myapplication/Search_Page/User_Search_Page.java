@@ -1,3 +1,7 @@
+// 작성자 : 김도윤
+// 최근 검색어를 띄워주는 클래스
+// Update : 22.08.18
+
 package com.example.myapplication.Search_Page;
 
 import android.content.Context;
@@ -37,15 +41,13 @@ public class User_Search_Page extends Fragment implements Searched{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         view = inflater.inflate(R.layout.search_page, container,false);
-
         context = container.getContext();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+        //SharedPreferences에 저장되어 있는 최근 검색어 저장
         spref = new SharedPreferencesUtil(context, "Searched");
-
-        Button delete_bt = view.findViewById(R.id.all_delete_button);
-
         searchHistoryList = (ArrayList<SearchedList>) spref.getSearchHistoryList();
 
+        // 최근 검색어 RecyclerView 설정
         adapter = new Searched_Adapter(context,this);
         recyclerView = view.findViewById(R.id.searched_recycle);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, true);
@@ -55,6 +57,8 @@ public class User_Search_Page extends Fragment implements Searched{
 
         adapter.setData(searchHistoryList);// searchHistoryList
 
+        // 최근 검색어 전체 삭제
+        Button delete_bt = view.findViewById(R.id.all_delete_button);
         delete_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +77,7 @@ public class User_Search_Page extends Fragment implements Searched{
         super.onViewCreated(view, savedInstanceState);
     }
 
+    // Adapter에서 최근 검색어 삭제 버튼 클릭 시
     @Override
     public void onSearchItemDeleteClicked(int position) {
         Log.e("User_Search_Page", "onSearchItemDeleteClick");

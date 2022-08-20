@@ -1,3 +1,8 @@
+// 작성자 : 김도윤, 송민우, 송준곤
+// 메인 페이지
+// 담당 : 김도윤 - 현재 위치 정보 표시 & 검색 버튼
+// Update : 22.08.18
+
 package com.example.myapplication.Main_Screen;
 
 import android.content.Context;

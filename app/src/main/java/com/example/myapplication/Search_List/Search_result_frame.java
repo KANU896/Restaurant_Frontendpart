@@ -1,7 +1,12 @@
+// 작성자 : 김도윤
+// 검색 결과 페이지
+// Update : 22.08.18
+
 package com.example.myapplication.Search_List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -56,14 +61,24 @@ public class Search_result_frame extends AppCompatActivity {
     private SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(this, "Searched");
     private String query;
     private ArrayList<SearchedList> searchHistoryList;
+    private String location = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result_frame);
+        Log.e(TAG, "연결 성공");
         // 데이터 받기
         Intent intent = getIntent();
         this.query = intent.getStringExtra("query");
+
+        //내 현재위치
+        String address = sharedPreferencesUtil.getPreferenceString("location");
+        if (!TextUtils.isEmpty(address) && !address.equals("위치 정보 없음")) {
+            String remove_text = "대한민국 ";
+            address = address.replace(remove_text,"");
+            this.location = address;
+        }
 
         //프래그먼트 초기화
         total = new Search_List_total();
@@ -89,7 +104,7 @@ public class Search_result_frame extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
-                Log.d(TAG, "선택된 탭 : " + position);
+                Log.e(TAG, "선택된 탭 : " + position);
 
                 if (position == 0) {
                     selected = total;
@@ -184,11 +199,11 @@ public class Search_result_frame extends AppCompatActivity {
         intent.putExtra("query", query);
         startActivity(intent);
     }
-    public void retrofit (Fragment selected, String query, String category, int position){
+    private void retrofit (Fragment selected, String query, String category, int position){
         ArrayList<ResponseData> responseData = new ArrayList<>();
         Bundle bundle = new Bundle();
 
-        Call<SearchData> call = RetrofitClient.getApiService().postOverlapCheck(query, category);
+        Call<SearchData> call = RetrofitClient.getApiService().Search_post(query, category, location);
         call.enqueue((new Callback<SearchData>() {
             @Override
             public void onResponse(Call<SearchData> call, Response<SearchData> response) {

@@ -1,3 +1,7 @@
+// 작성자 : 김도윤
+// 위치서비스 on 일 때, 현재 위치를 위도와 경도로 얻고 이를 주소로 바꿔주는 클래스
+// Update : 22.08.18
+
 package com.example.myapplication.Common;
 
 import android.Manifest;
@@ -22,9 +26,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class Location_GPS {
-    Context mContext;
-    Activity activity;
-    double longitude, latitude;
+    private Context mContext;
+    private Activity activity;
+    private double longitude, latitude;
+    private Location location;
+    private Geocoder geocoder;
 
     public Location_GPS(Context context, Main_Frame activity) {
         this.mContext = context;
@@ -34,7 +40,9 @@ public class Location_GPS {
     public String get_address() {
         Log.e("Location_GPS", "get_address");
         LocationManager locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, new String[] {
                     android.Manifest.permission.ACCESS_FINE_LOCATION}, 0 );
         }
@@ -56,14 +64,10 @@ public class Location_GPS {
                     1,
                     gpsLocationListener);
 
-            return change_address(longitude, latitude);
+            return change_address(latitude, longitude);
 
         }
-//        if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-//            // 위치정보 설정 Intent
-//            startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-        //}
-        return "";
+        return "위치 정보 없음";
     }
 
     final LocationListener gpsLocationListener = new LocationListener() {
@@ -81,24 +85,53 @@ public class Location_GPS {
         }
     };
 
-    public String change_address(double lonogitude, double latitude){
+    public String change_address(double latitude, double lonogitude){
         Log.e("Location_GPS_TEST", "test");
-        Geocoder geocoder= new Geocoder(mContext, Locale.KOREA);
-
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(mContext, "Searched");
+        geocoder= new Geocoder(mContext, Locale.KOREA);
+        List<Address> addresses = null;
         try {
-            List<Address> addresses = geocoder.getFromLocation(latitude, lonogitude,1);
+            addresses = geocoder.getFromLocation(latitude, lonogitude,1);
 
-            StringBuffer buffer= new StringBuffer();
-            for(Address t : addresses){
-                buffer.append(t.getAddressLine(0)+"\n"); //주소 1
-                //buffer.append(t.getAddressLine(1)+"\n"); //주소 2 - 없으면 null
-                //buffer.append(t.getAddressLine(2)+"\n"); //주소 3 - 없으면 null
-            }
-            Log.e("Location_GPS", buffer.toString());
-            return buffer.toString();
-        } catch (IOException e) {
-            Toast.makeText(mContext, "검색 실패", Toast.LENGTH_SHORT).show();
-            return "검색실패";
+        } catch (IOException ioException) {
+            //네트워크 문제
+            Toast.makeText(mContext, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
+            return "지오코더 서비스 사용불가";
+        } catch (IllegalArgumentException illegalArgumentException) {
+            Toast.makeText(mContext, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
+            return "잘못된 GPS 좌표";
+        }
+
+        if (addresses == null || addresses.size() == 0) {
+            Toast.makeText(mContext, "주소 미발견", Toast.LENGTH_LONG).show();
+            sharedPreferencesUtil.setPreference("location", "위치 정보 없음");
+            return "위치 정보 없음";
+
+        } else {
+            Address address = addresses.get(0);
+            sharedPreferencesUtil.setPreference("location", address.getAddressLine(0).toString());
+            return address.getAddressLine(0).toString();
         }
     }
+
+    public String [] getCoordinate(String address){
+        //주소로 좌표 추출
+        geocoder = new Geocoder(mContext, Locale.KOREA);
+        String [] coordinate = null;
+        try{
+            List<Address> addresses = geocoder.getFromLocationName(address,3);
+            StringBuffer buffer= new StringBuffer();
+            for(Address t : addresses){
+                buffer.append(t.getLatitude()+", "+t.getLongitude()+"\n");
+            }
+            coordinate = buffer.toString().split(", ");
+            return coordinate;
+        }
+        catch (IOException e) {
+            Toast.makeText(mContext, "검색 실패", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+    }
+
 }

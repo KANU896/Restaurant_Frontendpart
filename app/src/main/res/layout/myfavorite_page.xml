@@ -4,46 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#99D9EA"
     android:gravity="center"
-    android:weightSum="10"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="10">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5"
+        android:layout_weight="7"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="60dp"
             android:layout_marginRight="30dp"
-            android:text="로그인 하시면 나만의 즐겨찾기 관리와 리뷰 작성을 하실 수 있습니다." />
+            android:gravity="center"
+            android:text="로그인 하시면 나만의 즐겨찾기 관리와   리뷰 작성을 하실 수 있습니다."
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/myfavorite_login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
+            android:gravity="center"
             android:text="로그인" />
     </LinearLayout>
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#0E0E0E" />
+
     <LinearLayout
+        android:id="@+id/favorite_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:orientation="vertical">
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:paddingTop="15dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" 즐겨찾기 목록"
-            android:textSize="48sp" />
+            android:paddingTop="5dp"
+            android:paddingBottom="20dp"
+            android:text="내 즐겨찾기 목록"
+            android:textSize="13dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <!--        <Button-->
+        <!--            android:id="@+id/info_button"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="내 정보"-->
+        <!--            android:padding="30dp"-->
+        <!--            android:background="?attr/selectableItemBackground"/>-->
+
+        <!--        <View-->
+        <!--            android:id="@+id/view2"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="2dp"-->
+        <!--            android:background="#770E0E0E" />-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/favorite_button"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="즐겨찾기 목록"-->
+        <!--            android:padding="30dp"-->
+        <!--            android:background="?attr/selectableItemBackground"/>-->
+
+        <!--        <View-->
+        <!--            android:id="@+id/view3"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="2dp"-->
+        <!--            android:background="#770E0E0E" />-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/preferences_button"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="환경설정"-->
+        <!--            android:padding="30dp"-->
+        <!--            android:background="?attr/selectableItemBackground"/>-->
+        <!--        <View-->
+        <!--            android:id="@+id/view4"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="2dp"-->
+        <!--            android:background="#0E0E0E" />-->
     </LinearLayout>
 
 

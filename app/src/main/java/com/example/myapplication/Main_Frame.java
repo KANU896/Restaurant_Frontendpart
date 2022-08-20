@@ -1,3 +1,8 @@
+// 작성자 : 김도윤, 송민우, 송준곤
+// 메인페이지, 검색, 지도, 마이페이지 4개의 Fragment를 관리하는 메인 Frame
+// 담당 : 김도윤 - SearchView, onBackPressed(), 현재 위치 설정
+// Update : 22.08.18
+
 package com.example.myapplication;
 
 import android.content.Intent;
@@ -16,12 +21,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.Common.Location_GPS;
+import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Main_Screen.User_Home_Page;
 import com.example.myapplication.Map.User_Map_Page;
 import com.example.myapplication.Mypage.User_Myfavorite_Page;
 import com.example.myapplication.Search_List.search_result_fragment.Search_List_total;
 import com.example.myapplication.Search_List.Search_result_frame;
+import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.Data;
+import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
+import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 import com.example.myapplication.Search_Page.SearchedList;
 import com.example.myapplication.Search_Page.User_Search_Page;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -29,6 +38,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Main_Frame extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
@@ -39,15 +52,14 @@ public class Main_Frame extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private Fragment currentFragment;
-    private String tag;
+    private String tag, address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_main);
         Location_GPS gps = new Location_GPS(getApplicationContext(), Main_Frame.this);
-        String address = gps.get_address();
-        Log.e("Main_Frame", address);
+        address = gps.get_address();
 
         mBottomNV = findViewById(R.id.nav_view);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
@@ -94,10 +106,13 @@ public class Main_Frame extends AppCompatActivity {
         fragmentTransaction.setReorderingAllowed(true);
         fragmentTransaction.commitNow();
     }
-    
+
     //user_home_page에서 검색 button 클릭 시 검색 nav로 변경
     public void changeFragment(){
         mBottomNV.setSelectedItemId(R.id.navigation_2);
+    }
+    public void changeFragment(int id){
+        mBottomNV.setSelectedItemId(id);
     }
 
     // ActionBar
@@ -118,21 +133,8 @@ public class Main_Frame extends AppCompatActivity {
                     searchHistoryList = (ArrayList<SearchedList>) sharedPreferencesUtil.getSearchHistoryList();
                     searchHistoryList.add(new SearchedList(query));
                     sharedPreferencesUtil.storeSearchHistoryList(searchHistoryList);
-
-                    fragmentManager = getSupportFragmentManager();
-                    fragmentTransaction = fragmentManager.beginTransaction();
-
-                    currentFragment = fragmentManager.getPrimaryNavigationFragment();
-                    if (currentFragment != null) {
-                        fragmentTransaction.remove(currentFragment);
-                    }
-                    fragment = new User_Search_Page();
-
-                    fragmentTransaction.add(R.id.content_layout, fragment);
-
-                    fragmentTransaction.setPrimaryNavigationFragment(fragment);
-                    fragmentTransaction.setReorderingAllowed(true);
-                    fragmentTransaction.commitNow();
+                    BottomNavigate(R.id.navigation_1, address);
+                    changeFragment(R.id.navigation_1);
 
                     intent(query);
                     return true;

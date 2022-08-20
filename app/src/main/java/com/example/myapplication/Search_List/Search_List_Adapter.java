@@ -1,10 +1,13 @@
+// 작성자 : 김도윤
+// 검색 결과 또는 즐겨찾기 목록 등 RecyclerView에 데이터 넣고 띄워주는 Adapter
+// Update : 22.08.18
+
 package com.example.myapplication.Search_List;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,10 +23,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Detail_Page.Detail_page;
-import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Detail_ResponseData;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
 import com.example.myapplication.R;
-import com.example.myapplication.Search_Page.Search_Retrofit.Detail_Data.Detail_Data;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
 import com.example.myapplication.Common.RetrofitClient;
 
 import org.json.JSONObject;
@@ -40,6 +43,15 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
     private Context mContext;
     private String token;
 
+    public Search_List_Adapter(Context mContext, ArrayList<ResponseData> responseData){
+        this.responseData = responseData;
+        this.mContext = mContext;
+    }
+
+    public void setData(ArrayList<ResponseData> responseData){
+        this.responseData = responseData;
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder{
         ImageView image;
         TextView title;
@@ -50,7 +62,7 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
             super(view);
             image = (ImageView)view.findViewById(R.id.restaurant_image);
             title = (TextView)view.findViewById(R.id.title);
-            score = (TextView)view.findViewById(R.id.score);
+            score = (TextView)view.findViewById(R.id.review_score);
 
             //음식점 클릭 시
             view.setOnClickListener(new View.OnClickListener() {
@@ -76,10 +88,6 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
         }
     }
 
-    public Search_List_Adapter(Context mContext, ArrayList<ResponseData> responseData){
-        this.responseData = responseData;
-        this.mContext = mContext;
-    }
     @NonNull
     @Override
     public Search_List_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

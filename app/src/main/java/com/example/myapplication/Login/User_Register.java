@@ -1,3 +1,8 @@
+// 회원가입 페이지
+// 담당 : 김도윤 - 아이디 중복 확인 기능 구현(retrofit2)
+//               회원가입 기능 구현(retrofit2)
+// Update : 22.08.18
+
 package com.example.myapplication.Login;
 
 import androidx.annotation.Nullable;
@@ -7,31 +12,40 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapplication.Common.RetrofitClient;
+import com.example.myapplication.Login.Login_Data.Signup_Data;
 import com.example.myapplication.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class User_Register extends AppCompatActivity {
 
     private int id_flag = 0; // 아이디 중복 검사 플래그
     private int pwd_flag = 0; // 비밀번호 일치 검사 플래그
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_register);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(User_Register.this);
-        EditText id = (EditText) findViewById(R.id.id); // 이메일 입력 텍스트
-        Button duplicateID = (Button) findViewById(R.id.id_confirm_btn); // 이메일 중복 체크 버튼
-        EditText pwd = (EditText) findViewById(R.id.passwordText); // 비밀번호 입력 텍스트
-        EditText pwd_cfm = (EditText) findViewById(R.id.password_confirm); // 비밀번호 확인 텍스트
-        Button pwd_check = (Button) findViewById(R.id.pwd_confirm_btn); // 비밀번호 확인 버튼
-        EditText name = (EditText) findViewById(R.id.nameText); // 이름 입력 텍스트
-        Button register_btn = (Button) findViewById(R.id.register_btn); // 회원가입 버튼
+        builder = new AlertDialog.Builder(User_Register.this);
+        EditText id = findViewById(R.id.id); // 이메일 입력 텍스트
+        Button duplicateID = findViewById(R.id.id_confirm_btn); // 이메일 중복 체크 버튼
+        EditText pwd = findViewById(R.id.passwordText); // 비밀번호 입력 텍스트
+        EditText pwd_cfm = findViewById(R.id.password_confirm); // 비밀번호 확인 텍스트
+        Button pwd_check = findViewById(R.id.pwd_confirm_btn); // 비밀번호 확인 버튼
+        EditText name = findViewById(R.id.nameText); // 이름 입력 텍스트
+        Button register_btn = findViewById(R.id.register_btn); // 회원가입 버튼
 
 
         // 이메일 증복체크 버튼(데이터 안에 있는 아이디 중복 검사) -> 데이터베이스 추가시 구현 예정!!
@@ -40,15 +54,13 @@ public class User_Register extends AppCompatActivity {
             public void onClick(View view) {
                 // 이메일을 입력하지 않고 중복체크 버튼을 누를시 이메일을 입력하라는 창이뜸 (민우)
                 if (id.getText().toString().length() == 0 ) {
-                    Toast.makeText(User_Register.this, "이메일를 입력하세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(User_Register.this, "아이디를 입력하세요", Toast.LENGTH_SHORT).show();
                     id.requestFocus();
                     return;
                 }
-                builder.setTitle("확인 메시지");
-                builder.setMessage("사용 가능한 이메일입니다.");
-                builder.setPositiveButton("확인",null);
-                builder.create().show();
-                id_flag = 1; // 이메일 중복 검사 플래그 1로 변경
+
+                Call<Signup_Data> call = RetrofitClient.getApiService().IDCheck_post(id.getText().toString());
+                retrofit(call, "IDCheck");
             }
         });
 
@@ -64,6 +76,7 @@ public class User_Register extends AppCompatActivity {
                         pwd.requestFocus();
                         return;
                     }
+
                     builder.setTitle("확인 메시지");
                     builder.setMessage("비밀번호 일치 ^^");
                     builder.setPositiveButton("확인",null);
@@ -86,7 +99,7 @@ public class User_Register extends AppCompatActivity {
             public void onClick(View view) {
                 // 아이디 입력 필수
                 if (id.getText().toString().length() == 0 ) {
-                    Toast.makeText(User_Register.this, "이메일를 입력하세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(User_Register.this, "아이디를 입력하세요", Toast.LENGTH_SHORT).show();
                     id.requestFocus();
                     return;
                 }
@@ -111,7 +124,7 @@ public class User_Register extends AppCompatActivity {
                 // 아이디 중복 체크 필수
                 if(id_flag == 0)
                 {
-                    Toast.makeText(User_Register.this, "이메일 중복 검사를 해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(User_Register.this, "아이디 중복 검사를 해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 // 비밀번호 일치 검사 필수
@@ -120,11 +133,49 @@ public class User_Register extends AppCompatActivity {
                     Toast.makeText(User_Register.this, "비밀번호 확인 검사를 해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 //TODO Retrofit2 연결
-                show(); // 팝업함수 호출
+                Call<Signup_Data> call = RetrofitClient.getApiService().Signup_post(id.getText().toString(),
+                        pwd.getText().toString(),
+                        name.getText().toString());
+                retrofit(call, "Signup");
             }
         });
     }
+
+    public void retrofit (Call<Signup_Data> call, String a){
+        call.enqueue((new Callback<Signup_Data>() {
+            @Override
+            public void onResponse(Call<Signup_Data> call, Response<Signup_Data> response) {
+                if(!response.isSuccessful()){
+                    Log.e("연결이 비정상적 : ", "error code : " + response.code());
+                    return;
+                }
+                String msg = response.body().getMsg();
+                if (a.equals("Signup")) {
+                    if (msg.equals("등록 완료"))
+                        show(); // 팝업함수 호출
+                    else
+                        Toast.makeText(User_Register.this, msg, Toast.LENGTH_SHORT).show();
+                }
+                else{ // IDCheck
+                    builder.setTitle("확인 메시지");
+                    builder.setMessage(msg);
+                    builder.setPositiveButton("확인",null);
+                    builder.create().show();
+                    if (msg.equals("사용 가능한 아이디입니다.")) id_flag = 1; // 이메일 중복 검사 플래그 1로 변경
+                    else id_flag = 0;
+                }
+            }
+            // 서버 통신 실패 시
+            @Override
+            public void onFailure(Call<Signup_Data> call, Throwable t) {
+                Log.e("연결실패", t.getMessage());
+                Toast.makeText(getApplicationContext(), "서버연결 실패",Toast.LENGTH_SHORT).show();
+            }
+        }));
+    }
+
     // 가입환영 팝업 출력, 로그인화면 전환 함수
     void show(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

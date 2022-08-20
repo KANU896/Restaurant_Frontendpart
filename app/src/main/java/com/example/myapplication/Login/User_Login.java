@@ -1,3 +1,7 @@
+// 로그인 페이지
+// 담당 : 김도윤 - 로그인 서버 통신 기능(retrofit2) 구현
+// Update : 22.08.18
+
 package com.example.myapplication.Login;
 
 import androidx.annotation.Nullable;
@@ -84,9 +88,14 @@ public class User_Login extends AppCompatActivity {
         });
     }
 
-    public void retrofit (String username, String password){
-        //Bundle bundle = new Bundle();
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), Main_Frame.class);
+        startActivity(intent);
+        finish();
+    }
 
+    public void retrofit (String username, String password){
         Call<Login_Token> call = RetrofitClient.getApiService().Login_post(username, password);
         call.enqueue((new Callback<Login_Token>() {
             @Override

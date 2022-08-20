@@ -1,3 +1,7 @@
+// 작성자 : 김도윤
+// 검색 결과 페이지에 필요한 응답 데이터를 저장하는 클래스
+// Update : 22.08.18
+
 package com.example.myapplication.Search_Page.Search_Retrofit.Search_Data;
 
 import android.os.Parcelable;
