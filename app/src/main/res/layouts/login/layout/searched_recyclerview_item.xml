@@ -22,7 +22,7 @@
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/delete_button"
+            android:id="@+id/review_delete"
             android:layout_width="50dp"
             android:layout_height="38dp"
             android:background="@android:drawable/btn_dialog"

@@ -9,11 +9,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,17 +26,10 @@ import com.example.myapplication.Detail_Page.Fragment.Detail_map;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_List.ImageLoadTask;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
-import com.example.myapplication.Search_List.search_result_fragment.Alcohol;
-import com.example.myapplication.Search_List.search_result_fragment.Cafe;
-import com.example.myapplication.Search_List.search_result_fragment.Food;
-import com.example.myapplication.Search_List.search_result_fragment.Search_List_total;
-import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,9 +53,7 @@ public class Detail_page extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail_testpage);
-
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.detail_page);
 
         Intent intent = getIntent();
         responseData = (Detail_ResponseData) intent.getSerializableExtra("responseData");
@@ -81,7 +69,7 @@ public class Detail_page extends AppCompatActivity {
         detail_score.setText(responseData.getScore());
         new ImageLoadTask(responseData.getImage(), imageView).execute();
 
-        //TODO 즐겨찾기 기능
+        //즐겨찾기 기능
         CheckBox favorite = findViewById(R.id.favorite);
         SharedPreferencesUtil spref = new SharedPreferencesUtil(getApplicationContext(), "User");
         favorite.setChecked(responseData.getFav()); //해당 계정 즐겨찾기에 추가되어 있으면 체크 된 상태
@@ -104,13 +92,11 @@ public class Detail_page extends AppCompatActivity {
                     if (favorite.isChecked()) {
                         Call<Void> call = RetrofitClient.getApiService().favorite_put(responseData.getId(), username, token);
                         retrofit(call);
-                        Log.e("CheckBox", "check" + username);
                     }
                     // DB에서 삭제
                     else {
                         Call<Void> call = RetrofitClient.getApiService().favorite_delete(responseData.getId(), username, token);
                         retrofit(call);
-                        Log.e("CheckBox", "uncheck" + username);
                     }
                 }
                 else{
@@ -147,13 +133,9 @@ public class Detail_page extends AppCompatActivity {
                 Log.e(TAG, "선택된 탭 : " + position);
 
                 if (position == 0) {
-                    Log.e(TAG, "position == 0");
                     selected = detail_info;
-                    if (responseData != null) {
-                        Log.e(TAG, "responseData != null");
-                        bundle.putSerializable("responseData", responseData);
-                        selected.setArguments(bundle);
-                    }
+                    bundle.putSerializable("responseData", responseData);
+                    selected.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
                 }
                 else if (position == 1) {
@@ -164,6 +146,8 @@ public class Detail_page extends AppCompatActivity {
                 }
                 else if (position == 2) {
                     selected = detail_review;
+                    bundle.putString("restaurant_id", responseData.getId());
+                    selected.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
                 }
             }

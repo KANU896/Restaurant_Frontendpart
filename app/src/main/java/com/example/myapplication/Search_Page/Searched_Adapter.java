@@ -42,7 +42,7 @@ public class Searched_Adapter extends RecyclerView.Adapter<Searched_Adapter.MyVi
         MyViewHolder(View view){
             super(view);
             searced_title = (TextView)view.findViewById(R.id.searched_title);
-            delete_button = (Button) view.findViewById(R.id.delete_button);
+            delete_button = (Button) view.findViewById(R.id.review_delete);
 
             // x 버튼 클릭 시
             delete_button.setOnClickListener(new View.OnClickListener() {

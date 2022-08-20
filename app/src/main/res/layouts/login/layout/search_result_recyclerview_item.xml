@@ -27,7 +27,7 @@
             android:textSize="17sp" />
 
         <TextView
-            android:id="@+id/score"
+            android:id="@+id/review_score"
             android:layout_width="118dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

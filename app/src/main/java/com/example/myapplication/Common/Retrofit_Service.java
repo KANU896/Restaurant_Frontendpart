@@ -4,6 +4,8 @@
 
 package com.example.myapplication.Common;
 
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Review_ResponseData;
+import com.example.myapplication.Detail_Page.Detail_Data.Review_Data;
 import com.example.myapplication.Login.Login_Data.Login_Token;
 import com.example.myapplication.Login.Login_Data.Signup_Data;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
@@ -12,6 +14,7 @@ import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchD
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -60,4 +63,18 @@ public interface Retrofit_Service {
     @FormUrlEncoded
     @POST("/detail/favorite_list/")
     Call<SearchData> favorite_list(@Field("") String a, @Header("Authorization") String token);
+
+    //리뷰 등록
+    @FormUrlEncoded
+    @PUT("/detail/review/")
+    Call<Review_Data> Review_input(@Field("restaurant_id") String mongo_id,
+                                                  @Field("content") String content, @Header("Authorization") String token);
+
+    //리뷰 검색
+    @GET("/detail/review/")
+    Call<Review_Data> Review_list(@Header("Authorization") String token);
+
+    @FormUrlEncoded
+    @POST("/detail/review/")
+    Call<Review_Data> Review_delete(@Field("review_id") int review_id, @Header("Authorization") String token);
 }

@@ -65,7 +65,12 @@ public class User_Myfavorite_Page extends Fragment {
             } catch (Exception e) {
                 Log.e("JSON Decode Error", e.getMessage());
             }
-            //TODO 즐겨찾기 목록
+
+            //즐겨찾기 목록 recyclerview adapter 설정
+            adapter = new Search_List_Adapter(getContext(), null);
+            recyclerView = view.findViewById(R.id.recyclerview);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setAdapter(adapter);
             retrofit(view);
         }
 
@@ -84,7 +89,6 @@ public class User_Myfavorite_Page extends Fragment {
                     if (TextUtils.isEmpty(token)) {
                         myfavorite_login.setText("로그인");
                         comment.setText("로그인 하시면 나만의 즐겨찾기 관리와\n리뷰 작성을 하실 수 있습니다.");
-
                         adapter.setData(null);
                         adapter.notifyDataSetChanged();
 
@@ -129,10 +133,7 @@ public class User_Myfavorite_Page extends Fragment {
                             Score
                     ));
 
-                    adapter = new Search_List_Adapter(getContext(), responseData);
-                    recyclerView = view.findViewById(R.id.recyclerview);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    recyclerView.setAdapter(adapter);
+                    adapter.setData(responseData);
                 }
 
                 for(ResponseData a : responseData) {

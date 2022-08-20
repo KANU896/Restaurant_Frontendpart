@@ -62,7 +62,7 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
             super(view);
             image = (ImageView)view.findViewById(R.id.restaurant_image);
             title = (TextView)view.findViewById(R.id.title);
-            score = (TextView)view.findViewById(R.id.score);
+            score = (TextView)view.findViewById(R.id.review_score);
 
             //음식점 클릭 시
             view.setOnClickListener(new View.OnClickListener() {
