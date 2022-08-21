@@ -37,6 +37,14 @@
         <activity android:name=".Main_Screen.Today_Restourant"/>
         <activity android:name=".Search_List.Search_result_frame"/>
         <activity android:name=".Detail_Page.Detail_page"/>
+        // 준곤 추가
+        <activity android:name=".Main_Screen.Detail_Food.Korean_Food"/>
+        <activity android:name=".Main_Screen.Detail_Food.Chinese_Food"/>
+        <activity android:name=".Main_Screen.Detail_Food.Alchol_Food"/>
+        <activity android:name=".Main_Screen.Detail_Food.Japan_Food"/>
+        <activity android:name=".Main_Screen.Detail_Food.Flour_Food"/>
+        <activity android:name=".Main_Screen.Detail_Food.Chicken_Food"/>
+        //
         <meta-data android:name="com.kakao.sdk.AppKey"
             android:value="58f427dd33e20722f0e9f2b7b3010f14"/>
         <meta-data android:name= "com.google.android.geo.API_KEY"

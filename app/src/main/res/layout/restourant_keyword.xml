@@ -1,15 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#8DE6F1">
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="실시간 맛집 키워드"
+        android:layout_marginTop="4dp"
+        android:text="개발자 추천 맛집"
+        android:textAlignment="center"
+        android:textColor="#021F37"
         android:textSize="34sp"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="343dp" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/today_keword7"
+        android:layout_width="133dp"
+        android:layout_height="60dp"
+        android:background="@drawable/bin_blue"
+        android:backgroundTint="@color/teal_200"
+        android:text="치킨"
+        android:textColor="#3F51B5"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.758"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.555" />
+
+    <Button
+        android:id="@+id/today_keword2"
+        android:layout_width="133dp"
+        android:layout_height="60dp"
+        android:background="@drawable/bin_blue"
+        android:backgroundTint="@color/teal_200"
+        android:text="한식"
+        android:textColor="#3F51B5"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.346" />
+
+    <Button
+        android:id="@+id/today_keword3"
+        android:layout_width="133dp"
+        android:layout_height="60dp"
+        android:background="@drawable/bin_blue"
+        android:backgroundTint="@color/teal_200"
+        android:text="중식"
+        android:textColor="#3F51B5"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.758"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.344" />
+
+    <Button
+        android:id="@+id/today_keword6"
+        android:layout_width="133dp"
+        android:layout_height="60dp"
+        android:background="@drawable/bin_blue"
+        android:backgroundTint="@color/teal_200"
+        android:text="분식"
+        android:textColor="#3F51B5"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.555" />
+
+    <Button
+        android:id="@+id/today_keword5"
+        android:layout_width="133dp"
+        android:layout_height="60dp"
+        android:background="@drawable/bin_blue"
+        android:backgroundTint="@color/teal_200"
+        android:text="일식"
+        android:textColor="#3F51B5"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.758"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.451" />
+
+    <Button
+        android:id="@+id/today_keword4"
+        android:layout_width="133dp"
+        android:layout_height="60dp"
+        android:background="@drawable/bin_blue"
+        android:backgroundTint="@color/teal_200"
+        android:text="술집"
+        android:textColor="#3F51B5"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.452" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="407dp"
+        android:layout_height="729dp"
+        app:srcCompat="@drawable/mainscreen"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="90dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
