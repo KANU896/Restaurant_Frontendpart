@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myapplication">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -38,7 +39,7 @@
         <activity android:name=".Search_List.Search_result_frame"/>
         <activity android:name=".Detail_Page.Detail_page"/>
         <meta-data android:name="com.kakao.sdk.AppKey"
-            android:value="58f427dd33e20722f0e9f2b7b3010f14"/>
+            android:value="8a6b68429b3a1797f3f9f878beb26f40"/>
         <meta-data android:name= "com.google.android.geo.API_KEY"
             android:value="Google map API key"/>
     </application>
