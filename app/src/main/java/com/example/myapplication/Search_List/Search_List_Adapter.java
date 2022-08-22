@@ -135,7 +135,7 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
                 String Score = detail_data.getScore();
                 String Address = detail_data.getAddress();
                 String Tag = detail_data.getTag();
-                String Menu = detail_data.getMenu();
+                String Tell_number = detail_data.getTell_number();
                 boolean Fav = detail_data.getFav();
 
                 Detail_ResponseData response_detail_data = new Detail_ResponseData(
@@ -145,7 +145,7 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
                         Score,
                         Address,
                         Tag,
-                        Menu,
+                        Tell_number,
                         Fav
                 );
 

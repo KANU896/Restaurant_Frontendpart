@@ -26,7 +26,7 @@ public class Detail_Info extends Fragment {
     private View view;
 
     private Detail_ResponseData responseData;
-    private TextView detail_menu, detail_tag, detail_address;
+    private TextView detail_menu, detail_tag, detail_address, detail_number, detail_category, detail_opentime;
     private JSONObject jObject = null;
     double x, y;
 
@@ -36,80 +36,40 @@ public class Detail_Info extends Fragment {
 
         responseData = (Detail_ResponseData) getArguments().getSerializable("responseData");
 
-        //TODO 메뉴
-        LinearLayout menu_layout = view.findViewById(R.id.menu_layout);
-        Button menu_button = view.findViewById(R.id.menubutton);
+        //TODO 카테고리
+        detail_category = view.findViewById(R.id.info_category);
 
-        menu_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = (String) menu_button.getText();
 
-                // 펼치기
-                if (text.equals("+")){
-                    menu_button.setText("-");
-                    menu_layout.setVisibility(View.VISIBLE);
-                }
-                // 접기
-                else{
-                    menu_button.setText("+");
-                    menu_layout.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        //TODO 위치
+        //TODO 주소
         detail_address = view.findViewById(R.id.detail_address);
-        Button location_button = view.findViewById(R.id.locationbutton);
-        LinearLayout location_layout = view.findViewById(R.id.location_layout);
         String address = responseData.getAddress();
         if(!TextUtils.isEmpty(address))
             detail_address.setText(address);
         else
-            detail_address.setText("찾을 수 없습니다.");
+            detail_address.setText("-");
 
-        location_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = (String) location_button.getText();
+        //TODO 운영시간
+        detail_opentime = view.findViewById(R.id.info_opentime);
 
-                // 펼치기
-                if (text.equals("+")){
-                    location_button.setText("-");
-                    location_layout.setVisibility(View.VISIBLE);
-                }
-                // 접기
-                else{
-                    location_button.setText("+");
-                    location_layout.setVisibility(View.GONE);
-                }
-            }
-        });
-
+        //TODO 번호
+        detail_number = view.findViewById(R.id.info_number);
+        String number = responseData.getTell_number();
+        if(!TextUtils.isEmpty(number)){
+            detail_number.setText(number);
+        }
+        else{
+            detail_number.setText("-");
+        }
 
         //TODO TAG
         detail_tag = view.findViewById(R.id.detail_tag);
-        Button tag_button = view.findViewById(R.id.tagbutton);
-        LinearLayout tag_layout = view.findViewById(R.id.tag_layout);
-        detail_tag.setText(responseData.getTag());
-
-        tag_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = (String) tag_button.getText();
-
-                // 펼치기
-                if (text.equals("+")){
-                    tag_button.setText("-");
-                    tag_layout.setVisibility(View.VISIBLE);
-                }
-                // 접기
-                else{
-                    tag_button.setText("+");
-                    tag_layout.setVisibility(View.GONE);
-                }
-            }
-        });
+        String tag = responseData.getTag();
+        if(!TextUtils.isEmpty(tag)){
+            detail_tag.setText(tag);
+        }
+        else{
+            detail_tag.setText("-");
+        }
 
         return view;
     }
