@@ -14,17 +14,17 @@ public class Detail_ResponseData implements Serializable {
     private String Score;
     private String Address;
     private String Tag;
-    private String Menu;
+    private String Tell_number;
     private boolean Fav;
 
-    public Detail_ResponseData(String id, String Image, String Name, String Score, String Address, String Tag, String Menu, boolean Fav){
+    public Detail_ResponseData(String id, String Image, String Name, String Score, String Address, String Tag, String Tell_number, boolean Fav){
         this.Id = id;
         this.Image = Image;
         this.Name = Name;
         this.Score = Score;
         this.Address = Address;
         this.Tag = Tag;
-        this.Menu = Menu;
+        this.Tell_number = Tell_number;
         this.Fav = Fav;
     }
     public  String getId() { return Id; }
@@ -43,8 +43,8 @@ public class Detail_ResponseData implements Serializable {
     public String getTag() {
         return Tag;
     }
-    public String getMenu(){
-        return Menu;
+    public String getTell_number(){
+        return Tell_number;
     }
     public boolean getFav() { return Fav; }
 }

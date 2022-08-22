@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,17 +23,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Detail_Page.Delete_Content;
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_Review_Data;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Review_Datastore;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_Review_ResponseData;
 import com.example.myapplication.Detail_Page.Detail_Data.Review_Data;
 import com.example.myapplication.Detail_Page.Review_Adapter;
 import com.example.myapplication.R;
-import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -97,7 +92,7 @@ public class Detail_Review extends Fragment implements Delete_Content {
 
     //리뷰 데이터 조회&삽입
     public void retrofit (Call<Review_Data> call){
-        ArrayList<Detail_Review_Data> responseData = new ArrayList<>();
+        ArrayList<Detail_Review_Datastore> responseData = new ArrayList<>();
         call.enqueue((new Callback<Review_Data>() {
             @Override
             public void onResponse(Call<Review_Data> call, Response<Review_Data> response) {
@@ -119,7 +114,7 @@ public class Detail_Review extends Fragment implements Delete_Content {
 
                     Date = Date.replace("T", " ");
 
-                    responseData.add(new Detail_Review_Data(
+                    responseData.add(new Detail_Review_Datastore(
                             Review_id,
                             Username,
                             Content,

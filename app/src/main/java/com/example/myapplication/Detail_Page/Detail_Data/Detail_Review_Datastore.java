@@ -2,13 +2,12 @@ package com.example.myapplication.Detail_Page.Detail_Data;
 
 import java.util.Date;
 
-public class Detail_Review_Data {
-    private int review_id;
+public class Detail_Review_Datastore {private int review_id;
     private String Name;
     private String Content;
     private String Datetime;
 
-    public Detail_Review_Data(int review_id, String Name, String Content, String Datetime){
+    public Detail_Review_Datastore(int review_id, String Name, String Content, String Datetime){
         this.review_id = review_id;
         this.Name = Name;
         this.Content = Content;
@@ -25,4 +24,5 @@ public class Detail_Review_Data {
     public String getDatetime() {
         return Datetime;
     }
+
 }

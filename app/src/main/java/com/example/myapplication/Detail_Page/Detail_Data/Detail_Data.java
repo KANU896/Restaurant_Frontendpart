@@ -16,9 +16,9 @@ public class Detail_Data {
     @Expose
     private String Image;
 
-    @SerializedName("Menu")
+    @SerializedName("Tell_number")
     @Expose
-    private String Menu;
+    private String Tell_number;
 
     @SerializedName("Name")
     @Expose
@@ -48,8 +48,8 @@ public class Detail_Data {
         return Name;
     }
 
-    public String getMenu(){
-        return Menu;
+    public String getTell_number(){
+        return Tell_number;
     }
 
     public String getAddress(){

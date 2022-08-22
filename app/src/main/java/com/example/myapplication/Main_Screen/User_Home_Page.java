@@ -8,29 +8,47 @@ package com.example.myapplication.Main_Screen;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.myapplication.Common.Location_GPS;
+import com.example.myapplication.Common.RetrofitClient;
+import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Main_Frame;
+import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_Data;
+import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_Datastore;
+import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_ResponseData;
 import com.example.myapplication.R;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class User_Home_Page extends Fragment  {
     private View view;
     private Button today_key_btn;
-    private Button today_rest_btn;
     private TextView location_text;
     private Button search_button;
     private Main_Frame main_frame;
     private String address;
+    private String location = null;
+    private SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(getContext(), "Searched");
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -51,27 +69,6 @@ public class User_Home_Page extends Fragment  {
         setHasOptionsMenu(true);
         view = inflater.inflate(R.layout.home_page, container,false);
 
-        // 실시간 맛집 키워드 버튼 클릭시 화면전환
-        today_key_btn = (Button) view.findViewById(R.id.today_keword);
-        today_key_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               Intent intent = new Intent(getActivity(), Restourant_Keyword.class);
-
-                startActivity(intent);
-            }
-        });
-
-        //오늘의 맛집 버튼 클릭 시 화면전환
-        today_rest_btn = (Button) view.findViewById(R.id.today_restourant);
-        today_rest_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Today_Restourant.class);
-                startActivity(intent);
-            }
-        });
-
         //현재 위치 정보 표시
         location_text = (TextView) view.findViewById(R.id.location_text);
         address = getArguments().getString("address");
@@ -85,6 +82,24 @@ public class User_Home_Page extends Fragment  {
                 main_frame.changeFragment();
             }
         });
+
+        // 실시간 맛집 키워드 버튼 클릭시 화면전환
+        today_key_btn = (Button) view.findViewById(R.id.today_keword);
+        today_key_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent intent = new Intent(getActivity(), Restourant_Keyword.class);
+
+                startActivity(intent);
+            }
+        });
+
+        //TODO ViewPager2 (일일 음식점 추천)
+        ViewPager2 viewPager2 = view.findViewById(R.id.viewpager);
+        DR_Adapter dr_adapter = new DR_Adapter(getChildFragmentManager(), getLifecycle());
+        viewPager2.setAdapter(dr_adapter);
+
+
 
         return view;
     }
