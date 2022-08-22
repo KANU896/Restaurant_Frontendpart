@@ -87,10 +87,16 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.MyViewHo
             Log.e("JSON Decode Error", e.getMessage());
         }
 
-        if (!token_info.equals(data.getName()) || TextUtils.isEmpty(token_info)) {
+        if(TextUtils.isEmpty(token_info)){
             holder.delete_button.setVisibility(View.INVISIBLE);
-        } else {
-            holder.delete_button.setVisibility(View.VISIBLE);
+        }
+        else{
+            if (!token_info.equals(data.getName())){
+                holder.delete_button.setVisibility(View.INVISIBLE);
+            }
+            else {
+                holder.delete_button.setVisibility(View.VISIBLE);
+            }
         }
     }
 
