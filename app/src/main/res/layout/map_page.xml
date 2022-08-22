@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="563dp" />
+        android:layout_height="match_parent" />
 
     <Button
         android:id="@+id/around_search_button"

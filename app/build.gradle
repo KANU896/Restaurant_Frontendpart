@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.example.myapplication"
         minSdk 21
-        targetSdk 26
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 
@@ -24,6 +24,15 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a', 'x86_64'
+            universalApk true
+        }
     }
 
     sourceSets {

@@ -40,8 +40,7 @@
         <activity android:name=".Detail_Page.Detail_page"/>
         <meta-data android:name="com.kakao.sdk.AppKey"
             android:value="8a6b68429b3a1797f3f9f878beb26f40"/>
-        <meta-data android:name= "com.google.android.geo.API_KEY"
-            android:value="Google map API key"/>
+
     </application>
 
 </manifest>
