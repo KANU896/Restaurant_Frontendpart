@@ -8,25 +8,23 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_Datastore;
-import com.example.myapplication.Main_Screen.Viewpager_Fragment.Food_recommend;
-
-import java.util.ArrayList;
+import com.example.myapplication.Main_Screen.Viewpager_Fragment.Recommend_fragment;
 
 public class DR_Adapter extends FragmentStateAdapter {
-    public DR_Adapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    private String category;
+    public DR_Adapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, String category) {
         super(fragmentManager, lifecycle);
+        this.category = category;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        Fragment fragment = new Food_recommend();
-        ArrayList<DR_Datastore> responseData = new ArrayList<>();
+        Fragment fragment= new Recommend_fragment();;
 
         Bundle bundle = new Bundle();
         bundle.putInt("position", position);
-        //bundle.putSerializable("responseData", responseData);
+        bundle.putString("category", category);
         fragment.setArguments(bundle);
 
         return fragment;

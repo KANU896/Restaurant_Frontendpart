@@ -29,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Food_recommend extends Fragment {
+public class Recommend_fragment extends Fragment {
     private ImageView Image;
     private TextView Address, Title, Notice;
     private SharedPreferencesUtil spref;
@@ -62,7 +62,9 @@ public class Food_recommend extends Fragment {
             location = null;
         }
 
-        Call<DR_Data> call = RetrofitClient.getApiService().Day_recommend(location, "밥집");
+        String category = getArguments().getString("category");
+
+        Call<DR_Data> call = RetrofitClient.getApiService().Day_recommend(location, category);
         call.enqueue((new Callback<DR_Data>() {
             @Override
             public void onResponse(Call<DR_Data> call, Response<DR_Data> response) {

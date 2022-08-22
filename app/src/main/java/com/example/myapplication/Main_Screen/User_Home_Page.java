@@ -94,12 +94,20 @@ public class User_Home_Page extends Fragment  {
             }
         });
 
-        //TODO ViewPager2 (일일 음식점 추천)
-        ViewPager2 viewPager2 = view.findViewById(R.id.viewpager);
-        DR_Adapter dr_adapter = new DR_Adapter(getChildFragmentManager(), getLifecycle());
-        viewPager2.setAdapter(dr_adapter);
+        //밥집 카테고리 일일 추천 viewpager
+        ViewPager2 viewPager2_food = view.findViewById(R.id.viewpager_food);
+        DR_Adapter dr_adapter = new DR_Adapter(getChildFragmentManager(), getLifecycle(), "밥집");
+        viewPager2_food.setAdapter(dr_adapter);
 
+        //카페 카테고리 일일 추천 viewpager
+        ViewPager2 viewPager2_cafe = view.findViewById(R.id.viewpager_cafe);
+        DR_Adapter dr_adapter2 = new DR_Adapter(getChildFragmentManager(), getLifecycle(), "카페");
+        viewPager2_cafe.setAdapter(dr_adapter2);
 
+        //술집 카테고리 일일 추천 viewpager
+        ViewPager2 viewPager2_alcohol = view.findViewById(R.id.viewpager_alcohol);
+        DR_Adapter dr_adapter3 = new DR_Adapter(getChildFragmentManager(), getLifecycle(), "술집");
+        viewPager2_alcohol.setAdapter(dr_adapter3);
 
         return view;
     }
