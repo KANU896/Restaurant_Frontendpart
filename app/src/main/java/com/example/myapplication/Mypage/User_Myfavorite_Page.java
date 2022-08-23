@@ -132,8 +132,11 @@ public class User_Myfavorite_Page extends Fragment {
                             Name,
                             Score
                     ));
-
+                    for(ResponseData r : responseData){
+                        Log.e("ResponseData", r.getName());
+                    }
                     adapter.setData(responseData);
+                    adapter.notifyDataSetChanged();
                 }
 
                 for(ResponseData a : responseData) {
