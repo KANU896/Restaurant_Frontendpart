@@ -5,12 +5,15 @@
 package com.example.myapplication.Detail_Page;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +48,8 @@ public class Detail_page extends AppCompatActivity {
     private Detail_map detail_map;
     private Fragment selected = null;
     private JSONObject jObject = null;
+    private Button tell;
+    private LinearLayout favor_layout;
 
     private TextView detail_title, detail_score;
     private ImageView imageView;
@@ -69,8 +74,23 @@ public class Detail_page extends AppCompatActivity {
         detail_score.setText(responseData.getScore());
         new ImageLoadTask(responseData.getImage(), imageView).execute();
 
+        //전화 버튼 클릭 시 핸드폰 전화 기능으로 전환
+        tell = findViewById(R.id.tell_button);
+        Uri number = Uri.parse("tel:"+responseData.getTell_number());
+        Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+
+        tell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(callIntent);
+            }
+        });
+
+
         //즐겨찾기 기능
         CheckBox favorite = findViewById(R.id.favorite);
+        favor_layout = findViewById(R.id.favor_layout);
+
         SharedPreferencesUtil spref = new SharedPreferencesUtil(getApplicationContext(), "User");
         favorite.setChecked(responseData.getFav()); //해당 계정 즐겨찾기에 추가되어 있으면 체크 된 상태
         String token = spref.getPreferenceString("token");
@@ -78,7 +98,7 @@ public class Detail_page extends AppCompatActivity {
             jObject = JWTUtils.decoded(token);
         }
 
-        favorite.setOnClickListener(new View.OnClickListener() {
+        favor_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = null;
@@ -88,19 +108,18 @@ public class Detail_page extends AppCompatActivity {
                     } catch (JSONException e) {
                         Log.e("JSON ERROR", e.getMessage());
                     }
-                    // DB에 추가
+
                     if (favorite.isChecked()) {
-                        Call<Void> call = RetrofitClient.getApiService().favorite_put(responseData.getId(), username, token);
-                        retrofit(call);
-                    }
-                    // DB에서 삭제
-                    else {
+                        favorite.setChecked(false);
                         Call<Void> call = RetrofitClient.getApiService().favorite_delete(responseData.getId(), username, token);
+                        retrofit(call);
+                    } else {
+                        favorite.setChecked(true);
+                        Call<Void> call = RetrofitClient.getApiService().favorite_put(responseData.getId(), username, token);
                         retrofit(call);
                     }
                 }
                 else{
-                    favorite.setChecked(false);
                     Toast.makeText(getApplicationContext(), "로그인 후 이용할 수 있습니다.", Toast.LENGTH_LONG).show();
                 }
             }

@@ -56,7 +56,6 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
         ImageView image;
         TextView title;
         TextView score;
-        //CardView cvItem;
 
         MyViewHolder(View view){
             super(view);

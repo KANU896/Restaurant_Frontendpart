@@ -1,5 +1,7 @@
 package com.example.myapplication.Detail_Page.Fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -70,6 +72,18 @@ public class Detail_Info extends Fragment {
         else{
             detail_tag.setText("-");
         }
+
+        Button instar_button = view.findViewById(R.id.instar_button);
+        String url = "https://www.instagram.com/explore/tags/"+responseData.getName()+"/";
+        Uri instagram = Uri.parse(url);
+        Intent instar_intent = new Intent(Intent.ACTION_VIEW, instagram);
+
+        instar_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(instar_intent);
+            }
+        });
 
         return view;
     }
