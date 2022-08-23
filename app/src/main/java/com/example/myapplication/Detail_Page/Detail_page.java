@@ -14,12 +14,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.amar.library.ui.StickyScrollView;
 import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
@@ -144,10 +146,13 @@ public class Detail_page extends AppCompatActivity {
         selected.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
 
+        //StickyScrollView scrollView = findViewById(R.id.stickyscrollview);
+
         //탭이 선택되었을때 작동하는 메서드
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                //scrollView.fullScroll(ScrollView.FOCUS_UP);
                 int position = tab.getPosition();
                 Log.e(TAG, "선택된 탭 : " + position);
 

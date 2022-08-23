@@ -58,9 +58,7 @@ public class Recommend_fragment extends Fragment {
             String remove_text = "대한민국 ";
             location = location.replace(remove_text,"");
         }
-        else{
-            location = null;
-        }
+        if (location.equals("위치 정보 없음")) location = null;
 
         String category = getArguments().getString("category");
 

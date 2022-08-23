@@ -8,6 +8,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Detail_Data {
+    @SerializedName("_id")
+    @Expose
+    private String Id;
+
     @SerializedName("Address")
     @Expose
     private String Address;
@@ -35,6 +39,8 @@ public class Detail_Data {
     @SerializedName("fav")
     @Expose
     private boolean fav;
+
+    public String getId() { return Id; }
 
     public String getImage(){
         return Image;
