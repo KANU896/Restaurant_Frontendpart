@@ -63,15 +63,6 @@ public class User_Login extends AppCompatActivity {
             }
         });
 
-//        //자동 로그인을 선택한 유저
-//        checkBox = findViewById(R.id.checkBox);
-//        String autoLoginId = sharedPreferencesUtil.getPreferenceString("autoLoginId");
-//        String autoLoginPw =sharedPreferencesUtil.getPreferenceString("autoLoginPw");
-//        if (!TextUtils.isEmpty(autoLoginId) && !TextUtils.isEmpty(autoLoginPw)) {
-//            checkBox.setChecked(true);
-//            checkAutoLogin(sharedPreferencesUtil.getPreferenceString("autoLoginId"));
-//        }
-
         // 로그인 버튼
         Button login_btn = findViewById(R.id.login_btn);
         EditText username = findViewById(R.id.username);
@@ -110,14 +101,6 @@ public class User_Login extends AppCompatActivity {
 
                 if(login_data.getMsg().equals("success")) {
                     sharedPreferencesUtil.setPreference("token", token);
-//                    //자동 로그인 여부
-//                    if (checkBox.isChecked()) {
-//                        sharedPreferencesUtil.setPreference("autoLoginId", username);
-//                        sharedPreferencesUtil.setPreference("autoLoginPw", password);
-//                    } else {
-//                        sharedPreferencesUtil.setPreference("autoLoginId", "");
-//                        sharedPreferencesUtil.setPreference("autoLoginPw", "");
-//                    }
 
                     Intent intent = new Intent(getApplicationContext(), Main_Frame.class);
                     startActivity(intent);
@@ -138,18 +121,7 @@ public class User_Login extends AppCompatActivity {
             }
         }));
     }
-
-
-    //자동 로그인 유저
-    public void checkAutoLogin(String id){
-        //Toast.makeText(this, id + "님 환영합니다.", Toast.LENGTH_LONG).show();
-
-        Intent intent = new Intent(this, Main_Frame.class);
-        startActivity(intent);
-        finish();
-
-    }
-
+    
     private void getAppKeyHash() {
         try {
             PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
