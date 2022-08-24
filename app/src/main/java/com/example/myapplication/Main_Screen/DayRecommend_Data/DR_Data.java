@@ -1,6 +1,5 @@
 package com.example.myapplication.Main_Screen.DayRecommend_Data;
 
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_Review_ResponseData;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

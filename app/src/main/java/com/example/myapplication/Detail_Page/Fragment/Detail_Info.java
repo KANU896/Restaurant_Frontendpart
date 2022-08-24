@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,11 +16,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.example.myapplication.R;
-import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
 
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class Detail_Info extends Fragment {
     private View view;

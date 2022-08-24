@@ -14,26 +14,23 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.amar.library.ui.StickyScrollView;
 import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.example.myapplication.Detail_Page.Fragment.Detail_Info;
 import com.example.myapplication.Detail_Page.Fragment.Detail_Review;
 import com.example.myapplication.Detail_Page.Fragment.Detail_map;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_List.ImageLoadTask;
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.google.android.material.tabs.TabLayout;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import retrofit2.Call;

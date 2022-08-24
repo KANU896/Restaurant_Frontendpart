@@ -11,15 +11,12 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.myapplication.Search_Page.SearchedList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 public class SharedPreferencesUtil {
     private Context context;

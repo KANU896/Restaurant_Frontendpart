@@ -3,8 +3,6 @@ package com.example.myapplication.Detail_Page.Detail_Data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
-
 public class Detail_Review_ResponseData {
     @SerializedName("review_id")
     @Expose

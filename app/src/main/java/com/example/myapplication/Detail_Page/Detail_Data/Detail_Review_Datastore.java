@@ -1,7 +1,5 @@
 package com.example.myapplication.Detail_Page.Detail_Data;
 
-import java.util.Date;
-
 public class Detail_Review_Datastore {private int review_id;
     private String Name;
     private String Content;

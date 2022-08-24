@@ -4,15 +4,11 @@
 
 package com.example.myapplication.Login;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -21,11 +17,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Login.Login_Data.Login_Token;
-import com.example.myapplication.R;
 import com.example.myapplication.Main_Frame;
-import com.example.myapplication.Common.RetrofitClient;
+import com.example.myapplication.R;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

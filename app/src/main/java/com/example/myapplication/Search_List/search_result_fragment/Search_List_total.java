@@ -16,9 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.R;
 import com.example.myapplication.Search_List.Search_List_Adapter;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
-import com.example.myapplication.R;
 
 import java.util.ArrayList;
 

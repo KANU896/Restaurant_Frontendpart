@@ -4,8 +4,6 @@
 
 package com.example.myapplication.Search_Page.Search_Retrofit.Search_Data;
 
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
 public class ResponseData implements Serializable {

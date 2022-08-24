@@ -4,23 +4,19 @@
 
 package com.example.myapplication.Common;
 
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_Review_ResponseData;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
 import com.example.myapplication.Detail_Page.Detail_Data.Review_Data;
 import com.example.myapplication.Login.Login_Data.Login_Token;
 import com.example.myapplication.Login.Login_Data.Signup_Data;
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
 import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 
 import retrofit2.Call;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Query;
 
 public interface Retrofit_Service {
     //검색한 음식점 리스트 불러오기

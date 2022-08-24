@@ -20,16 +20,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Common.JWTUtils;
-import com.example.myapplication.Common.SharedPreferencesUtil;
-import com.example.myapplication.Detail_Page.Detail_page;
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
-import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
-import com.example.myapplication.R;
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
 import com.example.myapplication.Common.RetrofitClient;
-
-import org.json.JSONObject;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
+import com.example.myapplication.Detail_Page.Detail_page;
+import com.example.myapplication.R;
+import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
 
 import java.util.ArrayList;
 
