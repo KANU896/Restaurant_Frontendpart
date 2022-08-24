@@ -7,33 +7,28 @@ package com.example.myapplication.Search_List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.SearchView;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
-import com.example.myapplication.Main_Frame;
 import com.example.myapplication.R;
-import com.example.myapplication.Search_List.search_result_fragment.Food;
 import com.example.myapplication.Search_List.search_result_fragment.Alcohol;
 import com.example.myapplication.Search_List.search_result_fragment.Cafe;
+import com.example.myapplication.Search_List.search_result_fragment.Food;
 import com.example.myapplication.Search_List.search_result_fragment.Search_List_total;
-import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.Data;
-import com.example.myapplication.Common.RetrofitClient;
+import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 import com.example.myapplication.Search_Page.SearchedList;
 import com.google.android.material.tabs.TabLayout;
-
-
-import androidx.appcompat.app.AppCompatActivity;
-
-
-import android.util.Log;
-import android.widget.SearchView;
 
 import java.util.ArrayList;
 

@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true"
-        android:networkSecurityConfig="@xml/network_security_config">
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:name=".Common.MyApp">
 
         <activity
             android:name=".SplashActivity"
@@ -37,8 +38,12 @@
         <activity android:name=".Main_Screen.Today_Restourant"/>
         <activity android:name=".Search_List.Search_result_frame"/>
         <activity android:name=".Detail_Page.Detail_page"/>
+
+
+
         <meta-data android:name="com.kakao.sdk.AppKey"
             android:value="58f427dd33e20722f0e9f2b7b3010f14"/>
+
         <meta-data android:name= "com.google.android.geo.API_KEY"
             android:value="Google map API key"/>
     </application>

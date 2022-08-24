@@ -8,37 +8,20 @@ package com.example.myapplication.Main_Screen;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Main_Frame;
-import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_Data;
-import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_Datastore;
-import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_ResponseData;
 import com.example.myapplication.R;
-
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class User_Home_Page extends Fragment  {
     private View view;

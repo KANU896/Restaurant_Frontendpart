@@ -23,15 +23,14 @@ import androidx.fragment.app.Fragment;
 import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.example.myapplication.Detail_Page.Fragment.Detail_Info;
 import com.example.myapplication.Detail_Page.Fragment.Detail_Review;
 import com.example.myapplication.Detail_Page.Fragment.Detail_map;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_List.ImageLoadTask;
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.google.android.material.tabs.TabLayout;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import retrofit2.Call;
@@ -101,21 +100,14 @@ public class Detail_page extends AppCompatActivity {
         favor_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = null;
                 if (!TextUtils.isEmpty(token)) {
-                    try {
-                        username = jObject.getString("username");
-                    } catch (JSONException e) {
-                        Log.e("JSON ERROR", e.getMessage());
-                    }
-
                     if (favorite.isChecked()) {
                         favorite.setChecked(false);
-                        Call<Void> call = RetrofitClient.getApiService().favorite_delete(responseData.getId(), username, token);
+                        Call<Void> call = RetrofitClient.getApiService().favorite_delete(responseData.getId());
                         retrofit(call);
                     } else {
                         favorite.setChecked(true);
-                        Call<Void> call = RetrofitClient.getApiService().favorite_put(responseData.getId(), username, token);
+                        Call<Void> call = RetrofitClient.getApiService().favorite_put(responseData.getId());
                         retrofit(call);
                     }
                 }
@@ -144,10 +136,13 @@ public class Detail_page extends AppCompatActivity {
         selected.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
 
+        //StickyScrollView scrollView = findViewById(R.id.stickyscrollview);
+
         //탭이 선택되었을때 작동하는 메서드
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                //scrollView.fullScroll(ScrollView.FOCUS_UP);
                 int position = tab.getPosition();
                 Log.e(TAG, "선택된 탭 : " + position);
 

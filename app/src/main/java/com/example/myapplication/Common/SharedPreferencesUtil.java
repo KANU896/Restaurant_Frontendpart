@@ -11,15 +11,12 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.myapplication.Search_Page.SearchedList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 public class SharedPreferencesUtil {
     private Context context;
@@ -41,7 +38,7 @@ public class SharedPreferencesUtil {
     //내부 저장소에 저장된 데이터 가져오기
     public String getPreferenceString(String key) {
         String data;
-
+        Log.e("context", String.valueOf(context));
         SharedPreferences pref = context.getSharedPreferences(Data_Store, MODE_PRIVATE);
         Log.e("getpreference", Data_Store);
         try{

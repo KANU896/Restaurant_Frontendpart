@@ -23,8 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
-import com.example.myapplication.R;
 import com.example.myapplication.Login.User_Login;
+import com.example.myapplication.R;
 import com.example.myapplication.Search_List.Search_List_Adapter;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
@@ -105,7 +105,7 @@ public class User_Myfavorite_Page extends Fragment {
         SharedPreferencesUtil spref = new SharedPreferencesUtil(getContext(), "User");
         String token = spref.getPreferenceString("token");
 
-        Call<SearchData> call = RetrofitClient.getApiService().favorite_list("", token);
+        Call<SearchData> call = RetrofitClient.getApiService().favorite_list();
         call.enqueue((new Callback<SearchData>() {
             @Override
             public void onResponse(Call<SearchData> call, Response<SearchData> response) {

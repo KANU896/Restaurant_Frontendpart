@@ -7,7 +7,6 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,27 +20,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.Common.Location_GPS;
-import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Main_Screen.User_Home_Page;
 import com.example.myapplication.Map.User_Map_Page;
 import com.example.myapplication.Mypage.User_Myfavorite_Page;
-import com.example.myapplication.Search_List.search_result_fragment.Search_List_total;
 import com.example.myapplication.Search_List.Search_result_frame;
-import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.Data;
-import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
-import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 import com.example.myapplication.Search_Page.SearchedList;
 import com.example.myapplication.Search_Page.User_Search_Page;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Main_Frame extends AppCompatActivity {
     private BottomNavigationView mBottomNV;

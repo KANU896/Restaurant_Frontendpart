@@ -13,18 +13,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static final String BASE_URL = "http://192.168.219.103:8000"; // 서버 ip 주소
+    private static final String BASE_URL = "http://192.168.219.104:8000"; // 서버 ip 주소
 
     public static Retrofit_Service getApiService(){
         return getInstance().create(Retrofit_Service.class);
     }
 
-    //public static OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new AuthInterceptor()).build();
+    public static OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new AuthInterceptor()).build();
 
     private static Retrofit getInstance(){
         Gson gson = new GsonBuilder().setLenient().create();
         return new Retrofit.Builder()
-                //.client(okHttpClient)
+                .client(okHttpClient)
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();

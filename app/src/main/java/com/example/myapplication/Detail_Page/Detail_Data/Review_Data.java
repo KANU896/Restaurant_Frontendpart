@@ -1,6 +1,5 @@
 package com.example.myapplication.Detail_Page.Detail_Data;
 
-import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.Data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

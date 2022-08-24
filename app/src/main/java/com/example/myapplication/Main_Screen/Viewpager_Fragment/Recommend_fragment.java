@@ -1,11 +1,6 @@
 package com.example.myapplication.Main_Screen.Viewpager_Fragment;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
@@ -58,9 +57,7 @@ public class Recommend_fragment extends Fragment {
             String remove_text = "대한민국 ";
             location = location.replace(remove_text,"");
         }
-        else{
-            location = null;
-        }
+        if (location.equals("위치 정보 없음")) location = null;
 
         String category = getArguments().getString("category");
 

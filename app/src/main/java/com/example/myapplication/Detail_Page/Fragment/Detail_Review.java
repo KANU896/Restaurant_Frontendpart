@@ -4,8 +4,8 @@
 
 package com.example.myapplication.Detail_Page.Fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Detail_Review extends Fragment implements Delete_Content {
+public class Detail_Review extends Fragment implements Delete_Content{
     private View view;
     private RecyclerView recyclerView;
     private Review_Adapter adapter;
@@ -47,8 +48,7 @@ public class Detail_Review extends Fragment implements Delete_Content {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.detail_review, container,false);
 
-        spref = new SharedPreferencesUtil(getContext(), "User");
-        token = spref.getPreferenceString("token");
+        restaurant_id = getArguments().getString("restaurant_id");
 
         //리뷰 recyclerview adapter 설정
         recyclerView = view.findViewById(R.id.review_recyclerView);
@@ -58,24 +58,31 @@ public class Detail_Review extends Fragment implements Delete_Content {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
 
-        Call<Review_Data> call = RetrofitClient.getApiService().Review_list(token);
+        //리뷰 검색
+        Call<Review_Data> call = RetrofitClient.getApiService().Review_list(restaurant_id);
         retrofit(call);
 
-        //리뷰 입력
-        EditText content = view.findViewById(R.id.review_text);
-        Button review_input = view.findViewById(R.id.review_input_button);
-        restaurant_id = getArguments().getString("restaurant_id");
-
+        // 리뷰 입력
+        Button review_input = view.findViewById(R.id.review_input);
         review_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(token)){
-                    Toast.makeText(getContext(), "로그인이 필요합니다.", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                Call<Review_Data> call = RetrofitClient.getApiService()
-                        .Review_input(restaurant_id, content.getText().toString(), token);
-                retrofit(call);
+                final EditText et = new EditText(getContext());
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("리뷰 작성")
+                        .setView(et)
+                        .setPositiveButton("등록", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String text = et.getText().toString();
+                                Call<Review_Data> call = RetrofitClient.getApiService()
+                                        .Review_input(restaurant_id, text);
+                                retrofit(call);
+                            }
+                        })
+                        .setNegativeButton("취소", null);
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 
@@ -86,7 +93,7 @@ public class Detail_Review extends Fragment implements Delete_Content {
     @Override
     public void onSearchItemDeleteClicked(int review_id) {
         Call<Review_Data> call = RetrofitClient.getApiService()
-                .Review_delete(review_id, token);
+                .Review_delete(review_id);
         retrofit(call);
     }
 
@@ -134,4 +141,5 @@ public class Detail_Review extends Fragment implements Delete_Content {
             }
         }));
     }
+
 }

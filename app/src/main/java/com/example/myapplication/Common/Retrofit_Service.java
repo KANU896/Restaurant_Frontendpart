@@ -4,11 +4,10 @@
 
 package com.example.myapplication.Common;
 
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_Review_ResponseData;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
 import com.example.myapplication.Detail_Page.Detail_Data.Review_Data;
 import com.example.myapplication.Login.Login_Data.Login_Token;
 import com.example.myapplication.Login.Login_Data.Signup_Data;
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
 import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 
@@ -16,7 +15,6 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
@@ -27,11 +25,16 @@ public interface Retrofit_Service {
     Call<SearchData> Search_post(@Field("search_data") String search_data, @Field("category") String category,
                                       @Field("location") String location);
 
+    //선택한 음식점 정보 불러오기
+    @FormUrlEncoded
+    @POST("/detail/random/")
+    Call<Detail_Data> Detail_random(@Field("location") String location, @Field("category") String category);
+
 
     //선택한 음식점 정보 불러오기
     @FormUrlEncoded
     @POST("/detail/data/")
-    Call<Detail_Data> Detail_post(@Field("mongo_id") String mongo_id, @Field("username") String username);
+    Call<Detail_Data> Detail_post(@Field("restaurant_id") String restaurant_id);
 
     //로그인
     @FormUrlEncoded
@@ -51,34 +54,34 @@ public interface Retrofit_Service {
     //즐겨찾기 추가
     @FormUrlEncoded
     @PUT("/detail/favorite/")
-    Call<Void> favorite_put(@Field("mongo_id") String mongo_id, @Field("username") String username,
-                            @Header("Authorization") String token);
+    Call<Void> favorite_put(@Field("restaurant_id") String restaurant_id);
 
     //즐겨찾기 삭제
     @FormUrlEncoded
     @POST("/detail/favorite/")
-    Call<Void> favorite_delete(@Field("mongo_id") String mongo_id, @Field("username") String username,
-                               @Header("Authorization") String token);
+    Call<Void> favorite_delete(@Field("restaurant_id") String restaurant_id);
 
     //즐겨찾기 목록
+    @GET("/detail/favorite/")
+    Call<SearchData> favorite_list();
+
+    //리뷰 검색
     @FormUrlEncoded
-    @POST("/detail/favorite_list/")
-    Call<SearchData> favorite_list(@Field("") String a, @Header("Authorization") String token);
+    @POST("/detail/review/")
+    Call<Review_Data> Review_list(@Field("restaurant_id") String restaurant_id);
 
     //리뷰 등록
     @FormUrlEncoded
     @PUT("/detail/review/")
-    Call<Review_Data> Review_input(@Field("restaurant_id") String mongo_id,
-                                                  @Field("content") String content, @Header("Authorization") String token);
+    Call<Review_Data> Review_input(@Field("restaurant_id") String restaurant_id,
+                                                  @Field("content") String content);
 
-    //리뷰 검색
-    @GET("/detail/review/")
-    Call<Review_Data> Review_list(@Header("Authorization") String token);
-
+    //리뷰 삭제
     @FormUrlEncoded
-    @POST("/detail/review/")
-    Call<Review_Data> Review_delete(@Field("review_id") int review_id, @Header("Authorization") String token);
+    @POST("/detail/review/delete/")
+    Call<Review_Data> Review_delete(@Field("review_id") int review_id);
 
+    //일일 음식점 추천
     @FormUrlEncoded
     @POST("/day/recommend/")
     Call<DR_Data> Day_recommend(@Field("city") String city, @Field("category") String category);
