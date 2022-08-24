@@ -58,7 +58,6 @@ public class User_Myfavorite_Page extends Fragment {
         String token = sharedPreferencesUtil.getPreferenceString("token");
         if (!TextUtils.isEmpty(token)) {
             myfavorite_login.setText("로그아웃");
-            //String token = sharedPreferencesUtil.getPreferenceString("token");
             try {
                 JSONObject jObject = JWTUtils.decoded(token);
                 comment.setText(jObject.getString("username"));

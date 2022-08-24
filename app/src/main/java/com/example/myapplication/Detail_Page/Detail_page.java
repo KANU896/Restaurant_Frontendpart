@@ -20,7 +20,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
@@ -30,8 +29,6 @@ import com.example.myapplication.Detail_Page.Fragment.Detail_map;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_List.ImageLoadTask;
 import com.google.android.material.tabs.TabLayout;
-
-import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +43,6 @@ public class Detail_page extends AppCompatActivity {
     private Detail_Review detail_review;
     private Detail_map detail_map;
     private Fragment selected = null;
-    private JSONObject jObject = null;
     private Button tell;
     private LinearLayout favor_layout;
 
@@ -93,9 +89,6 @@ public class Detail_page extends AppCompatActivity {
         SharedPreferencesUtil spref = new SharedPreferencesUtil(getApplicationContext(), "User");
         favorite.setChecked(responseData.getFav()); //해당 계정 즐겨찾기에 추가되어 있으면 체크 된 상태
         String token = spref.getPreferenceString("token");
-        if(!TextUtils.isEmpty(token)){
-            jObject = JWTUtils.decoded(token);
-        }
 
         favor_layout.setOnClickListener(new View.OnClickListener() {
             @Override
