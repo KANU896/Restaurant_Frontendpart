@@ -89,6 +89,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e(TAG, "onCreate");
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -125,12 +126,13 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
                 showPlaceInformation(currentPosition);
             }
         });
-
+        Log.e("onCreate", "final line");
     }
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         Log.d(TAG, "onMapReady :");
+        Log.e(TAG, "onMapReady");
 
         mMap = googleMap;
 
@@ -155,7 +157,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
             // 2. 이미 퍼미션을 가지고 있다면
             // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
 
-
+            Log.e("onMapReady", "퍼미션 가지고 있음");
             startLocationUpdates(); // 3. 위치 업데이트 시작
 
 
@@ -208,7 +210,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
         @Override
         public void onLocationResult(LocationResult locationResult) {
             super.onLocationResult(locationResult);
-
+            Log.e(TAG, "LocationCallback");
             List<Location> locationList = locationResult.getLocations();
 
             if (locationList.size() > 0) {
@@ -240,12 +242,13 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private void startLocationUpdates() {
-
+        Log.e(TAG, "startLocationUpdates");
         if (!checkLocationServicesStatus()) {
-
+            Log.e("startLocationUpdates", "checkLocationServicesStatus False");
             Log.d(TAG, "startLocationUpdates : call showDialogForLocationServiceSetting");
             showDialogForLocationServiceSetting();
-        }else {
+        }
+        else {
 
             int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION);
@@ -277,7 +280,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onStart() {
         super.onStart();
-
+        Log.e(TAG, "onStart");
         Log.d(TAG, "onStart");
 
         if (checkPermission()) {
@@ -296,9 +299,8 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     protected void onStop() {
-
         super.onStop();
-
+        Log.e(TAG, "onStop");
         if (mFusedLocationClient != null) {
 
             Log.d(TAG, "onStop : call stopLocationUpdates");
@@ -310,7 +312,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //현재 좌표 -> 주소로 변환(지오코더)
     public String getCurrentAddress(@NonNull LatLng latlng) {
-
+        Log.e(TAG, "getCurrentAddress");
         //지오코더... GPS를 주소로 변환
         Geocoder geocoder = new Geocoder(this, Locale.KOREA);
 
@@ -346,6 +348,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     public boolean checkLocationServicesStatus() {
+        Log.e(TAG, "checkLocationServicesStatus");
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
@@ -355,7 +358,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //현재 위치 마커 셋팅
     public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
-
+        Log.e(TAG, "setCurrentLocation");
 
         if (currentMarker != null) currentMarker.remove();
 
@@ -378,7 +381,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //초기 위치
     public void setDefaultLocation() {
-
+        Log.e(TAG, "setDefaultLocation");
 
         //디폴트 위치, Seoul
         LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
@@ -404,7 +407,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //여기부터는 런타임 퍼미션 처리을 위한 메소드들
     private boolean checkPermission() {
-
+        Log.e(TAG, "checkPermission");
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -414,9 +417,10 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
+            Log.e("checkPermission", "True");
             return true;
         }
-
+        Log.e("checkPermission", "False");
         return false;
 
     }
@@ -432,6 +436,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
                                            @NonNull int[] grandResults) {
 
         super.onRequestPermissionsResult(permsRequestCode, permissions, grandResults);
+        Log.e(TAG, "onRequestPermissionsResult");
         if (permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
 
             // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
@@ -493,7 +498,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     //여기부터는 GPS 활성화를 위한 메소드들
     private void showDialogForLocationServiceSetting() {
-
+        Log.e(TAG, "showDialogForLocationServiceSetting");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("위치 서비스 비활성화");
         builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.");
@@ -519,7 +524,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        Log.e(TAG, "onActivityResult");
         switch (requestCode) {
 
             case GPS_ENABLE_REQUEST_CODE:

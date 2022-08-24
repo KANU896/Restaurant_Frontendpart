@@ -31,10 +31,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:gravity="center"
-                    android:text="위치 정보 없음"
+                    android:text="클릭하여 위치 갱신"
                     android:textColor="#817A7A"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:clickable="true"/>
 
                 <Button
                     android:id="@+id/search_button"

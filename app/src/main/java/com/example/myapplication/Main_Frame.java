@@ -13,13 +13,16 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.Common.Location_GPS;
+import com.example.myapplication.Common.Location_service;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Main_Screen.User_Home_Page;
 import com.example.myapplication.Map.User_Map_Page;
@@ -40,20 +43,18 @@ public class Main_Frame extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private Fragment currentFragment;
-    private String tag, address;
+    private String tag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_main);
-        Location_GPS gps = new Location_GPS(getApplicationContext(), Main_Frame.this);
-        address = gps.get_address();
 
         mBottomNV = findViewById(R.id.nav_view);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                BottomNavigate(menuItem.getItemId(), address);
+                BottomNavigate(menuItem.getItemId());
                 return true;
             }
         });
@@ -61,7 +62,7 @@ public class Main_Frame extends AppCompatActivity {
     }
 
     //BottomNavigation 페이지 변경
-    private void BottomNavigate(int id, String address) {
+    private void BottomNavigate(int id) {
         this.tag = String.valueOf(id);
 
         fragmentManager = getSupportFragmentManager();
@@ -76,9 +77,6 @@ public class Main_Frame extends AppCompatActivity {
 
         if (id == R.id.navigation_1) {
             fragment = new User_Home_Page();
-            Bundle bundle = new Bundle();
-            bundle.putString("address", address);
-            fragment.setArguments(bundle);
         } else if (id == R.id.navigation_2){
             fragment = new User_Search_Page();
         }else if(id == R.id.navigation_4){
@@ -121,7 +119,7 @@ public class Main_Frame extends AppCompatActivity {
                     searchHistoryList = (ArrayList<SearchedList>) sharedPreferencesUtil.getSearchHistoryList();
                     searchHistoryList.add(new SearchedList(query));
                     sharedPreferencesUtil.storeSearchHistoryList(searchHistoryList);
-                    BottomNavigate(R.id.navigation_1, address);
+                    BottomNavigate(R.id.navigation_1);
                     changeFragment(R.id.navigation_1);
 
                     intent(query);

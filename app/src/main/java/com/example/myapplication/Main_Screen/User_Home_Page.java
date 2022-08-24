@@ -5,6 +5,7 @@
 
 package com.example.myapplication.Main_Screen;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,19 +20,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.myapplication.Common.SharedPreferencesUtil;
+import com.example.myapplication.Common.LocationService;
+import com.example.myapplication.Common.Location_GPS;
+import com.example.myapplication.Common.Location_service;
 import com.example.myapplication.Main_Frame;
 import com.example.myapplication.R;
 
-public class User_Home_Page extends Fragment  {
+public class User_Home_Page extends Fragment implements LocationService {
+    private final String TAG = "User_Home_Page";
     private View view;
     private Button today_key_btn;
     private TextView location_text;
     private Button search_button;
     private Main_Frame main_frame;
     private String address;
-    private String location = null;
-    private SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(getContext(), "Searched");
+    private Location_service locationService;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -53,9 +56,25 @@ public class User_Home_Page extends Fragment  {
         view = inflater.inflate(R.layout.home_page, container,false);
 
         //현재 위치 정보 표시
+        Location_GPS gps = new Location_GPS(getContext(), getActivity());
+        address = gps.get_address(); //이 함수 실행되면서 Permission 검사 동시 실행
+
         location_text = (TextView) view.findViewById(R.id.location_text);
-        address = getArguments().getString("address");
         location_text.setText(address);
+
+        locationService = new Location_service(getContext(), this);
+        location_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(locationService.checkLocationServicesStatus()){
+                    location_text.setText(gps.get_address());
+                }
+                else{
+                    locationService.showDialogForLocationServiceSetting();
+                }
+            }
+        });
+
 
         //검색 버튼
         search_button = (Button) view.findViewById(R.id.search_button);
@@ -98,6 +117,12 @@ public class User_Home_Page extends Fragment  {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
+    @Override
+    public void onDialogSetClicked(Intent callGPSSettingIntent) {
+        startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
+        location_text.setText("위치 갱신");
     }
 }
 

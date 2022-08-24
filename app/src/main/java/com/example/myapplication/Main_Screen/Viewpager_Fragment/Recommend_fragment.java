@@ -91,6 +91,7 @@ public class Recommend_fragment extends Fragment {
                 int position = getArguments().getInt("position");
                 if (responseData.isEmpty()){
                     Notice.setVisibility(View.VISIBLE);
+                    Notice.setText("해당 정보가 없습니다.");
                     Image.setVisibility(View.GONE);
                     Title.setVisibility(View.GONE);
                     Address.setVisibility(View.GONE);
