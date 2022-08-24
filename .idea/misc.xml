@@ -59,6 +59,11 @@
         <entry key="app/src/main/res/layout/user_main.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/user_mainscreen.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/user_register.xml" value="0.2259963768115942" />
+        <entry key="app/src/main/res/layouts/login/layout/detailpage_menu_list.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layouts/login/layout/fragment2.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layouts/login/layout/fragment3.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layouts/login/layout/fragment4.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layouts/login/layout/network_security_config.xml" value="0.3423913043478261" />
         <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.291" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.291" />
@@ -67,4 +72,11 @@
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.37604166666666666" />
+      </ProjectState>
+    </option>
+  </component>
 </project>

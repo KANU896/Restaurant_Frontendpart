@@ -23,8 +23,8 @@ public class User_Map_Page extends Fragment /*implements OnMapReadyCallback*/ {
         MapView mapView = new MapView(getContext());
 
         View root = inflater(R.layout.map_page, container, false);
-        //RelativeLayout mapViewContainer = (RelativeLayout) findViewById(R.id.MapView);
-        ViewGroup mapViewContainer = (ViewGroup)root.findViewById(R.id.map_view);
+        //RelativeLayout mapViewContainer = (RelativeLayout) findViewById(R.id.map_view);
+        ViewGroup mapViewContainer = (ViewGroup) root.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
     }
 

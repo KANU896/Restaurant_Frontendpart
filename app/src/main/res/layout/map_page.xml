@@ -6,15 +6,24 @@
     android:background="@color/background"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/map_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="내 주변 맛집 검색"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
     <RelativeLayout
         android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="600dp" />
 
     <Button
         android:id="@+id/around_search_button"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="0.2"
         android:text="장소검색" />
 
