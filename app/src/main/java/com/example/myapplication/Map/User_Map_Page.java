@@ -23,7 +23,7 @@ public class User_Map_Page extends Fragment /*implements OnMapReadyCallback*/ {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //Inflage the layout for this fragment
-        View root = inflater(R.layout.map_page, container, false);
+        View root = inflater.inflate(R.layout.map_page, container, false);
 
         //지도
         MapView mapView = new MapView(getActivity());
