@@ -103,21 +103,14 @@ public class Detail_page extends AppCompatActivity {
         favor_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = null;
                 if (!TextUtils.isEmpty(token)) {
-                    try {
-                        username = jObject.getString("username");
-                    } catch (JSONException e) {
-                        Log.e("JSON ERROR", e.getMessage());
-                    }
-
                     if (favorite.isChecked()) {
                         favorite.setChecked(false);
-                        Call<Void> call = RetrofitClient.getApiService().favorite_delete(responseData.getId(), username, token);
+                        Call<Void> call = RetrofitClient.getApiService().favorite_delete(responseData.getId());
                         retrofit(call);
                     } else {
                         favorite.setChecked(true);
-                        Call<Void> call = RetrofitClient.getApiService().favorite_put(responseData.getId(), username, token);
+                        Call<Void> call = RetrofitClient.getApiService().favorite_put(responseData.getId());
                         retrofit(call);
                     }
                 }

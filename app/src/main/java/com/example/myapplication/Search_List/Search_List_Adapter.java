@@ -70,18 +70,14 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
                     int pos = getAdapterPosition();
                     ResponseData test = responseData.get(pos);
 
-                    SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(mContext, "User");
-                    token = sharedPreferencesUtil.getPreferenceString("token");
                     if (!TextUtils.isEmpty(token)) {
-                        //token = sharedPreferencesUtil.getPreferenceString("token");
                         try {
-                            JSONObject jObject = JWTUtils.decoded(token);
-                            retrofit(v, test.getId(), jObject.getString("username"));
+                            retrofit(v, test.getId());
                         } catch (Exception e) {
                             Log.e("JSON Decode Error", e.getMessage());
                         }
                     }
-                    else retrofit(v, test.getId(), "");
+                    else retrofit(v, test.getId());
                 }
             });
         }
@@ -118,8 +114,8 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
             return 0;
     }
 
-    public void retrofit (View v, String id, String username){
-        Call<Detail_Data> call = RetrofitClient.getApiService().Detail_post(id, username);
+    public void retrofit (View v, String id){
+        Call<Detail_Data> call = RetrofitClient.getApiService().Detail_post(id);
         call.enqueue((new Callback<Detail_Data>() {
             @Override
             public void onResponse(Call<Detail_Data> call, Response<Detail_Data> response) {

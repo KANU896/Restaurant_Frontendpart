@@ -32,9 +32,6 @@ public class Restourant_Keyword  extends AppCompatActivity {
         setContentView(R.layout.restourant_keyword);
 
         spref = new SharedPreferencesUtil(getApplicationContext(), "Searched"); // 위치 정보
-        spref2 = new SharedPreferencesUtil(getApplicationContext(), "User"); // 유저 정보
-
-        token = spref2.getPreferenceString("token");
 
         location = spref.getPreferenceString("location");
 
@@ -50,7 +47,7 @@ public class Restourant_Keyword  extends AppCompatActivity {
         food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Detail_Data> call = RetrofitClient.getApiService().Detail_random(location, "밥집", token);
+                Call<Detail_Data> call = RetrofitClient.getApiService().Detail_random(location, "밥집");
                 retrofit(call);
             }
         });
@@ -59,7 +56,7 @@ public class Restourant_Keyword  extends AppCompatActivity {
         alchol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Detail_Data> call = RetrofitClient.getApiService().Detail_random(location, "술집", token);
+                Call<Detail_Data> call = RetrofitClient.getApiService().Detail_random(location, "술집");
                 retrofit(call);
             }
         });
@@ -68,7 +65,7 @@ public class Restourant_Keyword  extends AppCompatActivity {
         cafe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Detail_Data> call = RetrofitClient.getApiService().Detail_random(location, "카페", token);
+                Call<Detail_Data> call = RetrofitClient.getApiService().Detail_random(location, "카페");
                 retrofit(call);
             }
         });

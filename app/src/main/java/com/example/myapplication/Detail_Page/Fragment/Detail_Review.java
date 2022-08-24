@@ -48,8 +48,6 @@ public class Detail_Review extends Fragment implements Delete_Content{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.detail_review, container,false);
 
-        spref = new SharedPreferencesUtil(getContext(), "User");
-        token = spref.getPreferenceString("token");
         restaurant_id = getArguments().getString("restaurant_id");
 
         //리뷰 recyclerview adapter 설정
@@ -61,7 +59,7 @@ public class Detail_Review extends Fragment implements Delete_Content{
         recyclerView.setAdapter(adapter);
 
         //리뷰 검색
-        Call<Review_Data> call = RetrofitClient.getApiService().Review_list(restaurant_id, token);
+        Call<Review_Data> call = RetrofitClient.getApiService().Review_list(restaurant_id);
         retrofit(call);
 
         // 리뷰 입력
@@ -78,7 +76,7 @@ public class Detail_Review extends Fragment implements Delete_Content{
                             public void onClick(DialogInterface dialog, int which) {
                                 String text = et.getText().toString();
                                 Call<Review_Data> call = RetrofitClient.getApiService()
-                                        .Review_input(restaurant_id, text, token);
+                                        .Review_input(restaurant_id, text);
                                 retrofit(call);
                             }
                         })
@@ -95,7 +93,7 @@ public class Detail_Review extends Fragment implements Delete_Content{
     @Override
     public void onSearchItemDeleteClicked(int review_id) {
         Call<Review_Data> call = RetrofitClient.getApiService()
-                .Review_delete(review_id, token);
+                .Review_delete(review_id);
         retrofit(call);
     }
 

@@ -105,7 +105,7 @@ public class User_Myfavorite_Page extends Fragment {
         SharedPreferencesUtil spref = new SharedPreferencesUtil(getContext(), "User");
         String token = spref.getPreferenceString("token");
 
-        Call<SearchData> call = RetrofitClient.getApiService().favorite_list("", token);
+        Call<SearchData> call = RetrofitClient.getApiService().favorite_list();
         call.enqueue((new Callback<SearchData>() {
             @Override
             public void onResponse(Call<SearchData> call, Response<SearchData> response) {
