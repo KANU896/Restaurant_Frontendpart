@@ -177,7 +177,7 @@ public class User_Map_Page extends Fragment implements  MapView.CurrentLocationE
     public void checkRunTimePermission(){
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크
-        int hasFineLocationPermission = ContextCompat.checkSelfPermission(User_Map_Page.context
+        int hasFineLocationPermission = ContextCompat.checkSelfPermission(getActivity()
                 ,
                 Manifest.permission.ACCESS_FINE_LOCATION);
 
@@ -247,7 +247,8 @@ public class User_Map_Page extends Fragment implements  MapView.CurrentLocationE
     }
 
     public boolean checkLocationServicesStatus() {
-        LocationManager locationManager = (LocationManager) context.getSystemService(context.LOCATION_SERVICE);
+
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(getActivity().LOCATION_SERVICE);
 
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
