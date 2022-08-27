@@ -6,17 +6,53 @@
     android:background="@color/background"
     android:orientation="vertical">
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <TextView
+        android:id="@+id/map_textView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8" />
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="내 주변 맛집 검색"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="70dp"
+            android:text="밥집" />
+
+        <RadioButton
+            android:id="@+id/radio_alcohole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="70dp"
+            android:text="술집" />
+
+        <RadioButton
+            android:id="@+id/radio_cafe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="70dp"
+            android:text="카페" />
+    </RadioGroup>
+
+    <RelativeLayout
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="592dp" />
 
     <Button
         android:id="@+id/around_search_button"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="0.2"
         android:text="장소검색" />
 

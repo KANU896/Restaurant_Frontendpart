@@ -1,5 +1,6 @@
 package com.example.myapplication.Main_Screen.Viewpager_Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -32,6 +33,7 @@ public class Recommend_fragment extends Fragment {
     private ImageView Image;
     private TextView Address, Title, Notice;
     private SharedPreferencesUtil spref;
+    private Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +46,8 @@ public class Recommend_fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.e("Fragment", String.valueOf(getArguments().getInt("position")));
         ArrayList<DR_Datastore> responseData = new ArrayList<>();
+
+        mContext = getContext();
 
         Image = view.findViewById(R.id.viewpager_image);
         Title = view.findViewById(R.id.viewpager_title);
@@ -119,7 +123,7 @@ public class Recommend_fragment extends Fragment {
             @Override
             public void onFailure(Call<DR_Data> call, Throwable t) {
                 Log.e("연결실패", t.getMessage());
-                Toast.makeText(getContext(), "연결 실패",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "연결 실패",Toast.LENGTH_SHORT).show();
             }
         }));
     }

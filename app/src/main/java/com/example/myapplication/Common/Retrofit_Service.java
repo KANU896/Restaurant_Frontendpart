@@ -9,6 +9,7 @@ import com.example.myapplication.Detail_Page.Detail_Data.Review_Data;
 import com.example.myapplication.Login.Login_Data.Login_Token;
 import com.example.myapplication.Login.Login_Data.Signup_Data;
 import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_Data;
+import com.example.myapplication.Map.MapData.Map_Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 
 import retrofit2.Call;
@@ -85,4 +86,9 @@ public interface Retrofit_Service {
     @FormUrlEncoded
     @POST("/day/recommend/")
     Call<DR_Data> Day_recommend(@Field("city") String city, @Field("category") String category);
+
+    // 내 위치 주변 음식점
+    @FormUrlEncoded
+    @POST("/map/location/")
+    Call<Map_Data> Map(@Field("latitude") double latitude, @Field("longitude") double longitude, @Field("category") String category);
 }

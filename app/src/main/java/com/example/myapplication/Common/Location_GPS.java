@@ -138,4 +138,11 @@ public class Location_GPS {
 
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
 }

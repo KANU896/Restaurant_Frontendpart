@@ -70,14 +70,10 @@ public class SplashActivity extends Activity {
     public void onRequestPermissionsResult(int permsRequestCode,
                                            @NonNull String[] permissions,
                                            @NonNull int[] grandResults) {
-
         super.onRequestPermissionsResult(permsRequestCode, permissions, grandResults);
         if (permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
-
             // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
-
             boolean check_result = true;
-
 
             // 모든 퍼미션을 허용했는지 체크합니다.
 
@@ -88,7 +84,6 @@ public class SplashActivity extends Activity {
                 }
             }
 
-
             if (check_result) {
                 // 퍼미션을 허용했다면 앱 시작
                 startActivity(new Intent(getApplicationContext(), Main_Frame.class));
@@ -98,7 +93,6 @@ public class SplashActivity extends Activity {
 
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
                         || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
-
 
                     // 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있습니다.
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -130,5 +124,4 @@ public class SplashActivity extends Activity {
             }
         }
     }
-
 }
