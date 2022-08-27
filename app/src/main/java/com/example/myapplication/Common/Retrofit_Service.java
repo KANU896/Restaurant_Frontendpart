@@ -4,7 +4,7 @@
 
 package com.example.myapplication.Common;
 
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.example.myapplication.Detail_Page.Detail_Data.Review_Data;
 import com.example.myapplication.Login.Login_Data.Login_Token;
 import com.example.myapplication.Login.Login_Data.Signup_Data;
@@ -28,13 +28,13 @@ public interface Retrofit_Service {
     //선택한 음식점 정보 불러오기
     @FormUrlEncoded
     @POST("/detail/random/")
-    Call<Detail_Data> Detail_random(@Field("location") String location, @Field("category") String category);
+    Call<Detail_ResponseData> Detail_random(@Field("location") String location, @Field("category") String category);
 
 
     //선택한 음식점 정보 불러오기
     @FormUrlEncoded
     @POST("/detail/data/")
-    Call<Detail_Data> Detail_post(@Field("restaurant_id") String restaurant_id);
+    Call<Detail_ResponseData> Detail_post(@Field("restaurant_id") String restaurant_id);
 
     //로그인
     @FormUrlEncoded

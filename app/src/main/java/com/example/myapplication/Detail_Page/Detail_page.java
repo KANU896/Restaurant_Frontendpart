@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Datastore;
 import com.example.myapplication.Detail_Page.Fragment.Detail_Info;
 import com.example.myapplication.Detail_Page.Fragment.Detail_Review;
 import com.example.myapplication.Detail_Page.Fragment.Detail_map;
@@ -48,7 +48,7 @@ public class Detail_page extends AppCompatActivity {
 
     private TextView detail_title, detail_score;
     private ImageView imageView;
-    private Detail_ResponseData responseData;
+    private Detail_Datastore responseData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class Detail_page extends AppCompatActivity {
         setContentView(R.layout.detail_page);
 
         Intent intent = getIntent();
-        responseData = (Detail_ResponseData) intent.getSerializableExtra("responseData");
+        responseData = (Detail_Datastore) intent.getSerializableExtra("responseData");
 
         Log.e(TAG, responseData.getTag());
 

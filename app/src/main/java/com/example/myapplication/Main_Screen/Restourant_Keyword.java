@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Datastore;
 import com.example.myapplication.Detail_Page.Detail_page;
 import com.example.myapplication.R;
 
@@ -47,7 +47,7 @@ public class Restourant_Keyword  extends AppCompatActivity {
         food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Detail_Data> call = RetrofitClient.getApiService().Detail_random(location, "밥집");
+                Call<Detail_ResponseData> call = RetrofitClient.getApiService().Detail_random(location, "밥집");
                 retrofit(call);
             }
         });
@@ -56,7 +56,7 @@ public class Restourant_Keyword  extends AppCompatActivity {
         alchol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Detail_Data> call = RetrofitClient.getApiService().Detail_random(location, "술집");
+                Call<Detail_ResponseData> call = RetrofitClient.getApiService().Detail_random(location, "술집");
                 retrofit(call);
             }
         });
@@ -65,22 +65,22 @@ public class Restourant_Keyword  extends AppCompatActivity {
         cafe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Detail_Data> call = RetrofitClient.getApiService().Detail_random(location, "카페");
+                Call<Detail_ResponseData> call = RetrofitClient.getApiService().Detail_random(location, "카페");
                 retrofit(call);
             }
         });
     }
 
-    private void retrofit(Call<Detail_Data> call){
-        call.enqueue((new Callback<Detail_Data>() {
+    private void retrofit(Call<Detail_ResponseData> call){
+        call.enqueue((new Callback<Detail_ResponseData>() {
             @Override
-            public void onResponse(Call<Detail_Data> call, Response<Detail_Data> response) {
+            public void onResponse(Call<Detail_ResponseData> call, Response<Detail_ResponseData> response) {
                 if(!response.isSuccessful()){
                     Log.e("연결이 비정상적 : ", "error code : " + response.code());
                     Toast.makeText(getApplicationContext(), "위치 서비스가 필요합니다.", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Detail_Data detail_data = response.body();
+                Detail_ResponseData detail_data = response.body();
 
                 if(TextUtils.isEmpty(detail_data.getId())){
                     Log.e("데이터", "없음");
@@ -97,7 +97,7 @@ public class Restourant_Keyword  extends AppCompatActivity {
                 String Tell_number = detail_data.getTell_number();
                 boolean Fav = detail_data.getFav();
 
-                Detail_ResponseData response_detail_data = new Detail_ResponseData(
+                Detail_Datastore response_detail_data = new Detail_Datastore(
                         Id,
                         Image,
                         Name,
@@ -115,7 +115,7 @@ public class Restourant_Keyword  extends AppCompatActivity {
 
             // 서버 통신 실패 시
             @Override
-            public void onFailure(Call<Detail_Data> call, Throwable t) {
+            public void onFailure(Call<Detail_ResponseData> call, Throwable t) {
                 Log.e("연결실패", t.getMessage());
                 Toast.makeText(getApplicationContext(),"연결 실패",Toast.LENGTH_SHORT).show();
             }

@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Common.Location_GPS;
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Datastore;
 import com.example.myapplication.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,13 +23,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class Detail_map extends Fragment implements OnMapReadyCallback {
     private View view;
     private GoogleMap mMap;
-    private Detail_ResponseData responseData;
+    private Detail_Datastore responseData;
     private double x, y;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.detail_map, container,false);
-        responseData = (Detail_ResponseData) getArguments().getSerializable("responseData");
+        responseData = (Detail_Datastore) getArguments().getSerializable("responseData");
         Log.e("Detail_Map", responseData.getAddress());
 
         if (responseData.getAddress().isEmpty()){

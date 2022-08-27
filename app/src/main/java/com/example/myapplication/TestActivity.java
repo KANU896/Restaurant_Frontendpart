@@ -582,7 +582,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
 
                 //중복 마커 제거
-                HashSet<Marker> hashSet = new HashSet<Marker>();
+                HashSet<Marker> hashSet = new HashSet<>();
                 hashSet.addAll(previous_marker);
                 previous_marker.clear();
                 previous_marker.addAll(hashSet);

@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Datastore;
 import com.example.myapplication.R;
 
 import org.json.JSONObject;
@@ -22,7 +22,7 @@ import org.json.JSONObject;
 public class Detail_Info extends Fragment {
     private View view;
 
-    private Detail_ResponseData responseData;
+    private Detail_Datastore responseData;
     private TextView detail_menu, detail_tag, detail_address, detail_number, detail_category, detail_opentime;
     private JSONObject jObject = null;
     double x, y;
@@ -31,7 +31,7 @@ public class Detail_Info extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.detail_info, container,false);
 
-        responseData = (Detail_ResponseData) getArguments().getSerializable("responseData");
+        responseData = (Detail_Datastore) getArguments().getSerializable("responseData");
 
         //TODO 카테고리
         detail_category = view.findViewById(R.id.info_category);

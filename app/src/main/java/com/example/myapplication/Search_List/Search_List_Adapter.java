@@ -21,8 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Common.RetrofitClient;
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Datastore;
 import com.example.myapplication.Detail_Page.Detail_page;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
@@ -111,15 +111,15 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
     }
 
     public void retrofit (View v, String id){
-        Call<Detail_Data> call = RetrofitClient.getApiService().Detail_post(id);
-        call.enqueue((new Callback<Detail_Data>() {
+        Call<Detail_ResponseData> call = RetrofitClient.getApiService().Detail_post(id);
+        call.enqueue((new Callback<Detail_ResponseData>() {
             @Override
-            public void onResponse(Call<Detail_Data> call, Response<Detail_Data> response) {
+            public void onResponse(Call<Detail_ResponseData> call, Response<Detail_ResponseData> response) {
                 if(!response.isSuccessful()){
                     Log.e("연결이 비정상적 : ", "error code : " + response.code());
                     return;
                 }
-                Detail_Data detail_data = response.body();
+                Detail_ResponseData detail_data = response.body();
 
                 String Image = detail_data.getImage();
                 String Name = detail_data.getName();
@@ -129,7 +129,7 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
                 String Tell_number = detail_data.getTell_number();
                 boolean Fav = detail_data.getFav();
 
-                Detail_ResponseData response_detail_data = new Detail_ResponseData(
+                Detail_Datastore response_detail_data = new Detail_Datastore(
                         id,
                         Image,
                         Name,
@@ -149,7 +149,7 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
 
             // 서버 통신 실패 시
             @Override
-            public void onFailure(Call<Detail_Data> call, Throwable t) {
+            public void onFailure(Call<Detail_ResponseData> call, Throwable t) {
                 Log.e("연결실패", t.getMessage());
                 Toast.makeText(mContext,"연결 실패",Toast.LENGTH_SHORT).show();
             }

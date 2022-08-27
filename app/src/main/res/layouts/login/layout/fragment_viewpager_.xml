@@ -17,41 +17,46 @@
         android:orientation="vertical"
         android:paddingTop="20dp">
 
-        <TextView
-            android:id="@+id/notice_text"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="132dp"
-            android:layout_marginEnd="-2dp"
-            android:layout_marginBottom="378dp"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:text="위치 설정이 필요합니다."
-            android:textSize="20dp"
-            android:visibility="gone" />
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/viewpager_image"
-            android:layout_width="match_parent"
-            android:layout_height="197dp"
-            tools:srcCompat="@tools:sample/avatars" />
+            <TextView
+                android:id="@+id/notice_text"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="132dp"
+                android:layout_marginEnd="-2dp"
+                android:layout_marginBottom="378dp"
+                android:gravity="center"
+                android:text="위치 설정이 필요합니다."
+                android:textSize="20dp"
+                android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/viewpager_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:text="TextView"
-            android:textSize="16dp" />
+            <ImageView
+                android:id="@+id/viewpager_image"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/viewpager_title"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:gravity="center"
-            android:text="TextView"
-            android:textSize="30dp" />
+            <TextView
+                android:id="@+id/viewpager_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/viewpager_title"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:textSize="20dp" />
+        </LinearLayout>
 
     </LinearLayout>
 
