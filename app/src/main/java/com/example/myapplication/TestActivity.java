@@ -114,7 +114,7 @@ public class TestActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.map_view);
         mapFragment.getMapAsync(this);
 
         previous_marker = new ArrayList<Marker>();

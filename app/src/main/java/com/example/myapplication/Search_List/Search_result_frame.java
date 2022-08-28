@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
+import com.example.myapplication.Main_Frame;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_List.search_result_fragment.Alcohol;
 import com.example.myapplication.Search_List.search_result_fragment.Cafe;
@@ -254,5 +255,11 @@ public class Search_result_frame extends AppCompatActivity {
                 Log.e("연결실패", t.getMessage());
             }
         }));
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), Main_Frame.class);
+        startActivity(intent);
+        finish();
     }
 }

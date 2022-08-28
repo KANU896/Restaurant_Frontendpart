@@ -104,6 +104,7 @@ public class Detail_Review extends Fragment implements Delete_Content{
             @Override
             public void onResponse(Call<Review_Data> call, Response<Review_Data> response) {
                 if(!response.isSuccessful()){
+                    Toast.makeText(getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
                     Log.e("연결이 비정상적 : ", "error code : " + response.code());
                     return;
                 }

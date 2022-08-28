@@ -151,6 +151,7 @@ public class Main_Frame extends AppCompatActivity {
         Intent intent = new Intent(this, Search_result_frame.class);
         intent.putExtra("query", query);
         startActivity(intent);
+        finish();
     }
 
     //뒤로가기 두번 클릭 시 종료

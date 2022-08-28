@@ -36,26 +36,30 @@ public class Detail_map extends Fragment {
         responseData = (Detail_Datastore) getArguments().getSerializable("responseData");
         Log.e("Detail_Map", responseData.getAddress());
 
-        // 카카오맵 지도 (에뮬레이터랑 호환 안되서 평소엔 주석처리)
-        MapView mapView = new MapView(getActivity());
-        ViewGroup mapViewContainer = (ViewGroup) view.findViewById(R.id.map_view);
-
         if (responseData.getAddress().isEmpty()){
-            View map = view.findViewById(R.id.map);
+            View map = view.findViewById(R.id.detail_map);
             map.setVisibility(View.INVISIBLE);
             return view;
         }
 
         Location_GPS location_gps = new Location_GPS(getContext(), null);
+        String [] coordinate = location_gps.getCoordinate(responseData.getAddress());
 
-        x = location_gps.getLatitude();
-        y = location_gps.getLongitude();
+        x = Double.parseDouble(coordinate[0]);
+        y = Double.parseDouble(coordinate[1]);
 
+
+        // 카카오맵 지도 (에뮬레이터랑 호환 안되서 평소엔 주석처리)
+        MapView mapView = new MapView(getActivity());
+        ViewGroup mapViewContainer = view.findViewById(R.id.detail_map);
         mapViewContainer.addView(mapView);
+
+        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(x, y), true);
 
         MapPOIItem marker = new MapPOIItem();
         MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(x, y);
-        marker.setItemName(responseData.getName());
+        marker.setItemName("Default Marker");
         marker.setTag(0);
         marker.setMapPoint(MARKER_POINT);
         marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
@@ -70,13 +74,3 @@ public class Detail_map extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 }
-//        mapViewContainer.addView(mapView);
-//
-//        MapPOIItem marker = new MapPOIItem();
-//        MapPoint MARKER_POINT = MapPoint.mapPointWithGeoCoord(x, y);
-//        marker.setItemName("Default Marker");
-//        marker.setTag(0);
-//        marker.setMapPoint(MARKER_POINT);
-//        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-//        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-//        mapView.addPOIItem(marker);

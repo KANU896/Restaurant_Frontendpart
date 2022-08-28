@@ -35,11 +35,11 @@ public class Restourant_Keyword  extends AppCompatActivity {
 
         location = spref.getPreferenceString("location");
 
-        if (!TextUtils.isEmpty(location) && !location.equals("")) {
-            String remove_text = "대한민국 ";
-            location = location.replace(remove_text,"");
-        }
-        if (location.equals("위치 정보 없음")) location = null;
+//        if (!TextUtils.isEmpty(location) && !location.equals("")) {
+//            String remove_text = "대한민국 ";
+//            location = location.replace(remove_text,"");
+//        }
+        if (location.equals("위치 정보 없음") || TextUtils.isEmpty(location)) location = null;
 
 
 

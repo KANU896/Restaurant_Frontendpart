@@ -83,6 +83,7 @@ public class User_Map_Page extends Fragment implements LocationService {
 
         return view;
     }
+
     RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -130,6 +131,8 @@ public class User_Map_Page extends Fragment implements LocationService {
                             longitude
                     ));
                 }
+
+                // 주변 음식점 데이터 마커 세팅
                 ArrayList<MapPOIItem> markerArr = new ArrayList<>();
                 for (Map_Datastore map_datastore : responseData){
                     MapPOIItem marker = new MapPOIItem();
