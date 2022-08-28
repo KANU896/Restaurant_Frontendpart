@@ -52,16 +52,6 @@ public class User_Login extends AppCompatActivity {
             }
         });
 
-        Button id_find = (Button) findViewById(R.id.id_find); // 계정찾기 버튼
-        //로그인화면 -> 계정찾기화면 전환
-        id_find.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), User_IdFind.class);
-                startActivity(intent);
-            }
-        });
-
         // 로그인 버튼
         Button login_btn = findViewById(R.id.login_btn);
         EditText username = findViewById(R.id.username);

@@ -40,9 +40,7 @@ public class Detail_Review extends Fragment implements Delete_Content{
     private View view;
     private RecyclerView recyclerView;
     private Review_Adapter adapter;
-    private SharedPreferencesUtil spref;
     private String restaurant_id;
-    private String token;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,14 +65,14 @@ public class Detail_Review extends Fragment implements Delete_Content{
         review_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final EditText et = new EditText(getContext());
+                final EditText editText = new EditText(getContext());
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("리뷰 작성")
-                        .setView(et)
+                        .setView(editText)
                         .setPositiveButton("등록", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String text = et.getText().toString();
+                                String text = editText.getText().toString();
                                 Call<Review_Data> call = RetrofitClient.getApiService()
                                         .Review_input(restaurant_id, text);
                                 retrofit(call);

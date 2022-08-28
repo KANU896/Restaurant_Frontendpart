@@ -37,7 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Search_result_frame extends AppCompatActivity {
+public class Search_result_page extends AppCompatActivity {
     private static final String TAG = "Search_result_frame";
 
     //객체 선언
@@ -191,7 +191,7 @@ public class Search_result_frame extends AppCompatActivity {
         return true;
     }
     public void intent (String query){
-        Intent intent = new Intent(this, Search_result_frame.class);
+        Intent intent = new Intent(this, Search_result_page.class);
         intent.putExtra("query", query);
         startActivity(intent);
     }

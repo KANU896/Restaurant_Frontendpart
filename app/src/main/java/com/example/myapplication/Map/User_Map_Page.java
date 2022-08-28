@@ -1,6 +1,5 @@
 package com.example.myapplication.Map;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;

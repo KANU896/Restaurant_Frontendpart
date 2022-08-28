@@ -17,15 +17,11 @@ import androidx.fragment.app.Fragment;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_Datastore;
 import com.example.myapplication.R;
 
-import org.json.JSONObject;
-
 public class Detail_Info extends Fragment {
     private View view;
 
     private Detail_Datastore responseData;
     private TextView detail_menu, detail_tag, detail_address, detail_number, detail_category, detail_opentime;
-    private JSONObject jObject = null;
-    double x, y;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -4,28 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FBFBFB"
     android:gravity="center|top"
     android:paddingTop="13dp"
     tools:context=".Main_Screen.Viewpager_Fragment.Recommend_fragment">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="315dp"
-        android:background="#C4E8E5"
+        android:layout_width="wrap_content"
+        android:layout_height="330dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="20dp">
+        android:paddingTop="20dp"
+        android:background="?attr/selectableItemBackground">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:background="@drawable/custom_rectangle">
 
             <TextView
                 android:id="@+id/notice_text"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="47dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="132dp"
@@ -38,13 +39,13 @@
 
             <ImageView
                 android:id="@+id/viewpager_image"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="160dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/viewpager_address"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="10dp"
@@ -52,7 +53,7 @@
 
             <TextView
                 android:id="@+id/viewpager_title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:gravity="center"
                 android:textSize="20dp" />

@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.Search_List.Search_result_frame;
+import com.example.myapplication.Search_List.Search_result_page;
 
 import java.util.ArrayList;
 
@@ -59,7 +59,7 @@ public class Searched_Adapter extends RecyclerView.Adapter<Searched_Adapter.MyVi
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
-                    Intent intent = new Intent(mContext, Search_result_frame.class);
+                    Intent intent = new Intent(mContext, Search_result_page.class);
                     intent.putExtra("query", searched.get(pos).name);
                     v.getContext().startActivity(intent);
                 }

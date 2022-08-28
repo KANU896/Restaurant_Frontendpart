@@ -13,21 +13,17 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.myapplication.Common.Location_GPS;
-import com.example.myapplication.Common.Location_service;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Main_Screen.User_Home_Page;
 import com.example.myapplication.Map.User_Map_Page;
 import com.example.myapplication.Mypage.User_Myfavorite_Page;
-import com.example.myapplication.Search_List.Search_result_frame;
+import com.example.myapplication.Search_List.Search_result_page;
 import com.example.myapplication.Search_Page.SearchedList;
 import com.example.myapplication.Search_Page.User_Search_Page;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -148,7 +144,7 @@ public class Main_Frame extends AppCompatActivity {
     }
 
     public void intent (String query){
-        Intent intent = new Intent(this, Search_result_frame.class);
+        Intent intent = new Intent(this, Search_result_page.class);
         intent.putExtra("query", query);
         startActivity(intent);
         finish();

@@ -13,12 +13,6 @@ import androidx.fragment.app.Fragment;
 import com.example.myapplication.Common.Location_GPS;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_Datastore;
 import com.example.myapplication.R;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -26,7 +20,6 @@ import net.daum.mf.map.api.MapView;
 
 public class Detail_map extends Fragment {
     private View view;
-    private GoogleMap mMap;
     private Detail_Datastore responseData;
     private double x, y;
 
