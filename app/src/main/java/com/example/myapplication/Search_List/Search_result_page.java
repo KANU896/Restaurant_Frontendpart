@@ -71,8 +71,6 @@ public class Search_result_page extends AppCompatActivity {
         //내 현재위치
         String address = sharedPreferencesUtil.getPreferenceString("location");
         if (!TextUtils.isEmpty(address) && !address.equals("위치 정보 없음")) {
-            String remove_text = "대한민국 ";
-            address = address.replace(remove_text,"");
             this.location = address;
         }
 

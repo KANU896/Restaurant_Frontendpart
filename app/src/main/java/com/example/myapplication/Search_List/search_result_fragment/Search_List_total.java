@@ -41,17 +41,6 @@ public class Search_List_total extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new Search_List_Adapter(context, responseData));
 
-        //recyclerView.
-
-//        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, recyclerView,
-//                new RecyclerItemClickListener.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(View view, int position) {
-//                        // event code
-//                        Toast.makeText(context, "Test Toast", Toast.LENGTH_SHORT).show();
-//                    }
-//                }));
-
         return view;
     }
 }

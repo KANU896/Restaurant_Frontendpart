@@ -52,15 +52,10 @@ public class Recommend_fragment extends Fragment {
         Image = view.findViewById(R.id.viewpager_image);
         Title = view.findViewById(R.id.viewpager_title);
         Address = view.findViewById(R.id.viewpager_address);
-        Notice = view.findViewById(R.id.notice_text);
 
         spref = new SharedPreferencesUtil(getContext(), "Searched");
         String location = spref.getPreferenceString("location");
 
-//        if (!TextUtils.isEmpty(location) && !location.equals("")) {
-//            String remove_text = "대한민국 ";
-//            location = location.replace(remove_text,"");
-//        }
         if (location.equals("위치 정보 없음") || TextUtils.isEmpty(location)) location = null;
 
         String category = getArguments().getString("category");
@@ -94,17 +89,9 @@ public class Recommend_fragment extends Fragment {
                 }
                 int position = getArguments().getInt("position");
                 if (responseData.isEmpty()){
-                    Notice.setVisibility(View.VISIBLE);
-                    Notice.setText("해당 정보가 없습니다.");
-                    Image.setVisibility(View.GONE);
-                    Title.setVisibility(View.GONE);
-                    Address.setVisibility(View.GONE);
+                    Title.setText("해당 정보가 없습니다.");
                     return;
                 }
-                Notice.setVisibility(View.GONE);
-                Image.setVisibility(View.VISIBLE);
-                Title.setVisibility(View.VISIBLE);
-                Address.setVisibility(View.VISIBLE);
                 DR_Datastore current_data = responseData.get(position);
                 Log.e("data", current_data.getName());
                 if(current_data.getImage().equals("")) {
