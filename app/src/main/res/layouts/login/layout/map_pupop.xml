@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/map_pupop_title"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/map_pupop_Score"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/map_pupop_address"
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:text="TextView" />
+</LinearLayout>

@@ -8,26 +8,28 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.myapplication.R;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-import java.util.Calendar;
-import java.util.Map;
+import org.w3c.dom.Document;
+
+import java.util.ArrayList;
 
 
 public class User_Map_Page extends Fragment implements  MapView.CurrentLocationEventListener, MapView.MapViewEventListener/*implements OnMapReadyCallback*/ {
@@ -60,9 +62,10 @@ public class User_Map_Page extends Fragment implements  MapView.CurrentLocationE
         mapViewContainer = (ViewGroup) root.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
         mapView.setMapViewEventListener(this);
+        mapView.setCurrentLocationEventListener(this); //현위치 트래킹 이벤트
+        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading); // 현재위치를 받아 오지만 나침반 모드 활성x
 
 
-        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();
         }else {
@@ -80,12 +83,17 @@ public class User_Map_Page extends Fragment implements  MapView.CurrentLocationE
     }*/
 
 
-
-
-
     public void onCurrentLocationUpdate(MapView mapView, MapPoint currentLocation, float accuracyInMeters){
         MapPoint.GeoCoordinate mapPointGeo = currentLocation.getMapPointGeoCoord();
+
+        // 현재위치 위도와 경도 값
         Log.i(LOG_TAG, String.format("MapView onCurrentLocationUpdate (%f,%f) accuracy (%f)", mapPointGeo.latitude, mapPointGeo.longitude, accuracyInMeters));
+        MapPoint currentMapPoint = MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude);
+
+        // 지도 중심점 변경
+        mapView.setMapCenterPoint(currentMapPoint,true);
+
+
 
         MapPOIItem marker = new MapPOIItem();
         marker.setItemName("현 위치");
@@ -229,6 +237,108 @@ public class User_Map_Page extends Fragment implements  MapView.CurrentLocationE
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
     }
+
+
+    protected Category(Parcel in) {
+        this.meta = in.readParcelable(Meta.class.getClassLoader());
+        this.documents = new ArrayList<Document>();
+        in.readList(this.documents, Document.class.getClassLoader());
+    }
+
+    public static final Creator<Category> CREATOR = new Creator<Category>() {
+        @Override
+        public Category createFromParcel(Parcel in) {
+            return new Category(in);
+        }
+
+        @Override
+        public Category[] newArray(int size) {
+            return new Category[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.meta, flags);
+        dest.writeList(this.documents);
+    }
+
+    public class RemoteDataSource {
+        private static final String URL ="  ";  // 통신할 서버 url 입력
+        private static Retrofit retrofit;
+
+        public static Retrofit getInstance(){
+            if(retrofit == null){
+                retrofit = new Retrofit.Builder()
+                        .baseUrl(URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+            }
+            return retrofit;
+        }
+    }
+
+    public interface Entity_Convenience {
+        @GET("v2/local/search/category.json")
+        Call<Category>getSearchCategory(
+                @Header("Authorization")String token,
+                @Query("category_group_code")String category_group_code,
+                @Query("x")String x,
+                @Query("y")String y,
+                @Query("radius")int radius
+        );
+    }
+
+
+
+    ArrayList<MapPOIItem> markerArr = new ArrayList<>();
+
+    // 마커 생성
+    @Override
+    public void clickSuccess(ArrayList<Map_ResponseData> list) {
+
+
+        for(Map_ResponseData map_responseData : list.toArray(new Map_ResponseData[0])){
+            MapPOIItem marker = new MapPOIItem();
+            //마커 클릭 시 이름
+            marker.setItemName(map_responseData.getName());
+            //마커를 생성하는 좌표
+            //MapPoint로 변환해야함.
+
+            MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(map_responseData.getLatitude(), map_responseData.getLongitude()));
+            marker.setMapPoint(mapPoint);
+
+            marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+            marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+            //마커 추가
+            mapView.addPOIItem(marker);
+        }
+    }
+
+
+    // getlist로 받아 마커 클릭시 이벤트등록
+    
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+        Intent intent = new Intent(getContext(), Map_Popup.class);
+
+        //인텐트로 이름, 점수, 주소
+        PopupMenu popupList = null;
+        for(int i = 0; i<markerArr.size(); i++){
+            if(mapPOIItem.getItemName().equals(markerArr.get(i).getName())){
+                popupList = new PopupMenu(markerArr.get(i).getName(),markerArr.get(i).getScore(),markerArr.get(i).getAddress());
+            }
+        }
+        intent.putExtra("data", (Parcelable) popupList);
+        startActivity(intent);
+    }
+
+
 
 
 

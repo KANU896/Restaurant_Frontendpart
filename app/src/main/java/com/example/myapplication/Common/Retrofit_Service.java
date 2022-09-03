@@ -4,11 +4,11 @@
 
 package com.example.myapplication.Common;
 
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_Review_ResponseData;
 import com.example.myapplication.Detail_Page.Detail_Data.Review_Data;
 import com.example.myapplication.Login.Login_Data.Login_Token;
 import com.example.myapplication.Login.Login_Data.Signup_Data;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
+import com.example.myapplication.Map.Map_Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 
 import retrofit2.Call;
@@ -74,7 +74,13 @@ public interface Retrofit_Service {
     @GET("/detail/review/")
     Call<Review_Data> Review_list(@Header("Authorization") String token);
 
+    //리뷰 삭제
     @FormUrlEncoded
     @POST("/detail/review/")
     Call<Review_Data> Review_delete(@Field("review_id") int review_id, @Header("Authorization") String token);
+
+    // 내 위치 주변 음식점
+    @FormUrlEncoded
+    @POST("/map/location/")
+    Call<Map_Data> Map(@Field("latitude") double latitude, @Field("longitude") double longitude, @Field("category") String category);
 }
