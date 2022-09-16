@@ -1,11 +1,10 @@
-package com.example.myapplication.Main_Screen;
+package com.example.myapplication.Home;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,7 +15,6 @@ import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_Datastore;
 import com.example.myapplication.Detail_Page.Detail_page;
-import com.example.myapplication.R;
 import com.example.myapplication.databinding.RestourantKeywordBinding;
 
 import retrofit2.Call;

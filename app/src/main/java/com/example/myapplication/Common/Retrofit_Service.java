@@ -8,7 +8,7 @@ import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.example.myapplication.Detail_Page.Detail_Data.Review_Data;
 import com.example.myapplication.Login.Login_Data.Login_Token;
 import com.example.myapplication.Login.Login_Data.Signup_Data;
-import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_Data;
+import com.example.myapplication.Home.DayRecommend_Data.DR_Data;
 import com.example.myapplication.Map.MapData.Map_Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 

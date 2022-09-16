@@ -75,6 +75,7 @@ public class SharedPreferencesUtil {
 
     //검색 기록 불러오기
     public List<SearchedList> getSearchHistoryList(){
+        Log.e("GSH", String.valueOf(context));
         SharedPreferences pref = context.getSharedPreferences(Data_Store, MODE_PRIVATE);
         String searchHistoryListString = pref.getString(SEARCHHISTORYLIST_KEY, null);
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.Main_Screen.DayRecommend_Data;
+package com.example.myapplication.Home.DayRecommend_Data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

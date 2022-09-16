@@ -34,7 +34,10 @@ public class Searched_Adapter extends RecyclerView.Adapter<Searched_Adapter.MyVi
     }
 
     public void setData(ArrayList<SearchedList> searched){
+        if (this.searched != null) this.searched.clear();
         this.searched = searched;
+        //this.searched = searched;
+        //notifyDataSetChanged();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{

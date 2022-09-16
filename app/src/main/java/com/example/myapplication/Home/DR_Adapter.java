@@ -1,4 +1,4 @@
-package com.example.myapplication.Main_Screen;
+package com.example.myapplication.Home;
 
 import android.os.Bundle;
 
@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.myapplication.Main_Screen.Viewpager_Fragment.Recommend_fragment;
+import com.example.myapplication.Home.Viewpager_Fragment.Recommend_fragment;
 
 public class DR_Adapter extends FragmentStateAdapter {
     private String category;

@@ -3,21 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_1"
+        android:id="@+id/homeFragment"
         android:icon="@android:drawable/ic_menu_today"
         android:title="홈" />
 
     <item
-        android:id="@+id/navigation_2"
+        android:id="@+id/searchFragment"
         android:icon="@android:drawable/ic_menu_search"
         android:title="검색" />
 
     <item
-        android:id="@+id/navigation_3"
+        android:id="@+id/mapFragment"
         android:icon="@android:drawable/ic_dialog_map"
         android:title="지도" />
     <item
-        android:id="@+id/navigation_4"
+        android:id="@+id/mypageFragment"
         android:icon="@android:drawable/btn_star_big_on"
         android:title="내정보" />
 
