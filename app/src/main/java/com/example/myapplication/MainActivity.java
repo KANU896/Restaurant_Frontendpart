@@ -30,7 +30,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-public class Main_Frame extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
     private ArrayList<SearchedList> searchHistoryList = new ArrayList<>();
 
@@ -69,7 +69,6 @@ public class Main_Frame extends AppCompatActivity {
         if (currentFragment != null) {
             fragmentTransaction.remove(currentFragment);
         }
-
 
         if (id == R.id.navigation_1) {
             fragment = new User_Home_Page();

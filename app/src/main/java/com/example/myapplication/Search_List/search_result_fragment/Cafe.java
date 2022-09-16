@@ -19,25 +19,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_List.Search_List_Adapter;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
+import com.example.myapplication.databinding.CafeFragmentBinding;
 
 import java.util.ArrayList;
 
 public class Cafe extends Fragment {
     private ArrayList<ResponseData> responseData = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private View view;
+    //private RecyclerView recyclerView;
+    //private View view;
     private Context context;
+    private CafeFragmentBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment4, container,false);
+        binding = CafeFragmentBinding.inflate(getLayoutInflater(), container, false);
+        //view = inflater.inflate(R.layout.cafe_fragment, container,false);
         context = container.getContext();
         responseData = (ArrayList<ResponseData>) getArguments().getSerializable("responseData");
 
-        recyclerView = view.findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new Search_List_Adapter(context, responseData));
+        //recyclerView = view.findViewById(R.id.recyclerview);
+        binding.recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerview.setAdapter(new Search_List_Adapter(context, responseData));
 
-        return view;
+        return binding.getRoot();
     }
 }

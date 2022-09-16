@@ -15,13 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_Data;
 import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_Datastore;
 import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_ResponseData;
 import com.example.myapplication.R;
-import com.example.myapplication.Search_List.ImageLoadTask;
+import com.example.myapplication.Common.ImageLoadTask;
+import com.example.myapplication.databinding.FragmentViewpagerBinding;
 
 import java.util.ArrayList;
 
@@ -30,28 +32,30 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Recommend_fragment extends Fragment {
-    private ImageView Image;
-    private TextView Address, Title, Notice;
+//    private ImageView Image;
+//    private TextView Address, Title;
     private SharedPreferencesUtil spref;
     private Context mContext;
+    private FragmentViewpagerBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_viewpager_, container, false);
+        binding = FragmentViewpagerBinding.inflate(getLayoutInflater(), container,false);
+        //return inflater.inflate(R.layout.fragment_viewpager_, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.e("Fragment", String.valueOf(getArguments().getInt("position")));
         ArrayList<DR_Datastore> responseData = new ArrayList<>();
 
         mContext = getContext();
 
-        Image = view.findViewById(R.id.viewpager_image);
-        Title = view.findViewById(R.id.viewpager_title);
-        Address = view.findViewById(R.id.viewpager_address);
+//        Image = view.findViewById(R.id.viewpager_image);
+//        Title = view.findViewById(R.id.viewpager_title);
+//        Address = view.findViewById(R.id.viewpager_address);
 
         spref = new SharedPreferencesUtil(getContext(), "Searched");
         String location = spref.getPreferenceString("location");
@@ -87,24 +91,24 @@ public class Recommend_fragment extends Fragment {
                             Address
                     ));
                 }
+
                 int position = getArguments().getInt("position");
+
                 if (responseData.isEmpty()){
-                    Title.setText("해당 정보가 없습니다.");
+                    binding.viewpagerTitle.setText("해당 정보가 없습니다.");
                     return;
                 }
                 DR_Datastore current_data = responseData.get(position);
-                Log.e("data", current_data.getName());
-                if(current_data.getImage().equals("")) {
-                    Image.setImageResource(R.drawable.no_image);
+
+                if(!TextUtils.isEmpty(current_data.getImage())) {
+                    //Glide.with(getContext()).load(current_data.getImage()).into(binding.viewpagerImage);
+                    new ImageLoadTask(current_data.getImage(), binding.viewpagerImage).execute();
                 }
-                else {
-                    new ImageLoadTask(current_data.getImage(), Image).execute();
-                }
-                Title.setText(current_data.getName());
+                binding.viewpagerTitle.setText(current_data.getName());
                 if (current_data.getAddress().equals(""))
-                    Address.setText("-");
+                    binding.viewpagerAddress.setText("-");
                 else
-                    Address.setText(current_data.getAddress());
+                    binding.viewpagerAddress.setText(current_data.getAddress());
             }
             // 서버 통신 실패 시
             @Override

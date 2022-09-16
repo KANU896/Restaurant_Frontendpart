@@ -23,8 +23,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Login.Login_Data.Login_Token;
-import com.example.myapplication.Main_Frame;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.databinding.UserLoginBinding;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -35,16 +36,19 @@ import retrofit2.Response;
 
 //로그인화면 -> 회원가입화면 전환
 public class User_Login extends AppCompatActivity {
-    CheckBox checkBox;
     SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(this, "User");
+    private UserLoginBinding binding;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_login);
+        binding = UserLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+//        setContentView(R.layout.user_login);
 
-        Button reg_btn = (Button) findViewById(R.id.reg_btn); // 회원가입 버튼
+        //Button reg_btn = (Button) findViewById(R.id.reg_btn); // 회원가입 버튼
         //로그인화면 -> 회원가입화면 전환
-        reg_btn.setOnClickListener(new View.OnClickListener() {
+        binding.regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), User_Register.class);
@@ -53,16 +57,16 @@ public class User_Login extends AppCompatActivity {
         });
 
         // 로그인 버튼
-        Button login_btn = findViewById(R.id.login_btn);
-        EditText username = findViewById(R.id.username);
-        EditText password = findViewById(R.id.password);
+//        Button login_btn = findViewById(R.id.login_btn);
+//        EditText username = findViewById(R.id.username);
+//        EditText password = findViewById(R.id.password);
 
-        login_btn.setOnClickListener(new View.OnClickListener() {
+        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getAppKeyHash();
-                String id = username.getText().toString();
-                String pw = password.getText().toString();
+                String id = binding.username.getText().toString();
+                String pw = binding.password.getText().toString();
                 retrofit(id, pw);
             }
         });
@@ -70,7 +74,7 @@ public class User_Login extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), Main_Frame.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -91,7 +95,7 @@ public class User_Login extends AppCompatActivity {
                 if(login_data.getMsg().equals("success")) {
                     sharedPreferencesUtil.setPreference("token", token);
 
-                    Intent intent = new Intent(getApplicationContext(), Main_Frame.class);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
                 }

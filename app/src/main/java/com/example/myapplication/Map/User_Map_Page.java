@@ -23,6 +23,7 @@ import com.example.myapplication.Map.MapData.Map_Data;
 import com.example.myapplication.Map.MapData.Map_Datastore;
 import com.example.myapplication.Map.MapData.Map_ResponseData;
 import com.example.myapplication.R;
+import com.example.myapplication.databinding.MapPageBinding;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -36,21 +37,23 @@ import retrofit2.Response;
 
 
 public class User_Map_Page extends Fragment implements LocationService {
-    private View view;
+    //private View view;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private MapView mapView;
-    private Button search_button;
-    private RadioGroup radioGroup;
+    //private Button search_button;
+    //private RadioGroup radioGroup;
     double latitude, longitude;
+    private MapPageBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        view = inflater.inflate(R.layout.map_page, container, false);
+        binding = MapPageBinding.inflate(getLayoutInflater(), container, false);
+        //view = inflater.inflate(R.layout.map_page, container, false);
 
-        search_button = view.findViewById(R.id.around_search_button);
-        radioGroup = view.findViewById(R.id.radiogroup);
+//        search_button = view.findViewById(R.id.around_search_button);
+//        radioGroup = view.findViewById(R.id.radiogroup);
         Location_service locationService = new Location_service(getContext(), this);
 
         //위치 퍼미션 확인
@@ -59,8 +62,9 @@ public class User_Map_Page extends Fragment implements LocationService {
             if(locationService.checkLocationServicesStatus()){
                 // 퍼미션 허용 및 위치 설정 on
                 mapView = new MapView(getActivity());
-                ViewGroup mapViewContainer = view.findViewById(R.id.map_view);
-                mapViewContainer.addView(mapView);
+                //ViewGroup mapViewContainer = view.findViewById(R.id.map_view);
+                //mapViewContainer.addView(mapView);
+                binding.mapView.addView(mapView);
 
                 mapView.setZoomLevel(4, true);
                 mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
@@ -69,7 +73,7 @@ public class User_Map_Page extends Fragment implements LocationService {
                 latitude = locationGps.getLatitude();
                 longitude = locationGps.getLongitude();
 
-                radioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
+                binding.radiogroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
             }
             else{
                 locationService.showDialogForLocationServiceSetting();
@@ -80,16 +84,16 @@ public class User_Map_Page extends Fragment implements LocationService {
             Toast.makeText(getContext(), "설정(앱 정보)에서 퍼미션을 허용해야 합니다.", Toast.LENGTH_LONG).show();
         }
 
-        return view;
+        return binding.getRoot();
     }
 
     RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-            search_button.setOnClickListener(new View.OnClickListener() {
+            binding.aroundSearchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    RadioButton button = view.findViewById(checkedId);
+                    RadioButton button = binding.getRoot().findViewById(checkedId);
                     String category = button.getText().toString();
                     Call<Map_Data> call = RetrofitClient.getApiService().Map(latitude, longitude, category);
                     retrofit(call);

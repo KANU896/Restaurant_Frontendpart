@@ -16,6 +16,7 @@ import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_Review_Datastore;
 import com.example.myapplication.R;
+import com.example.myapplication.databinding.DetailContentBinding;
 
 import org.json.JSONObject;
 
@@ -25,6 +26,7 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.MyViewHo
     private ArrayList<Detail_Review_Datastore> responseData;
     private Context mContext;
     private Delete_Content delete_content;
+    private DetailContentBinding binding;
 
     public Review_Adapter(Context mContext, ArrayList<Detail_Review_Datastore> responseData, Delete_Content delete_content){
         this.responseData = responseData;
@@ -37,21 +39,21 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView content;
-        TextView username;
-        TextView datetime;
-        Button delete_button;
+//        TextView content;
+//        TextView username;
+//        TextView datetime;
+//        Button delete_button;
 
 
-        MyViewHolder(View view){
-            super(view);
-            content = view.findViewById(R.id.review_content);
-            datetime = view.findViewById(R.id.review_datetime);
-            username = view.findViewById(R.id.username);
-            delete_button = view.findViewById(R.id.review_delete);
+        MyViewHolder(DetailContentBinding view){
+            super(view.getRoot());
+//            content = view.findViewById(R.id.review_content);
+//            datetime = view.findViewById(R.id.review_datetime);
+//            username = view.findViewById(R.id.username);
+//            delete_button = view.findViewById(R.id.review_delete);
 
             // 삭제 버튼 클릭 시
-            delete_button.setOnClickListener(new View.OnClickListener() {
+            binding.reviewDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
@@ -66,16 +68,17 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.MyViewHo
     @NonNull
     @Override
     public Review_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.detail_content,parent,false);
-        return new Review_Adapter.MyViewHolder(view);
+        binding = DetailContentBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.detail_content,parent,false);
+        return new Review_Adapter.MyViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Review_Adapter.MyViewHolder holder, int position) {
         Detail_Review_Datastore data = responseData.get(position);
-        holder.username.setText(data.getName());
-        holder.datetime.setText(data.getDatetime());
-        holder.content.setText(data.getContent());
+        binding.username.setText(data.getName());
+        binding.reviewDatetime.setText(data.getDatetime());
+        binding.reviewContent.setText(data.getContent());
 
         SharedPreferencesUtil spref = new SharedPreferencesUtil(mContext, "User");
         String token = spref.getPreferenceString("token");
@@ -88,14 +91,14 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.MyViewHo
         }
 
         if(TextUtils.isEmpty(token_info)){
-            holder.delete_button.setVisibility(View.INVISIBLE);
+            binding.reviewDelete.setVisibility(View.INVISIBLE);
         }
         else{
             if (!token_info.equals(data.getName())){
-                holder.delete_button.setVisibility(View.INVISIBLE);
+                binding.reviewDelete.setVisibility(View.INVISIBLE);
             }
             else {
-                holder.delete_button.setVisibility(View.VISIBLE);
+                binding.reviewDelete.setVisibility(View.VISIBLE);
             }
         }
     }

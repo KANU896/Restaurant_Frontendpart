@@ -17,19 +17,22 @@ import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_Datastore;
 import com.example.myapplication.Detail_Page.Detail_page;
 import com.example.myapplication.R;
+import com.example.myapplication.databinding.RestourantKeywordBinding;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Restourant_Keyword  extends AppCompatActivity {
-    private SharedPreferencesUtil spref, spref2;
-    private String location, token;
+    private SharedPreferencesUtil spref;
+    private String location;
+    private RestourantKeywordBinding binding;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.restourant_keyword);
+        binding = RestourantKeywordBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        //setContentView(R.layout.restourant_keyword);
 
         spref = new SharedPreferencesUtil(getApplicationContext(), "Searched"); // 위치 정보
 
@@ -43,8 +46,8 @@ public class Restourant_Keyword  extends AppCompatActivity {
 
 
 
-        Button food = findViewById(R.id.keyword_food); // 밥집 버튼
-        food.setOnClickListener(new View.OnClickListener() {
+        //Button food = findViewById(R.id.keyword_food); // 밥집 버튼
+        binding.keywordFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Call<Detail_ResponseData> call = RetrofitClient.getApiService().Detail_random(location, "밥집");
@@ -52,8 +55,8 @@ public class Restourant_Keyword  extends AppCompatActivity {
             }
         });
 
-        Button alchol = findViewById(R.id.keyword_alcohol); // 술집 버튼
-        alchol.setOnClickListener(new View.OnClickListener() {
+        //Button alchol = findViewById(R.id.keyword_alcohol); // 술집 버튼
+        binding.keywordAlcohol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Call<Detail_ResponseData> call = RetrofitClient.getApiService().Detail_random(location, "술집");
@@ -61,8 +64,8 @@ public class Restourant_Keyword  extends AppCompatActivity {
             }
         });
 
-        Button cafe = findViewById(R.id.keyword_cafe); // 카페 버튼
-        cafe.setOnClickListener(new View.OnClickListener() {
+        //Button cafe = findViewById(R.id.keyword_cafe); // 카페 버튼
+        binding.keywordCafe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Call<Detail_ResponseData> call = RetrofitClient.getApiService().Detail_random(location, "카페");

@@ -20,12 +20,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Common.ImageLoadTask;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.example.myapplication.Detail_Page.Detail_Data.Detail_Datastore;
 import com.example.myapplication.Detail_Page.Detail_page;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
+import com.example.myapplication.databinding.SearchResultRecyclerviewItemBinding;
 
 import java.util.ArrayList;
 
@@ -35,9 +37,9 @@ import retrofit2.Response;
 
 public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapter.MyViewHolder>{
     private ArrayList<ResponseData> responseData;
-    private AsyncTask<Void, Void, Bitmap> image_url;
     private Context mContext;
     private String token;
+    private SearchResultRecyclerviewItemBinding binding;
 
     public Search_List_Adapter(Context mContext, ArrayList<ResponseData> responseData){
         this.responseData = responseData;
@@ -49,31 +51,32 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        ImageView image;
-        TextView title;
-        TextView score;
+//        ImageView image;
+//        TextView title;
+//        TextView score;
 
-        MyViewHolder(View view){
-            super(view);
-            image = (ImageView)view.findViewById(R.id.restaurant_image);
-            title = (TextView)view.findViewById(R.id.title);
-            score = (TextView)view.findViewById(R.id.review_score);
+        MyViewHolder(SearchResultRecyclerviewItemBinding view){
+            super(view.getRoot());
+//            image = (ImageView)view.findViewById(R.id.restaurant_image);
+//            title = (TextView)view.findViewById(R.id.title);
+//            score = (TextView)view.findViewById(R.id.review_score);
 
             //음식점 클릭 시
-            view.setOnClickListener(new View.OnClickListener() {
+            view.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     ResponseData test = responseData.get(pos);
-
-                    if (!TextUtils.isEmpty(token)) {
-                        try {
-                            retrofit(v, test.getId());
-                        } catch (Exception e) {
-                            Log.e("JSON Decode Error", e.getMessage());
-                        }
-                    }
-                    else retrofit(v, test.getId());
+//
+//                    if (!TextUtils.isEmpty(token)) {
+//                        try {
+//                            retrofit(v, test.getId());
+//                        } catch (Exception e) {
+//                            Log.e("JSON Decode Error", e.getMessage());
+//                        }
+//                    }
+//                    else
+                    retrofit(v, test.getId());
                 }
             });
         }
@@ -82,24 +85,26 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
     @NonNull
     @Override
     public Search_List_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_result_recyclerview_item,parent,false);
-        return new MyViewHolder(view);
+        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_result_recyclerview_item,parent,false);
+        binding = SearchResultRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+
+        return new MyViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Search_List_Adapter.MyViewHolder holder, int position) {
         ResponseData text = responseData.get(position);
         if(text.getImage().equals("")) {
-            holder.image.setImageResource(R.drawable.no_image);
+            binding.restaurantImage.setImageResource(R.drawable.no_image);
         }
         else {
-            new ImageLoadTask(text.getImage(), holder.image).execute();
+            new ImageLoadTask(text.getImage(), binding.restaurantImage).execute();
         }
-        holder.title.setText(text.getName());
+        binding.title.setText(text.getName());
         if (text.getScore().equals(""))
-            holder.score.setText("점수 없음");
+            binding.reviewScore.setText("점수 없음");
         else
-            holder.score.setText(text.getScore());
+            binding.reviewScore.setText(text.getScore());
     }
 
     @Override

@@ -29,6 +29,7 @@ import com.example.myapplication.Search_List.Search_List_Adapter;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
+import com.example.myapplication.databinding.MyfavoritePageBinding;
 
 import org.json.JSONObject;
 
@@ -39,45 +40,47 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class User_Myfavorite_Page extends Fragment {
-    private Button myfavorite_login;
-    private TextView comment;
-    private RecyclerView recyclerView;
+//    private Button myfavorite_login;
+//    private TextView comment;
+//    private RecyclerView recyclerView;
     private ArrayList<ResponseData> responseData = new ArrayList<>();
     private Search_List_Adapter adapter;
+    private MyfavoritePageBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        View view = inflater.inflate(R.layout.myfavorite_page, container, false);
+        binding = MyfavoritePageBinding.inflate(getLayoutInflater(), container, false);
+        //View view = inflater.inflate(R.layout.myfavorite_page, container, false);
         Log.e("User_Myfavorite_Page", "접속");
-        comment = view.findViewById(R.id.comment);
-        myfavorite_login = (Button) view.findViewById(R.id.myfavorite_login_btn); // 로그인 버튼
+        //comment = view.findViewById(R.id.comment);
+        //myfavorite_login = (Button) view.findViewById(R.id.myfavorite_login_btn); // 로그인 버튼
 
         SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(this.getActivity(), "User");
         String token = sharedPreferencesUtil.getPreferenceString("token");
         if (!TextUtils.isEmpty(token)) {
-            myfavorite_login.setText("로그아웃");
+            binding.myfavoriteLoginBtn.setText("로그아웃");
             try {
                 JSONObject jObject = JWTUtils.decoded(token);
-                comment.setText(jObject.getString("username"));
+                binding.comment.setText(jObject.getString("username"));
             } catch (Exception e) {
                 Log.e("JSON Decode Error", e.getMessage());
             }
 
             //즐겨찾기 목록 recyclerview adapter 설정
             adapter = new Search_List_Adapter(getContext(), null);
-            recyclerView = view.findViewById(R.id.recyclerview);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            recyclerView.setAdapter(adapter);
-            retrofit(view);
+            //recyclerView = view.findViewById(R.id.recyclerview);
+            binding.recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+            binding.recyclerview.setAdapter(adapter);
+            retrofit();
         }
 
         // 버튼 클릭 시
-        myfavorite_login.setOnClickListener(new View.OnClickListener() {
+        binding.myfavoriteLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (myfavorite_login.getText().equals("로그인")) {
+                if (binding.myfavoriteLoginBtn.getText().equals("로그인")) {
                     Intent intent = new Intent(getActivity(), User_Login.class);
                     startActivity(intent);
                     getActivity().finish();
@@ -86,8 +89,8 @@ public class User_Myfavorite_Page extends Fragment {
                     sharedPreferencesUtil.deletePreference("token");
                     String token = sharedPreferencesUtil.getPreferenceString("token");
                     if (TextUtils.isEmpty(token)) {
-                        myfavorite_login.setText("로그인");
-                        comment.setText("로그인 하시면 나만의 즐겨찾기 관리와\n리뷰 작성을 하실 수 있습니다.");
+                        binding.myfavoriteLoginBtn.setText("로그인");
+                        binding.comment.setText("로그인 하시면 나만의 즐겨찾기 관리와\n리뷰 작성을 하실 수 있습니다.");
                         adapter.setData(null);
                         adapter.notifyDataSetChanged();
 
@@ -97,12 +100,12 @@ public class User_Myfavorite_Page extends Fragment {
             }
         });
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void retrofit(View view){
+    private void retrofit(){
         SharedPreferencesUtil spref = new SharedPreferencesUtil(getContext(), "User");
-        String token = spref.getPreferenceString("token");
+        //String token = spref.getPreferenceString("token");
 
         Call<SearchData> call = RetrofitClient.getApiService().favorite_list();
         call.enqueue((new Callback<SearchData>() {

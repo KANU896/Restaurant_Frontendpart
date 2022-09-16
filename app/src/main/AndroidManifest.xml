@@ -32,7 +32,7 @@
 
         <activity android:name=".Login.User_Login"/>
         <activity android:name=".Login.User_Register"/>
-        <activity android:name=".Main_Frame"/>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".Main_Screen.Restourant_Keyword"/>
         <activity android:name=".Search_List.Search_result_page"/>
         <activity android:name=".Detail_Page.Detail_page"/>

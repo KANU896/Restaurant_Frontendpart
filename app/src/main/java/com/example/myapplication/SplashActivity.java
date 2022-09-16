@@ -25,6 +25,7 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         Location_service locationService = new Location_service(getApplicationContext(), null);
 
         if(locationService.checkPermission()){
@@ -34,7 +35,7 @@ public class SplashActivity extends Activity {
             catch (InterruptedException e){
                 e.printStackTrace();
             }
-            startActivity(new Intent(getApplicationContext(), Main_Frame.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
         else{
@@ -86,7 +87,7 @@ public class SplashActivity extends Activity {
 
             if (check_result) {
                 // 퍼미션을 허용했다면 앱 시작
-                startActivity(new Intent(getApplicationContext(), Main_Frame.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             } else {
                 // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.

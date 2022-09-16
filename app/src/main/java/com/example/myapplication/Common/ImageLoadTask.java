@@ -2,7 +2,7 @@
 // URL 이미지를 적용시켜주는 클래스
 // Update : 22.08.18
 
-package com.example.myapplication.Search_List;
+package com.example.myapplication.Common;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

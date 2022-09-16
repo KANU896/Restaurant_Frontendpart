@@ -18,17 +18,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.Search_List.Search_result_page;
+import com.example.myapplication.databinding.SearchedRecyclerviewItemBinding;
 
 import java.util.ArrayList;
 
 public class Searched_Adapter extends RecyclerView.Adapter<Searched_Adapter.MyViewHolder>{
     private ArrayList<SearchedList> searched;
     private Context mContext;
-    private Searched Isearched = null;
+    private Searched I_searched = null;
+    private SearchedRecyclerviewItemBinding binding;
 
-    public Searched_Adapter(Context mContext, Searched s){
+    public Searched_Adapter(Context mContext, Searched Interface){
         this.mContext = mContext;
-        this.Isearched = s;
+        this.I_searched = Interface;
     }
 
     public void setData(ArrayList<SearchedList> searched){
@@ -36,26 +38,22 @@ public class Searched_Adapter extends RecyclerView.Adapter<Searched_Adapter.MyVi
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView searced_title;
-        Button delete_button;
 
-        MyViewHolder(View view){
-            super(view);
-            searced_title = (TextView)view.findViewById(R.id.searched_title);
-            delete_button = (Button) view.findViewById(R.id.review_delete);
+        MyViewHolder(SearchedRecyclerviewItemBinding view){
+            super(view.getRoot());
 
             // x 버튼 클릭 시
-            delete_button.setOnClickListener(new View.OnClickListener() {
+            binding.reviewDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     Log.e("click x", String.valueOf(pos));
-                    Isearched.onSearchItemDeleteClicked(pos);
+                    I_searched.onSearchItemDeleteClicked(pos);
                 }
             });
 
             //검색 내역 클릭 시
-            view.setOnClickListener(new View.OnClickListener() {
+            view.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
@@ -70,15 +68,14 @@ public class Searched_Adapter extends RecyclerView.Adapter<Searched_Adapter.MyVi
     @NonNull
     @Override
     public Searched_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.searched_recyclerview_item,parent,false);
-
-        return new Searched_Adapter.MyViewHolder(view);
+        binding = SearchedRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new Searched_Adapter.MyViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Searched_Adapter.MyViewHolder holder, int position) {
-        String a = searched.get(position).name;
-        holder.searced_title.setText(a);
+        String name = searched.get(position).name;
+        binding.searchedTitle.setText(name);
     }
 
     @Override

@@ -29,6 +29,7 @@ import com.example.myapplication.Detail_Page.Detail_Data.Detail_Review_ResponseD
 import com.example.myapplication.Detail_Page.Detail_Data.Review_Data;
 import com.example.myapplication.Detail_Page.Review_Adapter;
 import com.example.myapplication.R;
+import com.example.myapplication.databinding.DetailReviewBinding;
 
 import java.util.ArrayList;
 
@@ -37,32 +38,34 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Detail_Review extends Fragment implements Delete_Content{
-    private View view;
-    private RecyclerView recyclerView;
+    //private View view;
+   // private RecyclerView recyclerView;
     private Review_Adapter adapter;
     private String restaurant_id;
+    private DetailReviewBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.detail_review, container,false);
+        binding = DetailReviewBinding.inflate(getLayoutInflater(), container, false);
+        //view = inflater.inflate(R.layout.detail_review, container,false);
 
         restaurant_id = getArguments().getString("restaurant_id");
 
         //리뷰 recyclerview adapter 설정
-        recyclerView = view.findViewById(R.id.review_recyclerView);
+        //recyclerView = view.findViewById(R.id.review_recyclerView);
         adapter = new Review_Adapter(getContext(), null, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, true);
         linearLayoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapter);
+        binding.reviewRecyclerView.setLayoutManager(linearLayoutManager);
+        binding.reviewRecyclerView.setAdapter(adapter);
 
         //리뷰 검색
         Call<Review_Data> call = RetrofitClient.getApiService().Review_list(restaurant_id);
         retrofit(call);
 
         // 리뷰 입력
-        Button review_input = view.findViewById(R.id.review_input);
-        review_input.setOnClickListener(new View.OnClickListener() {
+        //Button review_input = view.findViewById(R.id.review_input);
+        binding.reviewInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final EditText editText = new EditText(getContext());
@@ -84,7 +87,7 @@ public class Detail_Review extends Fragment implements Delete_Content{
             }
         });
 
-        return view;
+        return binding.getRoot();
     }
 
     //리뷰 삭제

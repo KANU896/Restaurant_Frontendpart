@@ -28,6 +28,7 @@
             android:background="@android:drawable/btn_dialog"
             android:backgroundTint="#99D9EA"
             android:text="X" />
+
     </LinearLayout>
 
 </LinearLayout>
