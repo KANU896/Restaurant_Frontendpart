@@ -14,30 +14,31 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.R;
 import com.example.myapplication.Search_List.Search_List_Adapter;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
+import com.example.myapplication.databinding.AlcoholFragmentBinding;
 
 import java.util.ArrayList;
 
 public class Alcohol extends Fragment {
     private ArrayList<ResponseData> responseData = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private View view;
+    //private RecyclerView recyclerView;
+    //private View view;
     private Context context;
+    private AlcoholFragmentBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment3, container,false);
+        binding = AlcoholFragmentBinding.inflate(getLayoutInflater(), container, false);
+        //view = inflater.inflate(R.layout.alcohol_fragment, container,false);
         context = container.getContext();
         responseData = (ArrayList<ResponseData>) getArguments().getSerializable("responseData");
 
-        recyclerView = view.findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new Search_List_Adapter(context, responseData));
+        //recyclerView = view.findViewById(R.id.recyclerview);
+        binding.recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerview.setAdapter(new Search_List_Adapter(context, responseData));
 
-        return view;
+        return binding.getRoot();
     }
 }

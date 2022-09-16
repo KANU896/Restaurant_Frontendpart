@@ -4,11 +4,12 @@
 
 package com.example.myapplication.Common;
 
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_Data;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
 import com.example.myapplication.Detail_Page.Detail_Data.Review_Data;
 import com.example.myapplication.Login.Login_Data.Login_Token;
 import com.example.myapplication.Login.Login_Data.Signup_Data;
 import com.example.myapplication.Main_Screen.DayRecommend_Data.DR_Data;
+import com.example.myapplication.Map.MapData.Map_Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 
 import retrofit2.Call;
@@ -28,13 +29,13 @@ public interface Retrofit_Service {
     //선택한 음식점 정보 불러오기
     @FormUrlEncoded
     @POST("/detail/random/")
-    Call<Detail_Data> Detail_random(@Field("location") String location, @Field("category") String category);
+    Call<Detail_ResponseData> Detail_random(@Field("location") String location, @Field("category") String category);
 
 
     //선택한 음식점 정보 불러오기
     @FormUrlEncoded
     @POST("/detail/data/")
-    Call<Detail_Data> Detail_post(@Field("restaurant_id") String restaurant_id);
+    Call<Detail_ResponseData> Detail_post(@Field("restaurant_id") String restaurant_id);
 
     //로그인
     @FormUrlEncoded
@@ -85,4 +86,9 @@ public interface Retrofit_Service {
     @FormUrlEncoded
     @POST("/day/recommend/")
     Call<DR_Data> Day_recommend(@Field("city") String city, @Field("category") String category);
+
+    // 내 위치 주변 음식점
+    @FormUrlEncoded
+    @POST("/map/location/")
+    Call<Map_Data> Map(@Field("latitude") double latitude, @Field("longitude") double longitude, @Field("category") String category);
 }

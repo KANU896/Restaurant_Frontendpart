@@ -19,19 +19,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.myapplication.Common.Location_GPS;
 import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Main_Screen.User_Home_Page;
 import com.example.myapplication.Map.User_Map_Page;
 import com.example.myapplication.Mypage.User_Myfavorite_Page;
-import com.example.myapplication.Search_List.Search_result_frame;
+import com.example.myapplication.Search_List.Search_result_page;
 import com.example.myapplication.Search_Page.SearchedList;
 import com.example.myapplication.Search_Page.User_Search_Page;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-public class Main_Frame extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
     private ArrayList<SearchedList> searchHistoryList = new ArrayList<>();
 
@@ -40,20 +39,18 @@ public class Main_Frame extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private Fragment currentFragment;
-    private String tag, address;
+    private String tag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_main);
-        Location_GPS gps = new Location_GPS(getApplicationContext(), Main_Frame.this);
-        address = gps.get_address();
 
         mBottomNV = findViewById(R.id.nav_view);
         mBottomNV.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { //NavigationItemSelecte
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                BottomNavigate(menuItem.getItemId(), address);
+                BottomNavigate(menuItem.getItemId());
                 return true;
             }
         });
@@ -61,7 +58,7 @@ public class Main_Frame extends AppCompatActivity {
     }
 
     //BottomNavigation 페이지 변경
-    private void BottomNavigate(int id, String address) {
+    private void BottomNavigate(int id) {
         this.tag = String.valueOf(id);
 
         fragmentManager = getSupportFragmentManager();
@@ -73,12 +70,8 @@ public class Main_Frame extends AppCompatActivity {
             fragmentTransaction.remove(currentFragment);
         }
 
-
         if (id == R.id.navigation_1) {
             fragment = new User_Home_Page();
-            Bundle bundle = new Bundle();
-            bundle.putString("address", address);
-            fragment.setArguments(bundle);
         } else if (id == R.id.navigation_2){
             fragment = new User_Search_Page();
         }else if(id == R.id.navigation_4){
@@ -121,7 +114,7 @@ public class Main_Frame extends AppCompatActivity {
                     searchHistoryList = (ArrayList<SearchedList>) sharedPreferencesUtil.getSearchHistoryList();
                     searchHistoryList.add(new SearchedList(query));
                     sharedPreferencesUtil.storeSearchHistoryList(searchHistoryList);
-                    BottomNavigate(R.id.navigation_1, address);
+                    BottomNavigate(R.id.navigation_1);
                     changeFragment(R.id.navigation_1);
 
                     intent(query);
@@ -150,9 +143,10 @@ public class Main_Frame extends AppCompatActivity {
     }
 
     public void intent (String query){
-        Intent intent = new Intent(this, Search_result_frame.class);
+        Intent intent = new Intent(this, Search_result_page.class);
         intent.putExtra("query", query);
         startActivity(intent);
+        finish();
     }
 
     //뒤로가기 두번 클릭 시 종료

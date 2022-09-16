@@ -19,8 +19,6 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
-import com.example.myapplication.Main_Frame;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -31,8 +29,10 @@ public class Location_GPS {
     private double longitude, latitude;
     private Location location;
     private Geocoder geocoder;
+    String[] REQUIRED_PERMISSIONS  =
+            {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
-    public Location_GPS(Context context, Main_Frame activity) {
+    public Location_GPS(Context context, Activity activity) {
         this.mContext = context;
         this.activity = activity;
     }
@@ -40,14 +40,14 @@ public class Location_GPS {
     public String get_address() {
         Log.e("Location_GPS", "get_address");
         LocationManager locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION)
+        if (ActivityCompat.checkSelfPermission(mContext, REQUIRED_PERMISSIONS[0]) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, REQUIRED_PERMISSIONS[1])
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, new String[] {
                     android.Manifest.permission.ACCESS_FINE_LOCATION}, 0 );
         }
         else{
-            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if(location != null) {
                 String provider = location.getProvider();
                 longitude = location.getLongitude();
@@ -67,6 +67,8 @@ public class Location_GPS {
             return change_address(latitude, longitude);
 
         }
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(mContext, "Searched");
+        sharedPreferencesUtil.setPreference("location", "위치 정보 없음");
         return "위치 정보 없음";
     }
 
@@ -134,4 +136,11 @@ public class Location_GPS {
 
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
 }

@@ -31,10 +31,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:gravity="center"
-                    android:text="위치 정보 없음"
+                    android:text="클릭하여 위치 갱신"
                     android:textColor="#817A7A"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:clickable="true"/>
 
                 <Button
                     android:id="@+id/search_button"
@@ -49,19 +50,26 @@
                     android:textSize="14dp"
                     android:textStyle="bold"
                     app:circularflow_defaultRadius="10dp" />
-            </LinearLayout>
 
-            <Button
-                android:id="@+id/today_keword"
-                android:layout_width="281dp"
-                android:layout_height="51dp"
-                android:layout_gravity="center"
-                android:background="@drawable/bin_blue"
-                android:backgroundTint="#F3E2E2"
-                android:text="실시간 맛집 키워드"
-                android:textColor="#3F51B5"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="30dp">
+
+                    <Button
+                        android:id="@+id/today_keword"
+                        android:layout_width="281dp"
+                        android:layout_height="51dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bin_blue"
+                        android:backgroundTint="#F3E2E2"
+                        android:text="실시간 맛집 키워드"
+                        android:textColor="#3F51B5"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -88,7 +96,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewpager_food"
                     android:layout_width="match_parent"
-                    android:layout_height="340dp" />
+                    android:layout_height="290dp" />
 
             </LinearLayout>
 
@@ -117,7 +125,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewpager_cafe"
                     android:layout_width="match_parent"
-                    android:layout_height="340dp" />
+                    android:layout_height="290dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -145,7 +153,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewpager_alcohol"
                     android:layout_width="match_parent"
-                    android:layout_height="340dp" />
+                    android:layout_height="290dp" />
 
             </LinearLayout>
 

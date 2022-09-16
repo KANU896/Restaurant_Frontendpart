@@ -20,18 +20,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
+import com.example.myapplication.Detail_Page.Detail_Data.Detail_Datastore;
 import com.example.myapplication.Detail_Page.Fragment.Detail_Info;
 import com.example.myapplication.Detail_Page.Fragment.Detail_Review;
 import com.example.myapplication.Detail_Page.Fragment.Detail_map;
 import com.example.myapplication.R;
-import com.example.myapplication.Search_List.ImageLoadTask;
+import com.example.myapplication.Common.ImageLoadTask;
+import com.example.myapplication.databinding.DetailPageBinding;
 import com.google.android.material.tabs.TabLayout;
-
-import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,44 +39,46 @@ public class Detail_page extends AppCompatActivity {
     private String TAG = "Detail_page";
 
     //객체 선언
-    private TabLayout tabs;
+    //private TabLayout tabs;
     private Detail_Info detail_info;
     private Detail_Review detail_review;
     private Detail_map detail_map;
     private Fragment selected = null;
-    private JSONObject jObject = null;
-    private Button tell;
-    private LinearLayout favor_layout;
+    //private Button tell;
+    //private LinearLayout favor_layout;
 
-    private TextView detail_title, detail_score;
-    private ImageView imageView;
-    private Detail_ResponseData responseData;
+//    private TextView detail_title, detail_score;
+//    private ImageView imageView;
+    private Detail_Datastore responseData;
+    private DetailPageBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail_page);
+        binding = DetailPageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        //setContentView(R.layout.detail_page);
 
         Intent intent = getIntent();
-        responseData = (Detail_ResponseData) intent.getSerializableExtra("responseData");
+        responseData = (Detail_Datastore) intent.getSerializableExtra("responseData");
 
         Log.e(TAG, responseData.getTag());
 
-        detail_title = findViewById(R.id.detail_title);
-        detail_score = findViewById(R.id.detail_score);
-        imageView = findViewById(R.id.detail_image);
+//        detail_title = findViewById(R.id.detail_title);
+//        detail_score = findViewById(R.id.detail_score);
+//        imageView = findViewById(R.id.detail_image);
 
         //정적 데이터 설정
-        detail_title.setText(responseData.getName());
-        detail_score.setText(responseData.getScore());
-        new ImageLoadTask(responseData.getImage(), imageView).execute();
+        binding.detailTitle.setText(responseData.getName());
+        binding.detailScore.setText(responseData.getScore());
+        new ImageLoadTask(responseData.getImage(), binding.detailImage).execute();
 
         //전화 버튼 클릭 시 핸드폰 전화 기능으로 전환
-        tell = findViewById(R.id.tell_button);
+        //tell = findViewById(R.id.tell_button);
         Uri number = Uri.parse("tel:"+responseData.getTell_number());
         Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
 
-        tell.setOnClickListener(new View.OnClickListener() {
+        binding.tellButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(callIntent);
@@ -87,26 +87,23 @@ public class Detail_page extends AppCompatActivity {
 
 
         //즐겨찾기 기능
-        CheckBox favorite = findViewById(R.id.favorite);
-        favor_layout = findViewById(R.id.favor_layout);
+        //CheckBox favorite = findViewById(R.id.favorite);
+        //favor_layout = findViewById(R.id.favor_layout);
 
         SharedPreferencesUtil spref = new SharedPreferencesUtil(getApplicationContext(), "User");
-        favorite.setChecked(responseData.getFav()); //해당 계정 즐겨찾기에 추가되어 있으면 체크 된 상태
+        binding.favorite.setChecked(responseData.getFav()); //해당 계정 즐겨찾기에 추가되어 있으면 체크 된 상태
         String token = spref.getPreferenceString("token");
-        if(!TextUtils.isEmpty(token)){
-            jObject = JWTUtils.decoded(token);
-        }
 
-        favor_layout.setOnClickListener(new View.OnClickListener() {
+        binding.favorLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(token)) {
-                    if (favorite.isChecked()) {
-                        favorite.setChecked(false);
+                    if (binding.favorite.isChecked()) {
+                        binding.favorite.setChecked(false);
                         Call<Void> call = RetrofitClient.getApiService().favorite_delete(responseData.getId());
                         retrofit(call);
                     } else {
-                        favorite.setChecked(true);
+                        binding.favorite.setChecked(true);
                         Call<Void> call = RetrofitClient.getApiService().favorite_put(responseData.getId());
                         retrofit(call);
                     }
@@ -126,10 +123,10 @@ public class Detail_page extends AppCompatActivity {
         Bundle bundle = new Bundle();
 
         //Tab 설정
-        tabs = findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("정보"));
-        tabs.addTab(tabs.newTab().setText("지도"));
-        tabs.addTab(tabs.newTab().setText("리뷰"));
+        //tabs = findViewById(R.id.tabs);
+        binding.tabs.addTab(binding.tabs.newTab().setText("정보"));
+        binding.tabs.addTab(binding.tabs.newTab().setText("지도"));
+        binding.tabs.addTab(binding.tabs.newTab().setText("리뷰"));
 
         //첫 화면(프레그먼트) 세팅
         bundle.putSerializable("responseData", responseData);
@@ -139,7 +136,7 @@ public class Detail_page extends AppCompatActivity {
         //StickyScrollView scrollView = findViewById(R.id.stickyscrollview);
 
         //탭이 선택되었을때 작동하는 메서드
-        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        binding.tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 //scrollView.fullScroll(ScrollView.FOCUS_UP);

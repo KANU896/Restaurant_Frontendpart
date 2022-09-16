@@ -19,15 +19,17 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.Search_List.search_result_fragment.Alcohol;
 import com.example.myapplication.Search_List.search_result_fragment.Cafe;
 import com.example.myapplication.Search_List.search_result_fragment.Food;
-import com.example.myapplication.Search_List.search_result_fragment.Search_List_total;
+import com.example.myapplication.Search_List.search_result_fragment.Total;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.Data;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.ResponseData;
 import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
 import com.example.myapplication.Search_Page.SearchedList;
+import com.example.myapplication.databinding.SearchResultFrameBinding;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -36,12 +38,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Search_result_frame extends AppCompatActivity {
+public class Search_result_page extends AppCompatActivity {
     private static final String TAG = "Search_result_frame";
 
     //객체 선언
-    private TabLayout tabs;
-    private Search_List_total total;
+    private Total total;
     private Food food;
     private Alcohol alcohol;
     private Cafe cafe;
@@ -58,10 +59,13 @@ public class Search_result_frame extends AppCompatActivity {
     private ArrayList<SearchedList> searchHistoryList;
     private String location = null;
 
+    private SearchResultFrameBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_result_frame);
+        binding = SearchResultFrameBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         Log.e(TAG, "연결 성공");
         // 데이터 받기
         Intent intent = getIntent();
@@ -70,13 +74,11 @@ public class Search_result_frame extends AppCompatActivity {
         //내 현재위치
         String address = sharedPreferencesUtil.getPreferenceString("location");
         if (!TextUtils.isEmpty(address) && !address.equals("위치 정보 없음")) {
-            String remove_text = "대한민국 ";
-            address = address.replace(remove_text,"");
             this.location = address;
         }
 
         //프래그먼트 초기화
-        total = new Search_List_total();
+        total = new Total();
         food = new Food();
         alcohol = new Alcohol();
         cafe = new Cafe();
@@ -88,14 +90,13 @@ public class Search_result_frame extends AppCompatActivity {
         retrofit(selected, query, null, 0);
 
         //탭 만들기 (동적)
-        tabs = findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("전체"));
-        tabs.addTab(tabs.newTab().setText("밥집"));
-        tabs.addTab(tabs.newTab().setText("술집"));
-        tabs.addTab(tabs.newTab().setText("카페"));
+        binding.tabs.addTab(binding.tabs.newTab().setText("전체"));
+        binding.tabs.addTab(binding.tabs.newTab().setText("밥집"));
+        binding.tabs.addTab(binding.tabs.newTab().setText("술집"));
+        binding.tabs.addTab(binding.tabs.newTab().setText("카페"));
 
         //탭이 선택되었을때 작동하는 메서드
-        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        binding.tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
@@ -190,7 +191,7 @@ public class Search_result_frame extends AppCompatActivity {
         return true;
     }
     public void intent (String query){
-        Intent intent = new Intent(this, Search_result_frame.class);
+        Intent intent = new Intent(this, Search_result_page.class);
         intent.putExtra("query", query);
         startActivity(intent);
     }
@@ -254,5 +255,11 @@ public class Search_result_frame extends AppCompatActivity {
                 Log.e("연결실패", t.getMessage());
             }
         }));
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
