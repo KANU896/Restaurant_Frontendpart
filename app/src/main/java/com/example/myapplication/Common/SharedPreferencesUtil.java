@@ -10,7 +10,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.myapplication.Search_Page.SearchedList;
+import com.example.myapplication.Data.SearchedList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

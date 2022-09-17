@@ -4,13 +4,13 @@
 
 package com.example.myapplication.Common;
 
-import com.example.myapplication.Detail_Page.Detail_Data.Detail_ResponseData;
-import com.example.myapplication.Detail_Page.Detail_Data.Review_Data;
-import com.example.myapplication.Login.Login_Data.Login_Token;
-import com.example.myapplication.Login.Login_Data.Signup_Data;
-import com.example.myapplication.Home.DayRecommend_Data.DR_Data;
-import com.example.myapplication.Map.MapData.Map_Data;
-import com.example.myapplication.Search_Page.Search_Retrofit.Search_Data.SearchData;
+import com.example.myapplication.Data.Detail.Detail_ResponseData;
+import com.example.myapplication.Data.Detail.Review_Data;
+import com.example.myapplication.Data.Sign.Login_Token;
+import com.example.myapplication.Data.Sign.Signup_Data;
+import com.example.myapplication.Data.DayRecommend.DayRecommendData;
+import com.example.myapplication.Data.Map.Map_Data;
+import com.example.myapplication.Data.Search.SearchData;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -85,7 +85,7 @@ public interface Retrofit_Service {
     //일일 음식점 추천
     @FormUrlEncoded
     @POST("/day/recommend/")
-    Call<DR_Data> Day_recommend(@Field("city") String city, @Field("category") String category);
+    Call<DayRecommendData> Day_recommend(@Field("city") String city, @Field("category") String category);
 
     // 내 위치 주변 음식점
     @FormUrlEncoded
