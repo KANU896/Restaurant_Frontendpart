@@ -17,19 +17,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Adapter.DayRecommend_Adapter;
-import com.example.myapplication.Common.LocationService;
-import com.example.myapplication.Common.Location_GPS;
-import com.example.myapplication.Common.Location_service;
+import com.example.myapplication.databinding.FragmentHomeBinding;
 import com.example.myapplication.ui.MainActivity;
-import com.example.myapplication.databinding.HomePageBinding;
 import com.example.myapplication.ui.RestourantKeywordActivity;
+import com.example.myapplication.util.LocationService;
+import com.example.myapplication.util.Location_GPS;
+import com.example.myapplication.util.Location_service;
 
 public class HomeFragment extends Fragment implements LocationService {
     private final String TAG = "User_Home_Page";
     private MainActivity main_activity;
     private String address;
     private Location_service locationService;
-    private HomePageBinding binding;
+    private FragmentHomeBinding binding;
 
     /**
      * MainActivity에 있는 함수를 사용하기 위함
@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment implements LocationService {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        binding = HomePageBinding.inflate(getLayoutInflater(), container, false);
+        binding = FragmentHomeBinding.inflate(getLayoutInflater(), container, false);
 
         //현재 위치 정보 표시
         Location_GPS gps = new Location_GPS(getContext(), getActivity());
@@ -91,15 +91,18 @@ public class HomeFragment extends Fragment implements LocationService {
             }
         });
 
-        //밥집 카테고리 일일 추천 viewpager
+        /**
+         * 일일 추천 ViewPager
+         */
+        //밥집
         DayRecommend_Adapter dayRecommend_adapter = new DayRecommend_Adapter(getChildFragmentManager(), getLifecycle(), "밥집");
         binding.viewpagerFood.setAdapter(dayRecommend_adapter);
 
-        //카페 카테고리 일일 추천 viewpager
+        //카페
         DayRecommend_Adapter dayRecommend_adapter2 = new DayRecommend_Adapter(getChildFragmentManager(), getLifecycle(), "카페");
         binding.viewpagerCafe.setAdapter(dayRecommend_adapter2);
 
-        //술집 카테고리 일일 추천 viewpager
+        //술집
         DayRecommend_Adapter dayRecommend_adapter3 = new DayRecommend_Adapter(getChildFragmentManager(), getLifecycle(), "술집");
         binding.viewpagerAlcohol.setAdapter(dayRecommend_adapter3);
 

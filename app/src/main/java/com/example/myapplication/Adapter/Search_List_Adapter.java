@@ -15,7 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Common.RetrofitClient;
+import com.example.myapplication.util.RetrofitClient;
 import com.example.myapplication.Data.StoreResponseData;
 import com.example.myapplication.databinding.SearchResultRecyclerviewItemBinding;
 import com.example.myapplication.ui.DetailActivity;

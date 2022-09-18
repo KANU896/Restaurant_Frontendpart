@@ -16,19 +16,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.Adapter.Search_List_Adapter;
 import com.example.myapplication.Data.StoreResponseData;
-import com.example.myapplication.databinding.TotalFragmentBinding;
+import com.example.myapplication.databinding.FragmentTotalBinding;
 
 import java.util.ArrayList;
 
 
 public class Total extends Fragment {
     private ArrayList<StoreResponseData> storeResponseData = new ArrayList<>();
-    private TotalFragmentBinding binding;
+    private FragmentTotalBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        binding = TotalFragmentBinding.inflate(getLayoutInflater(), container, false);
+        binding = FragmentTotalBinding.inflate(getLayoutInflater(), container, false);
 
         storeResponseData = (ArrayList<StoreResponseData>) getArguments().getSerializable("responseData");
 

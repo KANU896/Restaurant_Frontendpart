@@ -20,11 +20,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.Adapter.Review_Adapter;
-import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Data.Detail_Review_ResponseData;
 import com.example.myapplication.Data.ReviewArrayData;
 import com.example.myapplication.Interface.onReviewItemDelete;
-import com.example.myapplication.databinding.DetailReviewBinding;
+import com.example.myapplication.databinding.FragmentDetailReviewBinding;
+import com.example.myapplication.util.RetrofitClient;
 
 import java.util.ArrayList;
 
@@ -37,11 +37,11 @@ public class Detail_Review extends Fragment implements onReviewItemDelete {
    // private RecyclerView recyclerView;
     private Review_Adapter adapter;
     private String restaurant_id;
-    private DetailReviewBinding binding;
+    private FragmentDetailReviewBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DetailReviewBinding.inflate(getLayoutInflater(), container, false);
+        binding = FragmentDetailReviewBinding.inflate(getLayoutInflater(), container, false);
         //view = inflater.inflate(R.layout.detail_review, container,false);
 
         restaurant_id = getArguments().getString("restaurant_id");

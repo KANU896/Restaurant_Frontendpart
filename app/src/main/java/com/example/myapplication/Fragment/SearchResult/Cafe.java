@@ -16,17 +16,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.Adapter.Search_List_Adapter;
 import com.example.myapplication.Data.StoreResponseData;
-import com.example.myapplication.databinding.CafeFragmentBinding;
+import com.example.myapplication.databinding.FragmentCafeBinding;
 
 import java.util.ArrayList;
 
 public class Cafe extends Fragment {
     private ArrayList<StoreResponseData> storeResponseData = new ArrayList<>();
-    private CafeFragmentBinding binding;
+    private FragmentCafeBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = CafeFragmentBinding.inflate(getLayoutInflater(), container, false);
+        binding = FragmentCafeBinding.inflate(getLayoutInflater(), container, false);
 
         storeResponseData = (ArrayList<StoreResponseData>) getArguments().getSerializable("responseData");
 

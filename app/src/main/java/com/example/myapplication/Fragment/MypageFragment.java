@@ -18,13 +18,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.Adapter.Search_List_Adapter;
-import com.example.myapplication.Common.JWTUtils;
-import com.example.myapplication.Common.RetrofitClient;
-import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Data.StoreArrayData;
 import com.example.myapplication.Data.StoreResponseData;
-import com.example.myapplication.databinding.MyfavoritePageBinding;
+import com.example.myapplication.databinding.FragmentMypageBinding;
 import com.example.myapplication.ui.LoginActivity;
+import com.example.myapplication.util.JWTUtils;
+import com.example.myapplication.util.RetrofitClient;
+import com.example.myapplication.util.SharedPreferencesUtil;
 
 import org.json.JSONObject;
 
@@ -37,13 +37,13 @@ import retrofit2.Response;
 public class MypageFragment extends Fragment {
     ArrayList<StoreResponseData>  responseData= new ArrayList<>();
     private Search_List_Adapter adapter;
-    private MyfavoritePageBinding binding;
+    private FragmentMypageBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        binding = MyfavoritePageBinding.inflate(getLayoutInflater(), container, false);
+        binding = FragmentMypageBinding.inflate(getLayoutInflater(), container, false);
         Log.e("User_Myfavorite_Page", "접속");
 
         SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(this.getActivity(), "User");

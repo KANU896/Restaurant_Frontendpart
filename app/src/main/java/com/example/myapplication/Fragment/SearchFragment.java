@@ -23,21 +23,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.Adapter.Searched_Adapter;
-import com.example.myapplication.Common.SharedPreferencesUtil;
-import com.example.myapplication.Interface.onSearchedItemDelete;
 import com.example.myapplication.Data.SearchedList;
-import com.example.myapplication.ui.MainActivity;
+import com.example.myapplication.Interface.onSearchedItemDelete;
 import com.example.myapplication.R;
+import com.example.myapplication.databinding.FragmentSearchBinding;
+import com.example.myapplication.ui.MainActivity;
 import com.example.myapplication.ui.SearchResultActivity;
-import com.example.myapplication.databinding.SearchPageBinding;
+import com.example.myapplication.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 
-public class SearchedFragment extends Fragment implements onSearchedItemDelete {
+public class SearchFragment extends Fragment implements onSearchedItemDelete {
     private Searched_Adapter adapter;
     private SharedPreferencesUtil spref ;
     private ArrayList<SearchedList> searchHistoryList;
-    private SearchPageBinding binding;
+    private FragmentSearchBinding binding;
     private MainActivity main_activity;
     private Toolbar toolbar;
 
@@ -61,7 +61,7 @@ public class SearchedFragment extends Fragment implements onSearchedItemDelete {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = SearchPageBinding.inflate(getLayoutInflater(), container, false);
+        binding = FragmentSearchBinding.inflate(getLayoutInflater(), container, false);
 
         setHasOptionsMenu(true); // Fragment에서 onCreateOptionsMenu 사용
 

@@ -15,14 +15,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.Common.RetrofitClient;
-import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Data.StoreResponseData;
 import com.example.myapplication.Fragment.Detail.Detail_Info;
 import com.example.myapplication.Fragment.Detail.Detail_Review;
 import com.example.myapplication.Fragment.Detail.Detail_map;
 import com.example.myapplication.R;
-import com.example.myapplication.databinding.DetailPageBinding;
+import com.example.myapplication.databinding.ActivityDetailPageBinding;
+import com.example.myapplication.util.RetrofitClient;
+import com.example.myapplication.util.SharedPreferencesUtil;
 import com.google.android.material.tabs.TabLayout;
 
 import retrofit2.Call;
@@ -38,13 +38,13 @@ public class DetailActivity extends AppCompatActivity {
     private Detail_map detail_map;
     private Fragment selected = null;
     private StoreResponseData responseData;
-    private DetailPageBinding binding;
+    private ActivityDetailPageBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.e("DetailActivity", "onCrete");
-        binding = DetailPageBinding.inflate(getLayoutInflater());
+        binding = ActivityDetailPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         Intent intent = getIntent();

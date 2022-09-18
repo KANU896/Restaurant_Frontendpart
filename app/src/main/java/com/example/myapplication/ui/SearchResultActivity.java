@@ -17,17 +17,17 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.Common.RetrofitClient;
-import com.example.myapplication.Common.SharedPreferencesUtil;
-import com.example.myapplication.Data.StoreArrayData;
 import com.example.myapplication.Data.SearchedList;
+import com.example.myapplication.Data.StoreArrayData;
 import com.example.myapplication.Data.StoreResponseData;
 import com.example.myapplication.Fragment.SearchResult.Alcohol;
 import com.example.myapplication.Fragment.SearchResult.Cafe;
 import com.example.myapplication.Fragment.SearchResult.Food;
 import com.example.myapplication.Fragment.SearchResult.Total;
 import com.example.myapplication.R;
-import com.example.myapplication.databinding.SearchResultActivityBinding;
+import com.example.myapplication.databinding.ActivitySearchResultBinding;
+import com.example.myapplication.util.RetrofitClient;
+import com.example.myapplication.util.SharedPreferencesUtil;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -51,12 +51,12 @@ public class SearchResultActivity extends AppCompatActivity {
     private ArrayList<SearchedList> searchHistoryList;
     private String location = null;
 
-    private SearchResultActivityBinding binding;
+    private ActivitySearchResultBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = SearchResultActivityBinding.inflate(getLayoutInflater());
+        binding = ActivitySearchResultBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.searchResultToolbar);
         Log.d(TAG, "onCreate");

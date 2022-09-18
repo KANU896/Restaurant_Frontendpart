@@ -2,7 +2,7 @@
 // Retrofit Client
 // Update : 22.08.18
 
-package com.example.myapplication.Common;
+package com.example.myapplication.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

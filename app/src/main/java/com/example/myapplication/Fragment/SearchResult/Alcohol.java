@@ -16,17 +16,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.Adapter.Search_List_Adapter;
 import com.example.myapplication.Data.StoreResponseData;
-import com.example.myapplication.databinding.AlcoholFragmentBinding;
+import com.example.myapplication.databinding.FragmentAlcoholBinding;
 
 import java.util.ArrayList;
 
 public class Alcohol extends Fragment {
     private ArrayList<StoreResponseData> storeResponseData = new ArrayList<>();
-    private AlcoholFragmentBinding binding;
+    private FragmentAlcoholBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = AlcoholFragmentBinding.inflate(getLayoutInflater(), container, false);
+        binding = FragmentAlcoholBinding.inflate(getLayoutInflater(), container, false);
 
         storeResponseData = (ArrayList<StoreResponseData>) getArguments().getSerializable("responseData");
 

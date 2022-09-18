@@ -17,10 +17,10 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.Common.RetrofitClient;
-import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Data.Login_Token;
-import com.example.myapplication.databinding.UserLoginBinding;
+import com.example.myapplication.databinding.ActivityLoginBinding;
+import com.example.myapplication.util.RetrofitClient;
+import com.example.myapplication.util.SharedPreferencesUtil;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -32,12 +32,12 @@ import retrofit2.Response;
 //로그인화면 -> 회원가입화면 전환
 public class LoginActivity extends AppCompatActivity {
     SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(this, "User");
-    private UserLoginBinding binding;
+    private ActivityLoginBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = UserLoginBinding.inflate(getLayoutInflater());
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 //        setContentView(R.layout.user_login);
 

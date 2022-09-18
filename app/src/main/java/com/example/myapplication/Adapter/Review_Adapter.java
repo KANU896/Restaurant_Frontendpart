@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Common.JWTUtils;
-import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Data.Detail_Review_ResponseData;
 import com.example.myapplication.Interface.onReviewItemDelete;
-import com.example.myapplication.databinding.DetailContentBinding;
+import com.example.myapplication.databinding.DetailReviewItemBinding;
+import com.example.myapplication.util.JWTUtils;
+import com.example.myapplication.util.SharedPreferencesUtil;
 
 import org.json.JSONObject;
 
@@ -24,7 +24,7 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.MyViewHo
     private ArrayList<Detail_Review_ResponseData> responseData;
     private Context mContext;
     private onReviewItemDelete onReviewItemDelete_;
-    private DetailContentBinding binding;
+    private DetailReviewItemBinding binding;
 
     public Review_Adapter(Context mContext, ArrayList<Detail_Review_ResponseData> responseData, onReviewItemDelete onReviewItemDelete_){
         this.responseData = responseData;
@@ -43,7 +43,7 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.MyViewHo
 //        Button delete_button;
 
 
-        MyViewHolder(DetailContentBinding view){
+        MyViewHolder(DetailReviewItemBinding view){
             super(view.getRoot());
 //            content = view.findViewById(R.id.review_content);
 //            datetime = view.findViewById(R.id.review_datetime);
@@ -66,7 +66,7 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.MyViewHo
     @NonNull
     @Override
     public Review_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = DetailContentBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        binding = DetailReviewItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.detail_content,parent,false);
         return new Review_Adapter.MyViewHolder(binding);
     }

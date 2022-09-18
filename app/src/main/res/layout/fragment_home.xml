@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="219dp"
+                android:orientation="vertical"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:id="@+id/location_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:gravity="center"
+                    android:text="클릭하여 위치 갱신"
+                    android:textColor="#817A7A"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:clickable="true"/>
+
+                <Button
+                    android:id="@+id/search_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="#F3E2E2"
+                    android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
+                    android:hint="검색어를 입력하세요."
+                    android:stateListAnimator="@null"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    app:circularflow_defaultRadius="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="30dp">
+
+                    <Button
+                        android:id="@+id/today_keword"
+                        android:layout_width="281dp"
+                        android:layout_height="51dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bin_blue"
+                        android:backgroundTint="#F3E2E2"
+                        android:text="실시간 맛집 키워드"
+                        android:textColor="#3F51B5"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="오늘의 밥집"
+                    android:textColor="#090909"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclerView_rice"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/today_keword"
+                    app:layout_constraintVertical_bias="0.771" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewpager_food"
+                    android:layout_width="match_parent"
+                    android:layout_height="290dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="오늘의 카페"
+                    android:textColor="#090909"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclerView_rice"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/today_keword"
+                    app:layout_constraintVertical_bias="0.771" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewpager_cafe"
+                    android:layout_width="match_parent"
+                    android:layout_height="290dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="오늘의 술집"
+                    android:textColor="#090909"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclerView_rice"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/today_keword"
+                    app:layout_constraintVertical_bias="0.771" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewpager_alcohol"
+                    android:layout_width="match_parent"
+                    android:layout_height="290dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        >
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

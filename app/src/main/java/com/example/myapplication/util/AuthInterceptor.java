@@ -1,7 +1,6 @@
-package com.example.myapplication.Common;
+package com.example.myapplication.util;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.io.IOException;
 

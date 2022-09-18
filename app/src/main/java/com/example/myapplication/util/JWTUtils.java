@@ -2,7 +2,7 @@
 // Token 복호화 클래스
 // Update : 22.08.18
 
-package com.example.myapplication.Common;
+package com.example.myapplication.util;
 
 import android.util.Base64;
 

@@ -10,10 +10,10 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.Common.RetrofitClient;
-import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Data.StoreResponseData;
-import com.example.myapplication.databinding.RestourantKeywordBinding;
+import com.example.myapplication.databinding.ActivityRestourantKeywordBinding;
+import com.example.myapplication.util.RetrofitClient;
+import com.example.myapplication.util.SharedPreferencesUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,11 +22,11 @@ import retrofit2.Response;
 public class RestourantKeywordActivity extends AppCompatActivity {
     private SharedPreferencesUtil spref;
     private String location;
-    private RestourantKeywordBinding binding;
+    private ActivityRestourantKeywordBinding binding;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = RestourantKeywordBinding.inflate(getLayoutInflater());
+        binding = ActivityRestourantKeywordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         //setContentView(R.layout.restourant_keyword);
 

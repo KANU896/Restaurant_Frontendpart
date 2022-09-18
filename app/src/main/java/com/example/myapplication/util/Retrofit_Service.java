@@ -2,7 +2,7 @@
 // 서버 전송 시 필요한 데이터, url 등 관리하는 인터페이스
 // Update : 22.08.18
 
-package com.example.myapplication.Common;
+package com.example.myapplication.util;
 
 import com.example.myapplication.Data.StoreArrayData;
 import com.example.myapplication.Data.DayRecommendArrayData;

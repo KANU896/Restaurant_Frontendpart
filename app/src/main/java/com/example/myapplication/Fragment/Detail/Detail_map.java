@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.Common.Location_GPS;
 import com.example.myapplication.Data.StoreResponseData;
-import com.example.myapplication.databinding.DetailMapBinding;
+import com.example.myapplication.databinding.FragmentDetailMapBinding;
+import com.example.myapplication.util.Location_GPS;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -22,11 +22,11 @@ public class Detail_map extends Fragment {
     //private View view;
     private StoreResponseData responseData;
     private double x, y;
-    private DetailMapBinding binding;
+    private FragmentDetailMapBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DetailMapBinding.inflate(getLayoutInflater(), container, false);
+        binding = FragmentDetailMapBinding.inflate(getLayoutInflater(), container, false);
         //view = inflater.inflate(R.layout.detail_map, container,false);
 
         responseData = (StoreResponseData) getArguments().getSerializable("responseData");

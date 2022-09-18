@@ -14,13 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.Common.LocationService;
-import com.example.myapplication.Common.Location_GPS;
-import com.example.myapplication.Common.Location_service;
-import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Data.MapArrayData;
 import com.example.myapplication.Data.Map_ResponseData;
-import com.example.myapplication.databinding.MapPageBinding;
+import com.example.myapplication.databinding.FragmentMapBinding;
+import com.example.myapplication.util.LocationService;
+import com.example.myapplication.util.Location_GPS;
+import com.example.myapplication.util.Location_service;
+import com.example.myapplication.util.RetrofitClient;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -40,13 +40,13 @@ public class MapFragment extends Fragment implements LocationService {
     //private Button search_button;
     //private RadioGroup radioGroup;
     double latitude, longitude;
-    private MapPageBinding binding;
+    private FragmentMapBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        binding = MapPageBinding.inflate(getLayoutInflater(), container, false);
+        binding = FragmentMapBinding.inflate(getLayoutInflater(), container, false);
         //view = inflater.inflate(R.layout.map_page, container, false);
 
 //        search_button = view.findViewById(R.id.around_search_button);

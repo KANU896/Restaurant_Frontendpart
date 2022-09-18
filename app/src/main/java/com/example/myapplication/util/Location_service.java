@@ -1,4 +1,4 @@
-package com.example.myapplication.Common;
+package com.example.myapplication.util;
 
 import android.Manifest;
 import android.app.AlertDialog;

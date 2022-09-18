@@ -13,15 +13,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Data.StoreResponseData;
-import com.example.myapplication.databinding.DetailInfoBinding;
+import com.example.myapplication.databinding.FragmentDetailInfoBinding;
 
 public class Detail_Info extends Fragment {
     private StoreResponseData responseData;
-    private DetailInfoBinding binding;
+    private FragmentDetailInfoBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DetailInfoBinding.inflate(getLayoutInflater(), container, false);
+        binding = FragmentDetailInfoBinding.inflate(getLayoutInflater(), container, false);
 
         responseData = (StoreResponseData) getArguments().getSerializable("responseData");
 

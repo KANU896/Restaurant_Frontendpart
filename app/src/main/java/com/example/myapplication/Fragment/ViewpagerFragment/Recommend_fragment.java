@@ -13,11 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.Common.RetrofitClient;
-import com.example.myapplication.Common.SharedPreferencesUtil;
 import com.example.myapplication.Data.DayRecommendArrayData;
 import com.example.myapplication.Data.DayRecommendResponseData;
-import com.example.myapplication.databinding.FragmentViewpagerBinding;
+import com.example.myapplication.databinding.FragmentRecommendBinding;
+import com.example.myapplication.util.RetrofitClient;
+import com.example.myapplication.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 
@@ -26,16 +26,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Recommend_fragment extends Fragment {
-//    private ImageView Image;
-//    private TextView Address, Title;
     private SharedPreferencesUtil spref;
     private Context mContext;
-    private FragmentViewpagerBinding binding;
+    private FragmentRecommendBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentViewpagerBinding.inflate(getLayoutInflater(), container,false);
+        binding = FragmentRecommendBinding.inflate(getLayoutInflater(), container,false);
         return binding.getRoot();
     }
 

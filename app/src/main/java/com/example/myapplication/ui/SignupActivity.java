@@ -17,9 +17,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Data.Signup_Data;
-import com.example.myapplication.databinding.UserRegisterBinding;
+import com.example.myapplication.databinding.ActivitySignupBinding;
+import com.example.myapplication.util.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,12 +30,12 @@ public class SignupActivity extends AppCompatActivity {
     private int id_flag = 0; // 아이디 중복 검사 플래그
     private int pwd_flag = 0; // 비밀번호 일치 검사 플래그
     private AlertDialog.Builder builder;
-    private UserRegisterBinding binding;
+    private ActivitySignupBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = UserRegisterBinding.inflate(getLayoutInflater());
+        binding = ActivitySignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         //setContentView(R.layout.user_register);
 
