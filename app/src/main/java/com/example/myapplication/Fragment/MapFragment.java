@@ -18,9 +18,8 @@ import com.example.myapplication.Common.LocationService;
 import com.example.myapplication.Common.Location_GPS;
 import com.example.myapplication.Common.Location_service;
 import com.example.myapplication.Common.RetrofitClient;
-import com.example.myapplication.Data.Map.Map_Data;
-import com.example.myapplication.Data.Map.Map_Datastore;
-import com.example.myapplication.Data.Map.Map_ResponseData;
+import com.example.myapplication.Data.MapArrayData;
+import com.example.myapplication.Data.Map_ResponseData;
 import com.example.myapplication.databinding.MapPageBinding;
 
 import net.daum.mf.map.api.MapPOIItem;
@@ -93,7 +92,7 @@ public class MapFragment extends Fragment implements LocationService {
                 public void onClick(View v) {
                     RadioButton button = binding.getRoot().findViewById(checkedId);
                     String category = button.getText().toString();
-                    Call<Map_Data> call = RetrofitClient.getApiService().Map(latitude, longitude, category);
+                    Call<MapArrayData> call = RetrofitClient.getApiService().Map(latitude, longitude, category);
                     retrofit(call);
 
                 }
@@ -101,17 +100,17 @@ public class MapFragment extends Fragment implements LocationService {
         }
     };
 
-    private void retrofit(Call<Map_Data> call) {
-        ArrayList<Map_Datastore> responseData = new ArrayList<>();
-        call.enqueue((new Callback<Map_Data>() {
+    private void retrofit(Call<MapArrayData> call) {
+        ArrayList<Map_ResponseData> responseData = new ArrayList<>();
+        call.enqueue((new Callback<MapArrayData>() {
             @Override
-            public void onResponse(Call<Map_Data> call, Response<Map_Data> response) {
+            public void onResponse(Call<MapArrayData> call, Response<MapArrayData> response) {
                 if(!response.isSuccessful()){
                     Log.e("연결이 비정상적 : ", "error code : " + response.code());
                     return;
                 }
                 Log.e("Search_List_total", "연결 성공");
-                Map_Data searchdata = response.body();
+                MapArrayData searchdata = response.body();
                 Map_ResponseData[] data = searchdata != null
                         ? searchdata.getData()
                         :new Map_ResponseData[0];
@@ -124,7 +123,7 @@ public class MapFragment extends Fragment implements LocationService {
                     double latitude = data[i].getLatitude();
                     double longitude = data[i].getLongitude();
 
-                    responseData.add(new Map_Datastore(
+                    responseData.add(new Map_ResponseData(
                             Id,
                             Name,
                             Address,
@@ -135,7 +134,7 @@ public class MapFragment extends Fragment implements LocationService {
 
                 // 주변 음식점 데이터 마커 세팅
                 ArrayList<MapPOIItem> markerArr = new ArrayList<>();
-                for (Map_Datastore map_datastore : responseData){
+                for (Map_ResponseData map_datastore : responseData){
                     MapPOIItem marker = new MapPOIItem();
                     marker.setMapPoint(MapPoint.mapPointWithGeoCoord(map_datastore.getLatitude(), map_datastore.getLongitude()));
                     marker.setItemName(map_datastore.getName());
@@ -146,7 +145,7 @@ public class MapFragment extends Fragment implements LocationService {
 
             // 서버 통신 실패 시
             @Override
-            public void onFailure(Call<Map_Data> call, Throwable t) {
+            public void onFailure(Call<MapArrayData> call, Throwable t) {
                 Log.e("연결실패", t.getMessage());
             }
         }));

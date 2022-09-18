@@ -19,12 +19,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.myapplication.Common.RetrofitClient;
-import com.example.myapplication.Interface.onReviewItemDelete;
-import com.example.myapplication.Data.Detail.Detail_Review_Datastore;
-import com.example.myapplication.Data.Detail.Detail_Review_ResponseData;
-import com.example.myapplication.Data.Detail.Review_Data;
 import com.example.myapplication.Adapter.Review_Adapter;
+import com.example.myapplication.Common.RetrofitClient;
+import com.example.myapplication.Data.Detail_Review_ResponseData;
+import com.example.myapplication.Data.ReviewArrayData;
+import com.example.myapplication.Interface.onReviewItemDelete;
 import com.example.myapplication.databinding.DetailReviewBinding;
 
 import java.util.ArrayList;
@@ -56,7 +55,7 @@ public class Detail_Review extends Fragment implements onReviewItemDelete {
         binding.reviewRecyclerView.setAdapter(adapter);
 
         //리뷰 검색
-        Call<Review_Data> call = RetrofitClient.getApiService().Review_list(restaurant_id);
+        Call<ReviewArrayData> call = RetrofitClient.getApiService().Review_list(restaurant_id);
         retrofit(call);
 
         // 리뷰 입력
@@ -72,7 +71,7 @@ public class Detail_Review extends Fragment implements onReviewItemDelete {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String text = editText.getText().toString();
-                                Call<Review_Data> call = RetrofitClient.getApiService()
+                                Call<ReviewArrayData> call = RetrofitClient.getApiService()
                                         .Review_input(restaurant_id, text);
                                 retrofit(call);
                             }
@@ -89,26 +88,26 @@ public class Detail_Review extends Fragment implements onReviewItemDelete {
     //리뷰 삭제
     @Override
     public void onReviewItemDelete(int review_id) {
-        Call<Review_Data> call = RetrofitClient.getApiService()
+        Call<ReviewArrayData> call = RetrofitClient.getApiService()
                 .Review_delete(review_id);
         retrofit(call);
     }
 
     //리뷰 데이터 조회&삽입
-    public void retrofit (Call<Review_Data> call){
-        ArrayList<Detail_Review_Datastore> responseData = new ArrayList<>();
-        call.enqueue((new Callback<Review_Data>() {
+    public void retrofit (Call<ReviewArrayData> call){
+        ArrayList<Detail_Review_ResponseData> responseData = new ArrayList<>();
+        call.enqueue((new Callback<ReviewArrayData>() {
             @Override
-            public void onResponse(Call<Review_Data> call, Response<Review_Data> response) {
+            public void onResponse(Call<ReviewArrayData> call, Response<ReviewArrayData> response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(getContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
                     Log.e("연결이 비정상적 : ", "error code : " + response.code());
                     return;
                 }
-                Review_Data review_data = response.body();
+                ReviewArrayData review_Array_data = response.body();
 
-                Detail_Review_ResponseData[] data = review_data != null
-                        ? review_data.getReview_data()
+                Detail_Review_ResponseData[] data = review_Array_data != null
+                        ? review_Array_data.getReview_data()
                         :new Detail_Review_ResponseData[0];
 
                 for (int i = 0; i < data.length; i++){
@@ -119,7 +118,7 @@ public class Detail_Review extends Fragment implements onReviewItemDelete {
 
                     Date = Date.replace("T", " ");
 
-                    responseData.add(new Detail_Review_Datastore(
+                    responseData.add(new Detail_Review_ResponseData(
                             Review_id,
                             Username,
                             Content,
@@ -133,7 +132,7 @@ public class Detail_Review extends Fragment implements onReviewItemDelete {
             }
             // 서버 통신 실패 시
             @Override
-            public void onFailure(Call<Review_Data> call, Throwable t) {
+            public void onFailure(Call<ReviewArrayData> call, Throwable t) {
                 Log.e("연결실패", t.getMessage());
                 Toast.makeText(getContext(), "연결 실패",Toast.LENGTH_SHORT).show();
             }

@@ -12,8 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
-import com.example.myapplication.Data.Detail.Detail_ResponseData;
-import com.example.myapplication.Data.Detail.Detail_Datastore;
+import com.example.myapplication.Data.StoreResponseData;
 import com.example.myapplication.databinding.RestourantKeywordBinding;
 
 import retrofit2.Call;
@@ -47,7 +46,7 @@ public class RestourantKeywordActivity extends AppCompatActivity {
         binding.keywordFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Detail_ResponseData> call = RetrofitClient.getApiService().Detail_random(location, "밥집");
+                Call<StoreResponseData> call = RetrofitClient.getApiService().Detail_random(location, "밥집");
                 retrofit(call);
             }
         });
@@ -56,7 +55,7 @@ public class RestourantKeywordActivity extends AppCompatActivity {
         binding.keywordAlcohol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Detail_ResponseData> call = RetrofitClient.getApiService().Detail_random(location, "술집");
+                Call<StoreResponseData> call = RetrofitClient.getApiService().Detail_random(location, "술집");
                 retrofit(call);
             }
         });
@@ -65,22 +64,22 @@ public class RestourantKeywordActivity extends AppCompatActivity {
         binding.keywordCafe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Detail_ResponseData> call = RetrofitClient.getApiService().Detail_random(location, "카페");
+                Call<StoreResponseData> call = RetrofitClient.getApiService().Detail_random(location, "카페");
                 retrofit(call);
             }
         });
     }
 
-    private void retrofit(Call<Detail_ResponseData> call){
-        call.enqueue((new Callback<Detail_ResponseData>() {
+    private void retrofit(Call<StoreResponseData> call){
+        call.enqueue((new Callback<StoreResponseData>() {
             @Override
-            public void onResponse(Call<Detail_ResponseData> call, Response<Detail_ResponseData> response) {
+            public void onResponse(Call<StoreResponseData> call, Response<StoreResponseData> response) {
                 if(!response.isSuccessful()){
                     Log.e("연결이 비정상적 : ", "error code : " + response.code());
                     Toast.makeText(getApplicationContext(), "위치 서비스가 필요합니다.", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Detail_ResponseData detail_data = response.body();
+                StoreResponseData detail_data = response.body();
 
                 if(TextUtils.isEmpty(detail_data.getId())){
                     Log.e("데이터", "없음");
@@ -88,34 +87,36 @@ public class RestourantKeywordActivity extends AppCompatActivity {
                     return;
                 }
 
-                String Id = detail_data.getId();
-                String Image = detail_data.getImage();
-                String Name = detail_data.getName();
-                String Score = detail_data.getScore();
-                String Address = detail_data.getAddress();
-                String Tag = detail_data.getTag();
-                String Tell_number = detail_data.getTell_number();
-                boolean Fav = detail_data.getFav();
-
-                Detail_Datastore response_detail_data = new Detail_Datastore(
-                        Id,
-                        Image,
-                        Name,
-                        Score,
-                        Address,
-                        Tag,
-                        Tell_number,
-                        Fav
-                );
+//                String id = detail_data.getId();
+//                String City = detail_data.getCity();
+//                String Address = detail_data.getAddress();
+//                String Name = detail_data.getName();
+//                String Tell = detail_data.getTell_number();
+//                String Score = detail_data.getScore();
+//                String Category = detail_data.getCategory();
+//                String Tag = detail_data.getTag();
+//                Boolean fav = detail_data.getFav();
+//
+//                TestResponseData response_detail_data = new TestResponseData(
+//                        id,
+//                        City,
+//                        Address,
+//                        Name,
+//                        Tell,
+//                        Score,
+//                        Category,
+//                        Tag,
+//                        fav
+//                );
 
                 Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-                intent.putExtra("responseData", response_detail_data);
+                intent.putExtra("responseData", detail_data);
                 startActivity(intent);
             }
 
             // 서버 통신 실패 시
             @Override
-            public void onFailure(Call<Detail_ResponseData> call, Throwable t) {
+            public void onFailure(Call<StoreResponseData> call, Throwable t) {
                 Log.e("연결실패", t.getMessage());
                 Toast.makeText(getApplicationContext(),"연결 실패",Toast.LENGTH_SHORT).show();
             }

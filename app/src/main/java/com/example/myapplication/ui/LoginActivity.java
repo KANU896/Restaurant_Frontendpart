@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
-import com.example.myapplication.Data.Sign.Login_Token;
+import com.example.myapplication.Data.Login_Token;
 import com.example.myapplication.databinding.UserLoginBinding;
 
 import java.security.MessageDigest;

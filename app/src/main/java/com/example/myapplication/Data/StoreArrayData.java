@@ -1,14 +1,14 @@
-package com.example.myapplication.Data.Map;
+package com.example.myapplication.Data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Map_Data {
+public class StoreArrayData {
     @SerializedName("data")
     @Expose
-    private Map_ResponseData[] data;
+    private StoreResponseData[] data;
 
-    public Map_ResponseData[] getData () {
+    public StoreResponseData[] getData () {
         return data;
     }
 }

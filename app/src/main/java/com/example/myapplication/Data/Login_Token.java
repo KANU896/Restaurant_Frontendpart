@@ -2,7 +2,7 @@
 // 로그인 서버 통신 때 들어오는 응답 데이터들 관리하는 데이터 클래스
 // Update : 22.08.18
 
-package com.example.myapplication.Data.Sign;
+package com.example.myapplication.Data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

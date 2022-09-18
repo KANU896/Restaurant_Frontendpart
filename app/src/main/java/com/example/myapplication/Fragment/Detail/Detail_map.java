@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Common.Location_GPS;
-import com.example.myapplication.Data.Detail.Detail_Datastore;
+import com.example.myapplication.Data.StoreResponseData;
 import com.example.myapplication.databinding.DetailMapBinding;
 
 import net.daum.mf.map.api.MapPOIItem;
@@ -20,7 +20,7 @@ import net.daum.mf.map.api.MapView;
 
 public class Detail_map extends Fragment {
     //private View view;
-    private Detail_Datastore responseData;
+    private StoreResponseData responseData;
     private double x, y;
     private DetailMapBinding binding;
 
@@ -29,7 +29,7 @@ public class Detail_map extends Fragment {
         binding = DetailMapBinding.inflate(getLayoutInflater(), container, false);
         //view = inflater.inflate(R.layout.detail_map, container,false);
 
-        responseData = (Detail_Datastore) getArguments().getSerializable("responseData");
+        responseData = (StoreResponseData) getArguments().getSerializable("responseData");
         Log.e("Detail_Map", responseData.getAddress());
 
         if (responseData.getAddress().isEmpty()){

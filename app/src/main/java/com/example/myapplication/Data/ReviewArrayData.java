@@ -1,9 +1,9 @@
-package com.example.myapplication.Data.Detail;
+package com.example.myapplication.Data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Review_Data {
+public class ReviewArrayData {
     @SerializedName("data")
     @Expose
     private Detail_Review_ResponseData[] review_data;

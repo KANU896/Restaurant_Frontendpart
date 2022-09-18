@@ -12,18 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.Data.Detail.Detail_Datastore;
+import com.example.myapplication.Data.StoreResponseData;
 import com.example.myapplication.databinding.DetailInfoBinding;
 
 public class Detail_Info extends Fragment {
-    private Detail_Datastore responseData;
+    private StoreResponseData responseData;
     private DetailInfoBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DetailInfoBinding.inflate(getLayoutInflater(), container, false);
 
-        responseData = (Detail_Datastore) getArguments().getSerializable("responseData");
+        responseData = (StoreResponseData) getArguments().getSerializable("responseData");
 
         //TODO 카테고리
 

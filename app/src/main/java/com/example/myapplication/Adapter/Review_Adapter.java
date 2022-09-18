@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Common.JWTUtils;
 import com.example.myapplication.Common.SharedPreferencesUtil;
+import com.example.myapplication.Data.Detail_Review_ResponseData;
 import com.example.myapplication.Interface.onReviewItemDelete;
-import com.example.myapplication.Data.Detail.Detail_Review_Datastore;
 import com.example.myapplication.databinding.DetailContentBinding;
 
 import org.json.JSONObject;
@@ -21,18 +21,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.MyViewHolder>{
-    private ArrayList<Detail_Review_Datastore> responseData;
+    private ArrayList<Detail_Review_ResponseData> responseData;
     private Context mContext;
     private onReviewItemDelete onReviewItemDelete_;
     private DetailContentBinding binding;
 
-    public Review_Adapter(Context mContext, ArrayList<Detail_Review_Datastore> responseData, onReviewItemDelete onReviewItemDelete_){
+    public Review_Adapter(Context mContext, ArrayList<Detail_Review_ResponseData> responseData, onReviewItemDelete onReviewItemDelete_){
         this.responseData = responseData;
         this.mContext = mContext;
         this.onReviewItemDelete_ = onReviewItemDelete_;
     }
 
-    public void setData(ArrayList<Detail_Review_Datastore> responseData){
+    public void setData(ArrayList<Detail_Review_ResponseData> responseData){
         this.responseData = responseData;
     }
 
@@ -55,9 +55,9 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.MyViewHo
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
-                    Detail_Review_Datastore delete_data = responseData.get(pos);
+                    //Detail_Review_ResponseData delete_data = responseData.get(pos);
                     Log.e("click content delete", String.valueOf(pos));
-                    onReviewItemDelete_.onReviewItemDelete(delete_data.getReview_id());
+                    onReviewItemDelete_.onReviewItemDelete(responseData.get(pos).getReview_id());
                 }
             });
         }
@@ -73,9 +73,9 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull Review_Adapter.MyViewHolder holder, int position) {
-        Detail_Review_Datastore data = responseData.get(position);
-        binding.username.setText(data.getName());
-        binding.reviewDatetime.setText(data.getDatetime());
+        Detail_Review_ResponseData data = responseData.get(position);
+        binding.username.setText(data.getUsername());
+        binding.reviewDatetime.setText(data.getDate());
         binding.reviewContent.setText(data.getContent());
 
         SharedPreferencesUtil spref = new SharedPreferencesUtil(mContext, "User");
@@ -92,7 +92,7 @@ public class Review_Adapter extends RecyclerView.Adapter<Review_Adapter.MyViewHo
             binding.reviewDelete.setVisibility(View.INVISIBLE);
         }
         else{
-            if (!token_info.equals(data.getName())){
+            if (!token_info.equals(data.getUsername())){
                 binding.reviewDelete.setVisibility(View.INVISIBLE);
             }
             else {

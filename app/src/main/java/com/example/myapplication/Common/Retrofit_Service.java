@@ -4,13 +4,13 @@
 
 package com.example.myapplication.Common;
 
-import com.example.myapplication.Data.Detail.Detail_ResponseData;
-import com.example.myapplication.Data.Detail.Review_Data;
-import com.example.myapplication.Data.Sign.Login_Token;
-import com.example.myapplication.Data.Sign.Signup_Data;
-import com.example.myapplication.Data.DayRecommend.DayRecommendData;
-import com.example.myapplication.Data.Map.Map_Data;
-import com.example.myapplication.Data.Search.SearchData;
+import com.example.myapplication.Data.StoreArrayData;
+import com.example.myapplication.Data.DayRecommendArrayData;
+import com.example.myapplication.Data.ReviewArrayData;
+import com.example.myapplication.Data.MapArrayData;
+import com.example.myapplication.Data.Login_Token;
+import com.example.myapplication.Data.Signup_Data;
+import com.example.myapplication.Data.StoreResponseData;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -23,19 +23,19 @@ public interface Retrofit_Service {
     //검색한 음식점 리스트 불러오기
     @FormUrlEncoded
     @POST("/search/data/")
-    Call<SearchData> Search_post(@Field("search_data") String search_data, @Field("category") String category,
-                                      @Field("location") String location);
+    Call<StoreArrayData> Search_post(@Field("search_data") String search_data, @Field("category") String category,
+                                     @Field("location") String location);
 
     //선택한 음식점 정보 불러오기
     @FormUrlEncoded
     @POST("/detail/random/")
-    Call<Detail_ResponseData> Detail_random(@Field("location") String location, @Field("category") String category);
+    Call<StoreResponseData> Detail_random(@Field("location") String location, @Field("category") String category);
 
 
     //선택한 음식점 정보 불러오기
     @FormUrlEncoded
     @POST("/detail/data/")
-    Call<Detail_ResponseData> Detail_post(@Field("restaurant_id") String restaurant_id);
+    Call<StoreResponseData> Detail_post(@Field("restaurant_id") String restaurant_id);
 
     //로그인
     @FormUrlEncoded
@@ -64,31 +64,31 @@ public interface Retrofit_Service {
 
     //즐겨찾기 목록
     @GET("/detail/favorite/")
-    Call<SearchData> favorite_list();
+    Call<StoreArrayData> favorite_list();
 
     //리뷰 검색
     @FormUrlEncoded
     @POST("/detail/review/")
-    Call<Review_Data> Review_list(@Field("restaurant_id") String restaurant_id);
+    Call<ReviewArrayData> Review_list(@Field("restaurant_id") String restaurant_id);
 
     //리뷰 등록
     @FormUrlEncoded
     @PUT("/detail/review/")
-    Call<Review_Data> Review_input(@Field("restaurant_id") String restaurant_id,
-                                                  @Field("content") String content);
+    Call<ReviewArrayData> Review_input(@Field("restaurant_id") String restaurant_id,
+                                       @Field("content") String content);
 
     //리뷰 삭제
     @FormUrlEncoded
     @POST("/detail/review/delete/")
-    Call<Review_Data> Review_delete(@Field("review_id") int review_id);
+    Call<ReviewArrayData> Review_delete(@Field("review_id") int review_id);
 
     //일일 음식점 추천
     @FormUrlEncoded
     @POST("/day/recommend/")
-    Call<DayRecommendData> Day_recommend(@Field("city") String city, @Field("category") String category);
+    Call<DayRecommendArrayData> Day_recommend(@Field("city") String city, @Field("category") String category);
 
     // 내 위치 주변 음식점
     @FormUrlEncoded
     @POST("/map/location/")
-    Call<Map_Data> Map(@Field("latitude") double latitude, @Field("longitude") double longitude, @Field("category") String category);
+    Call<MapArrayData> Map(@Field("latitude") double latitude, @Field("longitude") double longitude, @Field("category") String category);
 }

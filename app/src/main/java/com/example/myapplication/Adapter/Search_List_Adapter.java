@@ -15,14 +15,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Common.ImageLoadTask;
 import com.example.myapplication.Common.RetrofitClient;
-import com.example.myapplication.Data.Detail.Detail_ResponseData;
-import com.example.myapplication.Data.Detail.Detail_Datastore;
-import com.example.myapplication.ui.DetailActivity;
-import com.example.myapplication.R;
-import com.example.myapplication.Data.Search.ResponseData;
+import com.example.myapplication.Data.StoreResponseData;
 import com.example.myapplication.databinding.SearchResultRecyclerviewItemBinding;
+import com.example.myapplication.ui.DetailActivity;
 
 import java.util.ArrayList;
 
@@ -31,37 +27,38 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapter.MyViewHolder>{
-    private ArrayList<ResponseData> responseData;
     private Context mContext;
     private String token;
     private SearchResultRecyclerviewItemBinding binding;
+    private ArrayList<StoreResponseData> responseData;
 
-    public Search_List_Adapter(Context mContext, ArrayList<ResponseData> responseData){
+    /**
+     * Test
+     */
+    public Search_List_Adapter(Context mContext, ArrayList<StoreResponseData> responseData){
         this.responseData = responseData;
         this.mContext = mContext;
     }
 
-    public void setData(ArrayList<ResponseData> responseData){
+
+    /**
+     * Test
+     */
+    public void setData(ArrayList<StoreResponseData> responseData){
         this.responseData = responseData;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-//        ImageView image;
-//        TextView title;
-//        TextView score;
 
         MyViewHolder(SearchResultRecyclerviewItemBinding view){
             super(view.getRoot());
-//            image = (ImageView)view.findViewById(R.id.restaurant_image);
-//            title = (TextView)view.findViewById(R.id.title);
-//            score = (TextView)view.findViewById(R.id.review_score);
 
             //음식점 클릭 시
             view.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
-                    ResponseData test = responseData.get(pos);
+                    StoreResponseData clickdata = responseData.get(pos);
 //
 //                    if (!TextUtils.isEmpty(token)) {
 //                        try {
@@ -71,7 +68,7 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
 //                        }
 //                    }
 //                    else
-                    retrofit(v, test.getId());
+                    retrofit(v, clickdata.getId());
                 }
             });
         }
@@ -88,13 +85,9 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
 
     @Override
     public void onBindViewHolder(@NonNull Search_List_Adapter.MyViewHolder holder, int position) {
-        ResponseData text = responseData.get(position);
-        if(text.getImage().equals("")) {
-            binding.restaurantImage.setImageResource(R.drawable.no_image);
-        }
-        else {
-            new ImageLoadTask(text.getImage(), binding.restaurantImage).execute();
-        }
+        //ResponseData text = responseData.get(position);
+        StoreResponseData text = responseData.get(position);
+
         binding.title.setText(text.getName());
         if (text.getScore().equals(""))
             binding.reviewScore.setText("점수 없음");
@@ -105,51 +98,31 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
     @Override
     public int getItemCount() {
         if (responseData != null)
-           return responseData.size();
+            return responseData.size();
         else
             return 0;
     }
 
+
     public void retrofit (View v, String id){
-        Call<Detail_ResponseData> call = RetrofitClient.getApiService().Detail_post(id);
-        call.enqueue((new Callback<Detail_ResponseData>() {
+        Call<StoreResponseData> call = RetrofitClient.getApiService().Detail_post(id);
+        call.enqueue((new Callback<StoreResponseData>() {
             @Override
-            public void onResponse(Call<Detail_ResponseData> call, Response<Detail_ResponseData> response) {
+            public void onResponse(Call<StoreResponseData> call, Response<StoreResponseData> response) {
                 if(!response.isSuccessful()){
                     Log.e("연결이 비정상적 : ", "error code : " + response.code());
                     return;
                 }
-                Detail_ResponseData detail_data = response.body();
-
-                String Image = detail_data.getImage();
-                String Name = detail_data.getName();
-                String Score = detail_data.getScore();
-                String Address = detail_data.getAddress();
-                String Tag = detail_data.getTag();
-                String Tell_number = detail_data.getTell_number();
-                boolean Fav = detail_data.getFav();
-
-                Detail_Datastore response_detail_data = new Detail_Datastore(
-                        id,
-                        Image,
-                        Name,
-                        Score,
-                        Address,
-                        Tag,
-                        Tell_number,
-                        Fav
-                );
-
-
+                StoreResponseData detail_data = response.body();
 
                 Intent intent = new Intent(v.getContext(), DetailActivity.class);
-                intent.putExtra("responseData", response_detail_data);
+                intent.putExtra("responseData", detail_data);
                 v.getContext().startActivity(intent);
             }
 
             // 서버 통신 실패 시
             @Override
-            public void onFailure(Call<Detail_ResponseData> call, Throwable t) {
+            public void onFailure(Call<StoreResponseData> call, Throwable t) {
                 Log.e("연결실패", t.getMessage());
                 Toast.makeText(mContext,"연결 실패",Toast.LENGTH_SHORT).show();
             }

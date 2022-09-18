@@ -1,4 +1,4 @@
-package com.example.myapplication.Data.Detail;
+package com.example.myapplication.Data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -39,6 +39,13 @@ public class Detail_Review_ResponseData {
     @SerializedName("date_time")
     @Expose
     private String Date;
+
+    public Detail_Review_ResponseData(int id, String name, String content, String datetime){
+        this.review_id = id;
+        this.Username = name;
+        this.Content = content;
+        this.Date = datetime;
+    }
 
     public int getReview_id() { return review_id; }
     public void setReview_id(int review_id) { this.review_id = review_id; }

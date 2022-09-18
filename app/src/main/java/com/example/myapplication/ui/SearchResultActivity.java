@@ -19,16 +19,15 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
-import com.example.myapplication.R;
+import com.example.myapplication.Data.StoreArrayData;
+import com.example.myapplication.Data.SearchedList;
+import com.example.myapplication.Data.StoreResponseData;
 import com.example.myapplication.Fragment.SearchResult.Alcohol;
 import com.example.myapplication.Fragment.SearchResult.Cafe;
 import com.example.myapplication.Fragment.SearchResult.Food;
 import com.example.myapplication.Fragment.SearchResult.Total;
-import com.example.myapplication.Data.Search.Data;
-import com.example.myapplication.Data.Search.ResponseData;
-import com.example.myapplication.Data.Search.SearchData;
-import com.example.myapplication.Data.SearchedList;
-import com.example.myapplication.databinding.SearchResultFrameBinding;
+import com.example.myapplication.R;
+import com.example.myapplication.databinding.SearchResultActivityBinding;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -47,29 +46,26 @@ public class SearchResultActivity extends AppCompatActivity {
     private Cafe cafe;
     private Fragment selected = null;
 
-    // 각 프레그먼트 별 데이터 저장소
-    private ArrayList<ResponseData> total_data;
-    private ArrayList<ResponseData> food_data;
-    private ArrayList<ResponseData> alcohol_data;
-    private ArrayList<ResponseData> cafe_data;
-
     private SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(this, "Searched");
     private String query;
     private ArrayList<SearchedList> searchHistoryList;
     private String location = null;
 
-    private SearchResultFrameBinding binding;
+    private SearchResultActivityBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = SearchResultFrameBinding.inflate(getLayoutInflater());
+        binding = SearchResultActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Log.e(TAG, "연결 성공");
+        setSupportActionBar(binding.searchResultToolbar);
+        Log.d(TAG, "onCreate");
+
         // 데이터 받기
         Intent intent = getIntent();
         this.query = intent.getStringExtra("query");
 
+        binding.searchResultToolbar.setTitle(query);
         //내 현재위치
         String address = sharedPreferencesUtil.getPreferenceString("location");
         if (!TextUtils.isEmpty(address) && !address.equals("위치 정보 없음")) {
@@ -83,11 +79,8 @@ public class SearchResultActivity extends AppCompatActivity {
         cafe = new Cafe();
         selected = total;
 
-        Bundle bundle = new Bundle();
-        //Retrofit retrofit = new Retrofit(getApplicationContext());
-
         // 서버 통신
-        retrofit(selected, query, null, 0);
+        SearchResultRetrofit(selected, query, null, 0);
 
         //탭 만들기 (동적)
         binding.tabs.addTab(binding.tabs.newTab().setText("전체"));
@@ -104,43 +97,19 @@ public class SearchResultActivity extends AppCompatActivity {
 
                 if (position == 0) {
                     selected = total;
-                    if (total_data == null)
-                        retrofit(selected, query, null, position);
-                    else {
-                        bundle.putSerializable("responseData", total_data);
-                        selected.setArguments(bundle);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
-                    }
+                    SearchResultRetrofit(selected, query, null, position);
                 }
                 else if (position == 1) {
                     selected = food;
-                    if (food_data == null)
-                        retrofit(selected, query, "밥집", position);
-                    else {
-                        bundle.putSerializable("responseData", food_data);
-                        selected.setArguments(bundle);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
-                    }
+                    SearchResultRetrofit(selected, query, "밥집", position);
                 }
                 else if (position == 2) {
                     selected = alcohol;
-                    if (alcohol_data == null)
-                        retrofit(selected, query, "술집", position);
-                    else {
-                        bundle.putSerializable("responseData", alcohol_data);
-                        selected.setArguments(bundle);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
-                    }
+                    SearchResultRetrofit(selected, query, "술집", position);
                 }
                 else if (position == 3) {
                     selected = cafe;
-                    if (cafe_data == null)
-                        retrofit(selected, query, "카페", position);
-                    else {
-                        bundle.putSerializable("responseData", cafe_data);
-                        selected.setArguments(bundle);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
-                    }
+                    SearchResultRetrofit(selected, query, "카페", position);
                 }
             }
 
@@ -196,67 +165,63 @@ public class SearchResultActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void retrofit (Fragment selected, String query, String category, int position){
-        ArrayList<ResponseData> responseData = new ArrayList<>();
+    public void SearchResultRetrofit (Fragment selected, String query, String category, int position){
+        ArrayList<StoreResponseData> storeResponseData = new ArrayList<>();
         Bundle bundle = new Bundle();
 
-        Call<SearchData> call = RetrofitClient.getApiService().Search_post(query, category, location);
-        call.enqueue((new Callback<SearchData>() {
+        Call<StoreArrayData> call = RetrofitClient.getApiService().Search_post(query, category, location);
+        call.enqueue((new Callback<StoreArrayData>() {
             @Override
-            public void onResponse(Call<SearchData> call, Response<SearchData> response) {
+            public void onResponse(Call<StoreArrayData> call, Response<StoreArrayData> response) {
                 if(!response.isSuccessful()){
                     Log.e("연결이 비정상적 : ", "error code : " + response.code());
                     return;
                 }
                 Log.e("Search_List_total", "연결 성공");
-                SearchData searchdata = response.body();
-                Data[] data = searchdata != null
+                StoreArrayData searchdata = response.body();
+
+                StoreResponseData[] data = searchdata != null
                         ? searchdata.getData()
-                        :new Data[0];
+                        : new StoreResponseData[0];
 
                 // 데이터 저장 ArrayList<ResponseData>
                 for (int i = 0; i < data.length; i++){
-                    String id = data[i].get_id();
-                    String Image = data[i].getImage();
+                    String id = data[i].getId();
+                    String City = data[i].getCity();
+                    String Address = data[i].getAddress();
                     String Name = data[i].getName();
+                    String Tell = data[i].getTell_number();
                     String Score = data[i].getScore();
+                    String Category = data[i].getCategory();
+                    String Tag = data[i].getTag();
+                    Boolean fav = false; //data[i].getFav();
 
-                    responseData.add(new ResponseData(
+                    storeResponseData.add(new StoreResponseData(
                             id,
-                            Image,
+                            City,
+                            Address,
                             Name,
-                            Score
+                            Tell,
+                            Score,
+                            Category,
+                            Tag,
+                            fav
                     ));
                 }
 
-                if (position == 0) {
-                    total_data = responseData;
-                    bundle.putSerializable("responseData", total_data);
-                }
-                else if (position == 1){
-                    food_data = responseData;
-                    bundle.putSerializable("responseData", food_data);
-                }
-                else if (position == 2){
-                    alcohol_data = responseData;
-                    bundle.putSerializable("responseData", alcohol_data);
-                }
-                else if (position == 3){
-                    cafe_data = responseData;
-                    bundle.putSerializable("responseData", cafe_data);
-                }
-
+                bundle.putSerializable("responseData", storeResponseData);
                 selected.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
             }
 
             // 서버 통신 실패 시
             @Override
-            public void onFailure(Call<SearchData> call, Throwable t) {
+            public void onFailure(Call<StoreArrayData> call, Throwable t) {
                 Log.e("연결실패", t.getMessage());
             }
         }));
     }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);

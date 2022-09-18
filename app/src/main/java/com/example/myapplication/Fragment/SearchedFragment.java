@@ -98,8 +98,7 @@ public class SearchedFragment extends Fragment implements onSearchedItemDelete {
         Log.e("User_Search_Page", "onSearchItemDeleteClick");
         searchHistoryList.remove(position);
         spref.storeSearchHistoryList(searchHistoryList);
-
-        adapter.setData(searchHistoryList);
+        //adapter.setData(searchHistoryList);
         adapter.notifyDataSetChanged();
     }
 

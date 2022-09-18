@@ -15,10 +15,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.Common.ImageLoadTask;
 import com.example.myapplication.Common.RetrofitClient;
 import com.example.myapplication.Common.SharedPreferencesUtil;
-import com.example.myapplication.Data.Detail.Detail_Datastore;
+import com.example.myapplication.Data.StoreResponseData;
 import com.example.myapplication.Fragment.Detail.Detail_Info;
 import com.example.myapplication.Fragment.Detail.Detail_Review;
 import com.example.myapplication.Fragment.Detail.Detail_map;
@@ -38,32 +37,27 @@ public class DetailActivity extends AppCompatActivity {
     private Detail_Review detail_review;
     private Detail_map detail_map;
     private Fragment selected = null;
-    private Detail_Datastore responseData;
+    private StoreResponseData responseData;
     private DetailPageBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("DetailActivity", "onCrete");
         binding = DetailPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //setContentView(R.layout.detail_page);
 
         Intent intent = getIntent();
-        responseData = (Detail_Datastore) intent.getSerializableExtra("responseData");
+        responseData = (StoreResponseData) intent.getSerializableExtra("responseData");
 
         Log.e(TAG, responseData.getTag());
-
-//        detail_title = findViewById(R.id.detail_title);
-//        detail_score = findViewById(R.id.detail_score);
-//        imageView = findViewById(R.id.detail_image);
 
         //정적 데이터 설정
         binding.detailTitle.setText(responseData.getName());
         binding.detailScore.setText(responseData.getScore());
-        new ImageLoadTask(responseData.getImage(), binding.detailImage).execute();
+        //new ImageLoadTask(responseData.getImage(), binding.detailImage).execute();
 
         //전화 버튼 클릭 시 핸드폰 전화 기능으로 전환
-        //tell = findViewById(R.id.tell_button);
         Uri number = Uri.parse("tel:"+responseData.getTell_number());
         Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
 
@@ -76,8 +70,6 @@ public class DetailActivity extends AppCompatActivity {
 
 
         //즐겨찾기 기능
-        //CheckBox favorite = findViewById(R.id.favorite);
-        //favor_layout = findViewById(R.id.favor_layout);
 
         SharedPreferencesUtil spref = new SharedPreferencesUtil(getApplicationContext(), "User");
         binding.favorite.setChecked(responseData.getFav()); //해당 계정 즐겨찾기에 추가되어 있으면 체크 된 상태
@@ -112,7 +104,6 @@ public class DetailActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
 
         //Tab 설정
-        //tabs = findViewById(R.id.tabs);
         binding.tabs.addTab(binding.tabs.newTab().setText("정보"));
         binding.tabs.addTab(binding.tabs.newTab().setText("지도"));
         binding.tabs.addTab(binding.tabs.newTab().setText("리뷰"));
@@ -121,8 +112,6 @@ public class DetailActivity extends AppCompatActivity {
         bundle.putSerializable("responseData", responseData);
         selected.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
-
-        //StickyScrollView scrollView = findViewById(R.id.stickyscrollview);
 
         //탭이 선택되었을때 작동하는 메서드
         binding.tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

@@ -18,7 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Common.RetrofitClient;
-import com.example.myapplication.Data.Sign.Signup_Data;
+import com.example.myapplication.Data.Signup_Data;
 import com.example.myapplication.databinding.UserRegisterBinding;
 
 import retrofit2.Call;
