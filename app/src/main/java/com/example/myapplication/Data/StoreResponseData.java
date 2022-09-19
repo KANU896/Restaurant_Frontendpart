@@ -42,6 +42,10 @@ public class StoreResponseData implements Serializable {
     @Expose
     private boolean fav;
 
+    @SerializedName("Open_Time")
+    @Expose
+    private String open_time;
+
     public StoreResponseData(String id, String city, String address, String name, String tell, String score, String category, String tag, boolean fav){
         this.Id = id;
         this.City = city;
@@ -85,4 +89,6 @@ public class StoreResponseData implements Serializable {
     }
 
     public boolean getFav() { return fav; }
+
+    public String getOpen_time() { return open_time; }
 }

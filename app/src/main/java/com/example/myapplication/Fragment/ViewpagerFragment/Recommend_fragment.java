@@ -69,11 +69,13 @@ public class Recommend_fragment extends Fragment {
                     String Restaurant_id = data[i].getRestaurant_id();
                     String Name = data[i].getName();
                     String Address = data[i].getAddress();
+                    String Tag = data[i].getTag();
 
                     responseData.add(new DayRecommendResponseData(
                             Restaurant_id,
                             Name,
-                            Address
+                            Address,
+                            Tag
                     ));
                 }
 
@@ -85,15 +87,12 @@ public class Recommend_fragment extends Fragment {
                 }
                 DayRecommendResponseData current_data = responseData.get(position);
 
-//                if(!TextUtils.isEmpty(current_data.getImage())) {
-//                    //Glide.with(getContext()).load(current_data.getImage()).into(binding.viewpagerImage);
-//                    new ImageLoadTask(current_data.getImage(), binding.viewpagerImage).execute();
-//                }
                 binding.viewpagerTitle.setText(current_data.getName());
                 if (current_data.getAddress().equals(""))
                     binding.viewpagerAddress.setText("-");
                 else
                     binding.viewpagerAddress.setText(current_data.getAddress());
+                binding.viewpagerTag.setText(current_data.getTag());
             }
             // 서버 통신 실패 시
             @Override

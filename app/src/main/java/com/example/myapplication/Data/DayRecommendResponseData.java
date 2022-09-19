@@ -16,14 +16,19 @@ public class DayRecommendResponseData {
     @Expose
     String address;
 
+    @SerializedName("tag")
+    @Expose
+    String tag;
+
     public String getRestaurant_id() { return restaurant_id; }
     public String getName() { return name; }
     public String getAddress() { return address; }
+    public String getTag() { return tag; }
 
-    public DayRecommendResponseData(String Restaurant_id, String Name, String Address){
+    public DayRecommendResponseData(String Restaurant_id, String Name, String Address, String tag){
         this.restaurant_id = Restaurant_id;
         this.name = Name;
         this.address = Address;
-
+        this.tag = tag;
     }
 }

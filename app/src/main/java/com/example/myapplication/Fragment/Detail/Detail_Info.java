@@ -26,7 +26,7 @@ public class Detail_Info extends Fragment {
         responseData = (StoreResponseData) getArguments().getSerializable("responseData");
 
         //TODO 카테고리
-
+        binding.infoCategory.setText(responseData.getCategory());
 
         //TODO 주소
         String address = responseData.getAddress();
@@ -36,6 +36,7 @@ public class Detail_Info extends Fragment {
             binding.detailAddress.setText("-");
 
         //TODO 운영시간
+        binding.infoOpentime.setText(responseData.getOpen_time());
 
         //TODO 번호
         String number = responseData.getTell_number();
@@ -47,7 +48,6 @@ public class Detail_Info extends Fragment {
         }
 
         //TODO TAG
-        //detail_tag = view.findViewById(R.id.detail_tag);
         String tag = responseData.getTag();
         if(!TextUtils.isEmpty(tag)){
             binding.detailTag.setText(tag);
@@ -56,7 +56,6 @@ public class Detail_Info extends Fragment {
             binding.detailTag.setText("-");
         }
 
-        //Button instar_button = view.findViewById(R.id.instar_button);
         String url = "https://www.instagram.com/explore/tags/"+responseData.getName()+"/";
         Uri instagram = Uri.parse(url);
         Intent instar_intent = new Intent(Intent.ACTION_VIEW, instagram);

@@ -32,18 +32,12 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
     private SearchResultRecyclerviewItemBinding binding;
     private ArrayList<StoreResponseData> responseData;
 
-    /**
-     * Test
-     */
     public Search_List_Adapter(Context mContext, ArrayList<StoreResponseData> responseData){
         this.responseData = responseData;
         this.mContext = mContext;
     }
 
 
-    /**
-     * Test
-     */
     public void setData(ArrayList<StoreResponseData> responseData){
         this.responseData = responseData;
     }
@@ -59,15 +53,7 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     StoreResponseData clickdata = responseData.get(pos);
-//
-//                    if (!TextUtils.isEmpty(token)) {
-//                        try {
-//                            retrofit(v, test.getId());
-//                        } catch (Exception e) {
-//                            Log.e("JSON Decode Error", e.getMessage());
-//                        }
-//                    }
-//                    else
+
                     retrofit(v, clickdata.getId());
                 }
             });
@@ -77,7 +63,6 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
     @NonNull
     @Override
     public Search_List_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_result_recyclerview_item,parent,false);
         binding = SearchResultRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
 
         return new MyViewHolder(binding);
@@ -85,12 +70,12 @@ public class Search_List_Adapter extends RecyclerView.Adapter<Search_List_Adapte
 
     @Override
     public void onBindViewHolder(@NonNull Search_List_Adapter.MyViewHolder holder, int position) {
-        //ResponseData text = responseData.get(position);
         StoreResponseData text = responseData.get(position);
 
         binding.title.setText(text.getName());
-        if (text.getScore().equals(""))
-            binding.reviewScore.setText("점수 없음");
+        binding.address.setText(text.getAddress());
+        if (text.getScore().equals("없음"))
+            binding.reviewScore.setText("-");
         else
             binding.reviewScore.setText(text.getScore());
     }
