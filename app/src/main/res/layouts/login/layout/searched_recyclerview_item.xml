@@ -22,11 +22,11 @@
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/review_delete"
+            android:id="@+id/searched_delete"
             android:layout_width="50dp"
             android:layout_height="38dp"
             android:background="@android:drawable/btn_dialog"
-            android:backgroundTint="#99D9EA"
+            android:backgroundTint="@color/background2"
             android:text="X" />
 
     </LinearLayout>

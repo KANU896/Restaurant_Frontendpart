@@ -8,6 +8,8 @@ package com.example.myapplication.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,15 +58,18 @@ public class HomeFragment extends Fragment implements LocationService {
         //현재 위치 정보 표시
         Location_GPS gps = new Location_GPS(getContext(), getActivity());
         address = gps.get_address(); //이 함수 실행되면서 Permission 검사 동시 실행
-
-        binding.locationText.setText(address);
+        Log.d("address", address);
+        if(address != "위치 정보 없음")
+            binding.locationText.setText(SplitAddress(address));
+        else
+            binding.locationText.setText(address);
 
         locationService = new Location_service(getContext(), this);
         binding.locationText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(locationService.checkLocationServicesStatus()){
-                    binding.locationText.setText(gps.get_address());
+                    binding.locationText.setText(SplitAddress(gps.get_address()));
                 }
                 else{
                     locationService.showDialogForLocationServiceSetting();
@@ -120,5 +125,12 @@ public class HomeFragment extends Fragment implements LocationService {
         startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
         binding.locationText.setText("위치 갱신");
     }
+
+    private String SplitAddress(String address){
+        String addressArray[] = address.split(" ");
+        String newAddress = addressArray[2] + " " + addressArray[3];
+        return newAddress;
+    }
+
 }
 

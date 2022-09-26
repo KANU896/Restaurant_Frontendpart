@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
-        app:itemIconTint="@color/purple_700"
+        app:itemIconTint="@color/teal_700"
         app:itemTextColor="@color/black"
         app:menu="@menu/bottom_nav" />
 

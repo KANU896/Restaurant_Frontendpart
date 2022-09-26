@@ -45,7 +45,7 @@ public class Searched_Adapter extends RecyclerView.Adapter<Searched_Adapter.MyVi
             super(view.getRoot());
 
             // x 버튼 클릭 시
-            binding.reviewDelete.setOnClickListener(new View.OnClickListener() {
+            binding.searchedDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();

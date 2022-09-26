@@ -7,6 +7,9 @@
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/drawable/bin_blue.xml" value="0.1255" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/drawable/btn_tema.xml" value="0.1255" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1475" />
+        <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layout/activity_main.xml" value="0.14114583333333333" />
+        <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layout/fragment_home.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layout/fragment_map.xml" value="0.14114583333333333" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layout/fragment_search.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layout/home_page.xml" value="0.176" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layout/map_page.xml" value="0.264" />
@@ -21,15 +24,20 @@
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layout/user_register.xml" value="0.264" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/drawable/custom_rectangle.xml" value="0.1435" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/drawable/favorite_checkbox.xml" value="0.1365" />
+        <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/drawable/home_toplayout_background.xml" value="0.1605" />
+        <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/drawable/ractangle.xml" value="0.15" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/drawable/search_button.xml" value="0.1245" />
+        <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/drawable/shadow.xml" value="0.1605" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/drawable/splashactivity.xml" value="0.1365" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/activity_detail_page.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/activity_search_result.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/custom_rectangle.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/detail_content.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/detail_info.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/detail_map.xml" value="0.1724137931034483" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/detail_page.xml" value="0.12" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/detail_review.xml" value="0.264" />
+        <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/detail_review_item.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/detail_review_version2.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/detail_testpage.xml" value="0.14114583333333333" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/detailpage_menu_list.xml" value="0.2526041666666667" />
@@ -37,6 +45,7 @@
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/fragment2.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/fragment3.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/fragment4.xml" value="0.11979166666666667" />
+        <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/fragment_detail_map.xml" value="0.14114583333333333" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/fragment_recommend.xml" value="0.264" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/fragment_total.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/KDOY/Desktop/Git Clone/Restaurant_Frontendpart/app/src/main/res/layouts/login/layout/fragment_viewpager_.xml" value="0.264" />

@@ -6,6 +6,7 @@ package com.example.myapplication.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,25 +40,25 @@ public class SearchFragment extends Fragment implements onSearchedItemDelete {
     private ArrayList<SearchedList> searchHistoryList;
     private FragmentSearchBinding binding;
     private MainActivity main_activity;
-    private Toolbar toolbar;
-
-    /**
-     * MainActivity에 있는 binding을 사용하기 위함
-     */
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-        main_activity = (MainActivity) getActivity();
-        toolbar = main_activity.binding.toolbar;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-        main_activity = null;
-    }
+//    private Toolbar toolbar;
+//
+//    /**
+//     * MainActivity에 있는 binding을 사용하기 위함
+//     */
+//    @Override
+//    public void onAttach(@NonNull Context context) {
+//        super.onAttach(context);
+//
+//        main_activity = (MainActivity) getActivity();
+//        toolbar = main_activity.binding.toolbar;
+//    }
+//
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//
+//        main_activity = null;
+//    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
